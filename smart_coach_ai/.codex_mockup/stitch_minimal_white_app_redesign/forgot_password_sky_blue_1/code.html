@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Forgot Password - Smart Coach AI</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary": "#5b5b66",
+            "surface-container-low": "#f3f3f4",
+            "primary-fixed": "#e5deff",
+            "on-background": "#1a1c1c",
+            "surface-variant": "#e2e2e2",
+            "surface-bright": "#f9f9f9",
+            "surface-container-highest": "#e2e2e2",
+            "secondary": "#5f5e5e",
+            "on-tertiary-fixed": "#1a1b24",
+            "on-tertiary-container": "#fffbff",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#1a0063",
+            "on-secondary-fixed": "#1c1b1b",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#2f3131",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed": "#e5e2e1",
+            "background": "#f9f9f9",
+            "surface-dim": "#dadada",
+            "on-surface-variant": "#484555",
+            "on-primary-container": "#fffbff",
+            "outline-variant": "#c9c4d8",
+            "tertiary-container": "#74737f",
+            "on-error": "#ffffff",
+            "surface-tint": "#5d3fe0",
+            "on-secondary-fixed-variant": "#474746",
+            "inverse-primary": "#c9bfff",
+            "on-primary": "#ffffff",
+            "surface-container": "#eeeeee",
+            "secondary-fixed-dim": "#c8c6c5",
+            "tertiary-fixed": "#e3e1ee",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#c6c5d2",
+            "on-primary-fixed-variant": "#441cc8",
+            "on-tertiary-fixed-variant": "#464650",
+            "outline": "#797587",
+            "error-container": "#ffdad6",
+            "secondary-container": "#e2dfde",
+            "inverse-on-surface": "#f0f1f1",
+            "on-secondary-container": "#636262",
+            "on-surface": "#1a1c1c",
+            "error": "#ba1a1a",
+            "primary-fixed-dim": "#c9bfff",
+            "primary": "#5b3cdd",
+            "surface-container-high": "#e8e8e8",
+            "primary-container": "#7459f7",
+            "surface": "#f9f9f9",
+            "sky-blue": "#87CEEB"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "xs": "4px",
+            "xl": "32px",
+            "md": "16px",
+            "lg": "24px",
+            "gutter": "12px",
+            "unit": "4px",
+            "sm": "8px",
+            "container-padding": "20px"
+          },
+          "fontFamily": {
+            "h1": ["Manrope"],
+            "h2": ["Manrope"],
+            "body-md": ["Manrope"],
+            "body-lg": ["Manrope"],
+            "h3": ["Manrope"],
+            "label-sm": ["Manrope"]
+          },
+          "fontSize": {
+            "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+            "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+            "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      background-color: #ffffff;
+      color: #1a1c1c;
+      font-family: 'Manrope', sans-serif;
+    }
+    .level-1-card {
+      box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.06);
+      background-color: #ffffff;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col items-center">
+<!-- Top App Bar -->
+<!-- Following Shared Components JSON Logic for Shell Layout & Styles -->
+<header class="flex justify-between items-center w-full px-5 h-16 bg-white sticky top-0 z-50 border-b border-slate-100 shadow-[0_4px_15px_0_rgba(0,0,0,0.06)]">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-200 text-slate-900">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Manrope'] text-lg font-bold tracking-tight text-slate-900">Forgot Password</h1>
+</div>
+<div class="flex items-center">
+<button class="active:scale-95 transition-transform duration-200 text-slate-900">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-md px-container-padding pt-xl pb-32 flex flex-col items-center">
+<!-- Hero Illustration Section -->
+<div class="mb-xl w-full flex justify-center">
+<div class="relative w-48 h-48 bg-primary-fixed rounded-full flex items-center justify-center overflow-hidden">
+<img alt="Password Recovery Illustration" class="w-full h-full object-cover mix-blend-multiply opacity-80" data-alt="A stylized 3D digital illustration of a glowing metallic padlock centered on a clean, soft white background. A circular blue arrow wraps around the lock, symbolizing a reset or recovery process. The lighting is bright and airy with soft shadows, using a palette of sky blue, deep indigo, and crisp white to convey security and modern technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuPY88rMarQzqq-16AFsw__q2eKhGuZHfLP_Re4MbQ7S7-XUGA7g8Qa6uWYi_0sA1lFQjyu_VWHHGh6_Kr5b22hVSdIaatYd4_XkXO07OV_D6uegaYJamAng4O9BkCMEGcJfQoiwd74CEdowzhRsgAa_PNfRUpYFYKI6bor5lE23inOznKH4SjegIOhs77QBLSGB0iB4AAyYWZ9ZKO9tMP0NqZE7TeCrK6Xo1X79slqQV254y3tiWQoihG_eq_yLSjlzMw6IzdHLjK"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[64px] text-primary" data-icon="lock_reset" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lock_reset</span>
+</div>
+</div>
+</div>
+<!-- Text Header Section -->
+<section class="text-center mb-xl">
+<h2 class="font-h1 text-h1 text-on-surface mb-sm">Forgot Password?</h2>
+<p class="font-body-lg text-body-lg text-secondary">Enter your email or phone number to reset your password</p>
+</section>
+<!-- Form Section -->
+<div class="w-full level-1-card rounded-xl p-md border border-[#E9ECEF] mb-lg">
+<div class="flex flex-col gap-lg">
+<!-- Input Field -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1 uppercase tracking-wider">Email or Phone Number</label>
+<div class="relative group">
+<div class="absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-sky-blue transition-colors">
+<span class="material-symbols-outlined" data-icon="alternate_email">alternate_email</span>
+</div>
+<input class="w-full h-14 pl-12 pr-md rounded-lg border border-[#E9ECEF] focus:border-sky-blue focus:ring-1 focus:ring-sky-blue outline-none transition-all font-body-md text-on-surface bg-surface-container-lowest" placeholder="e.g. alex@example.com" type="text"/>
+</div>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full h-14 bg-[#87CEEB] hover:bg-[#76bedb] text-white font-h3 text-h3 rounded-xl shadow-md active:scale-[0.98] transition-all flex items-center justify-center gap-sm">
+          Send Reset Link
+          <span class="material-symbols-outlined text-xl" data-icon="send">send</span>
+</button>
+</div>
+</div>
+<!-- Secondary Link -->
+<div class="w-full text-center">
+<a class="inline-flex items-center gap-xs font-body-lg text-body-lg text-primary hover:underline transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="arrow_back">arrow_back</span>
+        Back to Login
+      </a>
+</div>
+</main>
+<!-- Footer / Security Note Card -->
+<footer class="fixed bottom-0 w-full max-w-md bg-background px-container-padding pb-md pt-md">
+<div class="level-1-card rounded-xl p-md border border-[#E9ECEF] flex items-start gap-md bg-surface-bright/50 backdrop-blur-sm">
+<div class="p-sm bg-tertiary-fixed rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user">verified_user</span>
+</div>
+<p class="font-label-sm text-label-sm text-tertiary leading-relaxed">
+        Your security is our priority. All recovery links are encrypted and expire after 15 minutes.
+      </p>
+</div>
+</footer>
+</body></html>

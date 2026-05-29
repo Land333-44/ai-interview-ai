@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "outline": "#797587",
+                    "primary": "#5b3cdd",
+                    "surface-variant": "#e2e2e2",
+                    "tertiary-fixed": "#e3e1ee",
+                    "on-surface": "#1a1c1c",
+                    "inverse-on-surface": "#f0f1f1",
+                    "surface-container-highest": "#e2e2e2",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#eeeeee",
+                    "tertiary-fixed-dim": "#c6c5d2",
+                    "tertiary": "#5b5b66",
+                    "outline-variant": "#c9c4d8",
+                    "surface-dim": "#dadada",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#c9bfff",
+                    "surface-container-low": "#f3f3f4",
+                    "on-background": "#1a1c1c",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-surface-variant": "#484555",
+                    "surface": "#f9f9f9",
+                    "background": "#f9f9f9",
+                    "on-primary-fixed-variant": "#441cc8",
+                    "secondary": "#5f5e5e",
+                    "on-tertiary-fixed": "#1a1b24",
+                    "surface-bright": "#f9f9f9",
+                    "on-tertiary-container": "#fffbff",
+                    "primary-fixed": "#e5deff",
+                    "primary-container": "#7459f7",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#464650",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "inverse-primary": "#c9bfff",
+                    "secondary-fixed": "#e5e2e1",
+                    "secondary-container": "#e2dfde",
+                    "surface-container-high": "#e8e8e8",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#fffbff",
+                    "surface-tint": "#5d3fe0",
+                    "tertiary-container": "#74737f",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#1a0063",
+                    "on-secondary-container": "#636262",
+                    "inverse-surface": "#2f3131",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#c8c6c5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "gutter": "12px",
+                    "container-padding": "20px",
+                    "sm": "8px",
+                    "unit": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "h2": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "h3": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ai-pulse {
+            box-shadow: 0 0 0 0 rgba(123, 97, 255, 0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(123, 97, 255, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(123, 97, 255, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(123, 97, 255, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex flex-col font-body-md text-on-surface selection:bg-primary-fixed">
+<!-- Top Navigation Bar -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] sticky top-0 z-50 h-16 flex justify-between items-center w-full px-5">
+<div class="flex items-center gap-3 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-[#7B61FF]" data-icon="arrow_back">arrow_back</span>
+</div>
+<h1 class="font-['Manrope'] text-lg font-bold tracking-tight text-slate-900 dark:text-white">Smart Coach AI</h1>
+<div class="flex items-center gap-3 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-[#7B61FF]" data-icon="notifications">notifications</span>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center px-container-padding py-lg max-w-md mx-auto w-full">
+<!-- AI Brain Visual -->
+<div class="relative mt-xl mb-lg">
+<div class="w-32 h-32 bg-primary-container/10 rounded-full flex items-center justify-center ai-pulse">
+<div class="w-24 h-24 bg-white shadow-xl rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-5xl" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+</div>
+<!-- Floating Decorative Particles -->
+<div class="absolute -top-2 -right-2 w-4 h-4 bg-[#7B61FF]/20 rounded-full blur-sm"></div>
+<div class="absolute bottom-4 -left-6 w-6 h-6 bg-[#7B61FF]/10 rounded-full blur-md"></div>
+</div>
+<!-- Header Content -->
+<div class="text-center space-y-sm mb-xl">
+<h2 class="font-h1 text-h1 text-on-surface">Analyzing your input...</h2>
+<p class="font-body-lg text-body-lg text-secondary">Please wait a few moments while we process your session details.</p>
+</div>
+<!-- Progress Section -->
+<div class="w-full bg-white rounded-xl p-md shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] border border-slate-100 mb-lg">
+<div class="flex justify-between items-end mb-sm">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">Analysis Progress</span>
+<span class="font-h3 text-h3 text-primary">75%</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%] rounded-full transition-all duration-1000 ease-in-out"></div>
+</div>
+</div>
+<!-- Checklist Section -->
+<div class="w-full space-y-md">
+<div class="flex items-center gap-md p-md bg-white rounded-xl border border-slate-100 shadow-sm">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+<span class="material-symbols-outlined text-md" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-body-md text-body-md font-semibold text-on-surface">Transcribing speech</span>
+</div>
+<div class="flex items-center gap-md p-md bg-white rounded-xl border border-slate-100 shadow-sm">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+<span class="material-symbols-outlined text-md" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-body-md text-body-md font-semibold text-on-surface">Sending to Hume AI</span>
+</div>
+<div class="flex items-center gap-md p-md bg-white rounded-xl border border-slate-100 shadow-sm">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+<span class="material-symbols-outlined text-md" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-body-md text-body-md font-semibold text-on-surface">Extracting top 5 emotions</span>
+</div>
+<div class="flex items-center gap-md p-md bg-white rounded-xl border border-slate-100 shadow-sm">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+<span class="material-symbols-outlined text-md" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-body-md text-body-md font-semibold text-on-surface">Sending to LLaMA 70B</span>
+</div>
+<div class="flex items-center gap-md p-md bg-[#F4F2FF] rounded-xl border border-primary/10 shadow-sm">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-primary/20 text-primary">
+<div class="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+</div>
+<span class="font-body-md text-body-md font-bold text-primary">Generating personalized advice</span>
+</div>
+</div>
+<!-- AI Tip Chip -->
+<div class="mt-xl p-md bg-tertiary-fixed rounded-xl border border-outline-variant/30 flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary mt-1" data-icon="lightbulb">lightbulb</span>
+<div>
+<span class="font-label-sm text-label-sm text-tertiary uppercase">Pro Tip</span>
+<p class="font-body-md text-body-md text-on-tertiary-fixed-variant leading-relaxed">AI analysis works best when you speak naturally and express your genuine feelings without filtering.</p>
+</div>
+</div>
+<!-- Decorative Context Image -->
+<div class="mt-lg w-full rounded-2xl overflow-hidden aspect-[1.5] shadow-lg border border-white">
+<img class="w-full h-full object-cover" data-alt="A clean and professional digital workspace showing a glowing holographic brain interface floating above a minimalist desk. The scene is bright and airy with soft purple and blue ambient lighting, reflecting a calm yet advanced technological environment. Minimalist UI elements like floating data streams and clean typography are visible in the background, creating a high-end corporate coaching aesthetic." src="https://lh3.googleusercontent.com/aida/ADBb0ugBfy5Kxykx6VRSG_RKDzIa0SbhBs6z_g98JeSzKd3fP33mDvpQ30oimByftaHHNkJ3__u6lJmHYdiS1ohb18UGD1dEMYC5J-h2c6Gvor4BPXwtnNttjDiOvV7dIOh8-gNlvtOTZhUChXgVQrpWlIGreIvcNDj_U-DTIz54FUEyH4KOWDMO4ZXeh2j6A9ybZMoxgfq9NSRhSt18-OUNqs9El3c7KpBrmx24fXGF7B3BFyQlWBU3h41LBMVQoqW_Itp3N4KD2Ko0JI8"/>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-[0_-4px_15px_0_rgba(0,0,0,0.04)] fixed bottom-0 w-full z-50 h-20 px-2 pb-safe flex justify-around items-center">
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Upload</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#7B61FF] dark:text-[#A291FF] bg-[#F4F2FF] dark:bg-indigo-900/20 rounded-2xl px-4 py-1.5 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Analysis</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Coach</span>
+</div>
+</nav>
+<!-- Spacer for Bottom Nav -->
+<div class="h-24"></div>
+</body></html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>AI Coach Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f9f9f9",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "tertiary-fixed-dim": "#c6c5d2",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-background": "#1a1c1c",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#464650",
+                        "surface-dim": "#dadada",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#74737f",
+                        "surface-variant": "#e2e2e2",
+                        "primary-fixed-dim": "#c9bfff",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#e2dfde",
+                        "surface-container-highest": "#e2e2e2",
+                        "inverse-primary": "#c9bfff",
+                        "primary": "#5b3cdd",
+                        "primary-accent": "#87CEEB",
+                        "surface-container": "#eeeeee",
+                        "primary-container": "#7459f7",
+                        "outline-variant": "#c9c4d8",
+                        "on-primary-fixed": "#1a0063",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e8e8e8",
+                        "primary-fixed": "#e5deff",
+                        "background": "#f9f9f9",
+                        "on-primary-fixed-variant": "#441cc8",
+                        "inverse-on-surface": "#f0f1f1",
+                        "tertiary": "#5b5b66",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#636262",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "secondary": "#5f5e5e",
+                        "tertiary-fixed": "#e3e1ee",
+                        "on-surface-variant": "#484555",
+                        "inverse-surface": "#2f3131",
+                        "surface-container-low": "#f3f3f4",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#5d3fe0",
+                        "outline": "#797587",
+                        "on-tertiary-fixed": "#1a1b24",
+                        "on-primary-container": "#fffbff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "gutter": "12px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "container-padding": "20px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #ffffff;
+            color: #1a1c1c;
+        }
+        .message-thread {
+            height: calc(100vh - 144px);
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .message-thread::-webkit-scrollbar {
+            display: none;
+        }
+        .sky-blue-bubble {
+            background-color: #87CEEB;
+            color: #ffffff;
+        }
+        .gray-bubble {
+            background-color: #f3f3f4;
+            color: #1a1c1c;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] docked full-width top-0 sticky z-50 flex justify-between items-center w-full px-5 h-16">
+<div class="flex items-center gap-3">
+<button class="active:scale-95 transition-transform duration-200 text-slate-500">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 flex items-center justify-center bg-sky-100 rounded-lg text-[#87CEEB]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lightbulb_circle</span>
+</div>
+<h1 class="font-['Manrope'] text-lg font-bold tracking-tight text-slate-900 dark:text-white">AI Coach Chat</h1>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-200 text-slate-500">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Message Canvas -->
+<main class="message-thread flex flex-col px-container-padding py-lg space-y-lg">
+<!-- Date Marker -->
+<div class="flex justify-center">
+<span class="bg-surface-container-low px-3 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant">Today</span>
+</div>
+<!-- AI Message Greeting -->
+<div class="flex items-end gap-3 max-w-[85%]">
+<div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-sky-100 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A friendly, high-tech robot avatar with expressive digital eyes and a sleek white ceramic body. The robot is set against a soft, light-mode background with clean sky blue highlights, conveying a professional yet approachable AI coaching persona. The lighting is bright and optimistic, emphasizing its modern and reliable character." src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="sky-blue-bubble px-4 py-3 rounded-2xl rounded-bl-none shadow-md">
+<p class="font-body-md text-body-md">Hello! I've analyzed your latest presentation. Overall, your energy was excellent, but there are a few areas where we can refine your delivery. How can I help you improve today?</p>
+</div>
+<span class="text-[10px] text-on-surface-variant font-medium ml-1">9:41 AM</span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end gap-1 max-w-[85%] self-end">
+<div class="gray-bubble px-4 py-3 rounded-2xl rounded-br-none shadow-sm">
+<p class="font-body-md text-body-md">How can I improve my vocal pace? I felt like I was rushing near the end.</p>
+</div>
+<span class="text-[10px] text-on-surface-variant font-medium mr-1">9:42 AM</span>
+</div>
+<!-- AI Message Advice -->
+<div class="flex items-end gap-3 max-w-[85%]">
+<div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-sky-100 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A sleek robot head portrait with a minimalist aesthetic, featuring subtle blue glowing elements on its face. The character is designed to look like an expert assistant, rendered in a bright, modern high-contrast style. It sits comfortably within a circle, appearing friendly and supportive for a coaching application context." src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="sky-blue-bubble px-4 py-3 rounded-2xl rounded-bl-none shadow-md">
+<p class="font-body-md text-body-md">Try using 2-second silences after key points to allow your message to settle. This naturally slows your rhythm and gives the audience time to absorb complex information. Would you like to practice a specific segment?</p>
+</div>
+<span class="text-[10px] text-on-surface-variant font-medium ml-1">9:42 AM</span>
+</div>
+</div>
+<!-- Coaching Insight Card (Bento Style) -->
+<div class="bg-surface-container-lowest border border-slate-100 rounded-3xl p-lg shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] flex flex-col gap-md">
+<div class="flex items-center gap-2 text-[#87CEEB]">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<h3 class="font-h3 text-h3">Speech Analytics</h3>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-sky-50 rounded-2xl p-md flex flex-col gap-xs">
+<span class="text-label-sm font-label-sm text-sky-700">AVG PACE</span>
+<span class="text-h2 font-h2 text-sky-900">145 <span class="text-label-sm">wpm</span></span>
+</div>
+<div class="bg-orange-50 rounded-2xl p-md flex flex-col gap-xs">
+<span class="text-label-sm font-label-sm text-orange-700">FILLER WORDS</span>
+<span class="text-h2 font-h2 text-orange-900">12 <span class="text-label-sm">count</span></span>
+</div>
+</div>
+<button class="w-full py-md bg-white border border-sky-100 text-[#87CEEB] font-bold rounded-2xl hover:bg-sky-50 transition-colors">
+                View Full Analysis
+            </button>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end gap-1 max-w-[85%] self-end">
+<div class="gray-bubble px-4 py-3 rounded-2xl rounded-br-none shadow-sm">
+<p class="font-body-md text-body-md">That makes sense. Can we look at the 'Q3 Results' slide specifically? I think that's where I lost the flow.</p>
+</div>
+<span class="text-[10px] text-on-surface-variant font-medium mr-1">9:44 AM</span>
+</div>
+</main>
+<!-- Bottom Message Input -->
+<footer class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-100 dark:border-slate-800 z-50 h-20 px-container-padding flex items-center">
+<div class="flex items-center gap-gutter w-full bg-surface-container-low rounded-3xl px-md py-sm">
+<button class="text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<input class="flex-grow bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-surface placeholder-on-surface-variant" placeholder="Type a message..." type="text"/>
+<button class="bg-[#87CEEB] text-white w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</footer>
+<!-- BottomNavBar (Hidden on Chat Detail Screen for focus) -->
+<!-- As per instructions: "suppress the navigation shell if the page intent is: Task-Focused... Close or Back action" -->
+</body></html>

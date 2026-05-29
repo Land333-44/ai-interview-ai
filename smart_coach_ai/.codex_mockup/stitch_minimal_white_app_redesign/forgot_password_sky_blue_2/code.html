@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Forgot Password - Smart Coach AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#1a0063",
+                    "on-primary-container": "#fffbff",
+                    "primary": "#5b3cdd",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f0f1f1",
+                    "surface-bright": "#f9f9f9",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#e5e2e1",
+                    "surface-tint": "#5d3fe0",
+                    "tertiary-fixed-dim": "#c6c5d2",
+                    "primary-container": "#7459f7",
+                    "on-tertiary-fixed": "#1a1b24",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#e5deff",
+                    "tertiary-fixed": "#e3e1ee",
+                    "secondary-container": "#e2dfde",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "on-surface-variant": "#484555",
+                    "tertiary": "#5b5b66",
+                    "inverse-surface": "#2f3131",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-background": "#1a1c1c",
+                    "outline-variant": "#c9c4d8",
+                    "inverse-primary": "#c9bfff",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-container": "#eeeeee",
+                    "secondary": "#5f5e5e",
+                    "on-tertiary-fixed-variant": "#464650",
+                    "on-surface": "#1a1c1c",
+                    "outline": "#797587",
+                    "surface-dim": "#dadada",
+                    "surface-container-low": "#f3f3f4",
+                    "background": "#f9f9f9",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#c9bfff",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-secondary-container": "#636262",
+                    "tertiary-container": "#74737f",
+                    "surface-container-high": "#e8e8e8",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-primary-fixed-variant": "#441cc8",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "error-container": "#ffdad6",
+                    "surface": "#f9f9f9",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "gutter": "12px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "unit": "4px",
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "h2": ["Manrope"],
+                    "h3": ["Manrope"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sky-accent {
+            background-color: #E0F2FE;
+            color: #0369A1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- Top Navigation Shell (Transactional Mode - Minimal) -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] flex justify-between items-center w-full px-5 h-16 sticky top-0 z-50">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-[#7B61FF] flex items-center justify-center text-white active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-[20px]" data-icon="lightbulb">lightbulb</span>
+</div>
+<span class="font-['Manrope'] text-lg font-extrabold tracking-tight text-slate-900 dark:text-white">Smart Coach AI</span>
+</div>
+<div class="p-2 rounded-full hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-95 transition-transform duration-200 cursor-pointer">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500" data-icon="close">close</span>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-container-padding py-xl">
+<div class="w-full max-w-md">
+<!-- Hero Imagery/Icon Section -->
+<div class="flex flex-col items-center text-center mb-xl">
+<div class="w-20 h-20 rounded-full sky-accent flex items-center justify-center mb-lg shadow-sm">
+<span class="material-symbols-outlined text-[40px]" data-icon="lock_reset">lock_reset</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-surface mb-sm">Forgot Password?</h1>
+<p class="font-body-md text-body-md text-secondary px-4">Enter your email or phone number to reset your password</p>
+</div>
+<!-- Interactive Form Card -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] border border-outline-variant/30">
+<form class="space-y-lg">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="identifier">Email or Phone Number</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-[20px]" data-icon="alternate_email">alternate_email</span>
+</div>
+<input class="w-full h-14 pl-11 pr-md bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 outline-none font-body-md text-on-surface placeholder:text-outline/60" id="identifier" name="identifier" placeholder="name@example.com" type="text"/>
+</div>
+</div>
+<button class="w-full h-14 bg-[#7B61FF] text-white rounded-lg font-h3 text-h3 shadow-[0_4px_15px_0_rgba(123,97,255,0.3)] hover:brightness-110 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2" type="submit">
+<span>Send Reset Link</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<div class="mt-xl flex flex-col items-center space-y-md">
+<div class="w-full flex items-center gap-4">
+<div class="h-[1px] flex-grow bg-outline-variant/50"></div>
+<span class="font-label-sm text-label-sm text-outline">OR</span>
+<div class="h-[1px] flex-grow bg-outline-variant/50"></div>
+</div>
+<a class="flex items-center gap-2 text-primary font-body-lg text-body-lg hover:underline decoration-2 underline-offset-4 active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
+                        Back to Login
+                    </a>
+</div>
+</div>
+<!-- Branding / Footer Hint -->
+<div class="mt-xl text-center">
+<div class="inline-flex items-center gap-2 px-md py-sm bg-surface-container-low rounded-full">
+<span class="w-2 h-2 rounded-full bg-[#0369A1] animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Secure recovery via Smart Coach AI</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual Aesthetic Element -->
+<div class="fixed bottom-0 left-0 w-full overflow-hidden -z-10 h-64 pointer-events-none opacity-40">
+<div class="absolute -bottom-32 -left-32 w-96 h-96 bg-[#E0F2FE] rounded-full blur-3xl"></div>
+<div class="absolute -bottom-16 -right-16 w-64 h-64 bg-[#F4F2FF] rounded-full blur-3xl"></div>
+</div>
+</body></html>

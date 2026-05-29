@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Coach AI - Forgot Password</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e2e2e2",
+                        "surface-bright": "#f9f9f9",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#5b5b66",
+                        "primary-fixed": "#e5deff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-secondary-container": "#636262",
+                        "tertiary-fixed-dim": "#c6c5d2",
+                        "primary-fixed-dim": "#c9bfff",
+                        "outline-variant": "#c9c4d8",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "outline": "#797587",
+                        "on-background": "#1a1c1c",
+                        "surface-container-high": "#e8e8e8",
+                        "primary-container": "#7459f7",
+                        "on-tertiary-fixed-variant": "#464650",
+                        "on-surface": "#1a1c1c",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary-container": "#fffbff",
+                        "on-surface-variant": "#484555",
+                        "on-error": "#ffffff",
+                        "surface": "#f9f9f9",
+                        "tertiary-container": "#74737f",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#c9bfff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f4",
+                        "inverse-surface": "#2f3131",
+                        "surface-tint": "#5d3fe0",
+                        "on-primary-fixed-variant": "#441cc8",
+                        "on-secondary-fixed-variant": "#474746",
+                        "background": "#f9f9f9",
+                        "on-tertiary-fixed": "#1a1b24",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#1a0063",
+                        "primary": "#5b3cdd",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#e2dfde",
+                        "inverse-on-surface": "#f0f1f1",
+                        "surface-dim": "#dadada",
+                        "tertiary-fixed": "#e3e1ee",
+                        "surface-container": "#eeeeee",
+                        "on-primary-container": "#fffbff",
+                        "sky-custom": "#38bdf8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "gutter": "12px",
+                        "container-padding": "20px",
+                        "unit": "4px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation Bar (Contextually Hidden/Suppressed as per rules, but shown for branding in a simple way if needed. However, Task-Focused screens often suppress it. Using the JSON TopAppBar as guidance but maintaining focus.) -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-sky-100/50 flex items-center justify-between px-6 h-16 max-w-7xl mx-auto shadow-sm shadow-sky-100/20">
+<div class="text-xl font-bold text-sky-500 flex items-center gap-2 font-manrope">
+<span class="material-symbols-outlined text-sky-400" data-icon="lightbulb">lightbulb</span>
+<span>Smart Coach AI</span>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-container-padding pt-24 pb-12">
+<div class="w-full max-w-md flex flex-col items-center">
+<!-- Illustration Area -->
+<div class="mb-xl relative">
+<div class="absolute inset-0 bg-sky-100/50 blur-3xl rounded-full scale-150"></div>
+<div class="relative w-48 h-48 bg-white shadow-[0_15px_35px_rgba(56,189,248,0.15)] rounded-[32px] flex items-center justify-center border border-sky-50">
+<img alt="Recovery Illustration" class="w-32 h-32 object-contain" data-alt="A clean, minimalist 3D render of a futuristic metallic silver padlock with glowing sky-blue circuitry details. The lock is floating in a bright, airy white space with soft blue ambient lighting. High-end professional aesthetic with smooth surfaces and gentle reflections, conveying security and trust for a modern AI coaching application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXor_35CZ_BBTwJAZQOys4EhUxbr5qfRF2zLGF5Ri0KlfhUpG29Gm8IgtDpjpRFPqDqtWFoIcc1xxikGPPQSxyBOgbP5Bfs9IUfevctXxofOeHojdvjOxi-rzEzOG7PimmfXNgXzJEb-jpiLUdXVuOqJUWJmEJunC0Za7tnBBp90Dty02uSj7KNMf082YvKiNtEKDmfUESgFAucRLKThIFLpaAqal2vsMzGZbR0XojuAoedWFn1QW4vu5ppY1S-ACI7InC97LUTp5X"/>
+</div>
+</div>
+<!-- Content -->
+<div class="text-center mb-xl">
+<h1 class="font-h1 text-h1 text-on-surface mb-sm">Forgot Password?</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-xs mx-auto">Enter your email to receive a password reset link</p>
+</div>
+<!-- Form -->
+<div class="w-full space-y-lg">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1 uppercase">Email Address</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline group-focus-within:text-sky-custom transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="mail">mail</span>
+</div>
+<input class="w-full h-14 pl-12 pr-4 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-sky-custom focus:border-sky-custom transition-all outline-none text-body-lg placeholder:text-outline-variant" placeholder="coach@smartai.com" type="email"/>
+</div>
+</div>
+<!-- Primary Action -->
+<button class="w-full h-14 bg-sky-custom hover:bg-sky-500 active:scale-[0.98] transition-all rounded-xl text-white font-h3 text-h3 shadow-[0_8px_20px_rgba(56,189,248,0.3)] flex items-center justify-center gap-2 group">
+<span>Send Reset Link</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Navigation Footer -->
+<div class="mt-xl">
+<a class="flex items-center gap-2 text-secondary font-body-lg hover:text-sky-custom transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
+<span>Back to Login</span>
+</a>
+</div>
+</div>
+</main>
+<!-- Visual Accents -->
+<div class="fixed bottom-0 left-0 w-full h-1 bg-gradient-to-r from-sky-200 via-sky-400 to-sky-200 opacity-20"></div>
+<div class="fixed -bottom-24 -left-24 w-64 h-64 bg-sky-100/30 blur-[100px] rounded-full pointer-events-none"></div>
+<div class="fixed -top-24 -right-24 w-64 h-64 bg-primary/5 blur-[100px] rounded-full pointer-events-none"></div>
+</body></html>

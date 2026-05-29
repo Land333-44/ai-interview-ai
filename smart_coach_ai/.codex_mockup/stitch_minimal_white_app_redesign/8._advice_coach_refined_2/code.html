@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-dim": "#dadada",
+            "surface-variant": "#e2e2e2",
+            "secondary-container": "#e2dfde",
+            "surface-container-high": "#e8e8e8",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#464650",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed": "#1a1b24",
+            "surface-tint": "#7B61FF",
+            "tertiary-container": "#74737f",
+            "surface-container-low": "#f3f3f4",
+            "secondary": "#5f5e5e",
+            "on-primary": "#ffffff",
+            "on-background": "#1a1c1c",
+            "primary": "#7B61FF",
+            "background": "#f9f9f9",
+            "outline": "#e2e8f0",
+            "surface-container-highest": "#e2e2e2",
+            "on-primary-fixed-variant": "#441cc8",
+            "on-secondary-fixed": "#1c1b1b",
+            "inverse-surface": "#2f3131",
+            "primary-fixed-dim": "#c9bfff",
+            "primary-container": "#F4F2FF",
+            "inverse-on-surface": "#f0f1f1",
+            "tertiary-fixed": "#e3e1ee",
+            "tertiary-fixed-dim": "#c6c5d2",
+            "surface-bright": "#f9f9f9",
+            "on-secondary": "#ffffff",
+            "on-primary-container": "#fffbff",
+            "inverse-primary": "#c9bfff",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#1a0063",
+            "tertiary": "#5b5b66",
+            "on-surface": "#1a1c1c",
+            "on-secondary-container": "#636262",
+            "on-secondary-fixed-variant": "#474746",
+            "on-error-container": "#93000a",
+            "surface-container": "#eeeeee",
+            "surface": "#f9f9f9",
+            "secondary-fixed-dim": "#c8c6c5",
+            "primary-fixed": "#e5deff",
+            "on-tertiary-container": "#fffbff",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#e5e2e1",
+            "on-surface-variant": "#484555",
+            "on-tertiary": "#ffffff",
+            "outline-variant": "#f1f5f9"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "1rem",
+            "2xl": "1.25rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "xl": "32px",
+            "sm": "8px",
+            "xs": "4px",
+            "unit": "4px",
+            "lg": "24px",
+            "gutter": "12px",
+            "container-padding": "20px",
+            "md": "16px"
+          },
+          "fontFamily": {
+            "h3": ["Manrope"],
+            "label-sm": ["Manrope"],
+            "body-md": ["Manrope"],
+            "h1": ["Manrope"],
+            "body-lg": ["Manrope"],
+            "h2": ["Manrope"]
+          },
+          "fontSize": {
+            "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+            "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+            "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-shadow-lvl1 {
+      box-shadow: 0 4px 20px 0 rgba(0,0,0,0.05);
+    }
+    .custom-shadow-lvl2 {
+      box-shadow: 0 10px 30px 0 rgba(123, 97, 255, 0.25);
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+    }
+    body {
+      background-color: #fcfcfd;
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface bg-background min-h-screen flex flex-col">
+<!-- TopAppBar Component -->
+<header class="glass-effect flex justify-between items-center w-full px-5 h-16 docked full-width top-0 sticky z-50 border-b border-outline shadow-sm">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-200 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<img alt="Smart Coach AI Logo" class="h-8 w-8 object-contain rounded-lg" src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+</div>
+<div class="flex items-center">
+<button class="active:scale-95 transition-transform duration-200 text-on-surface-variant p-2 relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
+</button>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-container-padding pt-lg pb-40 max-w-md">
+<!-- Hero Header / AI Identity -->
+<section class="mb-xl text-center">
+<div class="relative inline-block mb-md">
+<div class="w-28 h-28 rounded-full bg-primary-container flex items-center justify-center border-[6px] border-white custom-shadow-lvl1 mx-auto overflow-hidden">
+<span class="material-symbols-outlined text-primary text-[56px]" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="absolute bottom-1 right-1 bg-primary p-2 rounded-full border-[3px] border-white shadow-md">
+<span class="material-symbols-outlined text-white text-[16px]" data-icon="auto_awesome">auto_awesome</span>
+</div>
+</div>
+<h2 class="font-h1 text-h1 text-on-surface mb-xs tracking-tight">AI Coach Advice</h2>
+<p class="font-body-md text-secondary font-medium">Session: Presentation Prep</p>
+</section>
+<!-- Overall Assessment Card -->
+<section class="mb-lg">
+<div class="bg-white rounded-2xl p-md custom-shadow-lvl1 border border-outline">
+<div class="flex items-center gap-sm mb-md">
+<div class="w-10 h-10 rounded-xl bg-primary-container/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[24px]" data-icon="query_stats">query_stats</span>
+</div>
+<h3 class="font-h2 text-h2 text-[20px]">Overall Assessment</h3>
+</div>
+<p class="font-body-md text-on-surface-variant leading-relaxed opacity-90">
+          Your delivery was <span class="text-primary font-semibold">confident</span> and structurally sound. You demonstrated strong subject matter expertise; however, there are opportunities to improve your engagement through pacing and visual cues. Your tone is professional, but softening the transitions will make the content more digestible.
+        </p>
+</div>
+</section>
+<!-- Action Plan / What you should do -->
+<section class="mb-lg">
+<div class="bg-white rounded-2xl p-md custom-shadow-lvl1 border border-outline">
+<div class="flex items-center gap-sm mb-lg">
+<div class="w-10 h-10 rounded-xl bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[24px]" data-icon="task_alt">task_alt</span>
+</div>
+<h3 class="font-h2 text-h2 text-[20px]">Strategic Improvements</h3>
+</div>
+<ul class="space-y-3">
+<li class="flex items-center gap-md p-md bg-surface-container-low rounded-xl border border-outline-variant hover:border-primary/30 transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-lg text-on-surface text-[15px]">Incorporate deep breathing</span>
+</li>
+<li class="flex items-center gap-md p-md bg-surface-container-low rounded-xl border border-outline-variant hover:border-primary/30 transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-lg text-on-surface text-[15px]">Maintain consistent eye contact</span>
+</li>
+<li class="flex items-center gap-md p-md bg-surface-container-low rounded-xl border border-outline-variant hover:border-primary/30 transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-lg text-on-surface text-[15px]">Slightly reduce vocal pace</span>
+</li>
+<li class="flex items-center gap-md p-md bg-surface-container-low rounded-xl border border-outline-variant hover:border-primary/30 transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-lg text-on-surface text-[15px]">Strategic use of rhetorical pauses</span>
+</li>
+</ul>
+</div>
+</section>
+<!-- Bottom Banner/Motivation -->
+<div class="mb-lg px-md py-3 bg-primary/10 rounded-2xl border border-primary/20 text-center">
+<p class="font-label-sm text-primary tracking-widest uppercase font-bold text-[10px]">Continuous Growth • Keep practicing!</p>
+</div>
+<!-- Primary Action Button -->
+<div class="fixed bottom-24 left-0 w-full px-container-padding pointer-events-none z-40">
+<button class="pointer-events-auto w-full h-[60px] bg-primary text-on-primary rounded-2xl font-h3 flex items-center justify-center gap-sm custom-shadow-lvl2 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+        Chat with AI Coach
+      </button>
+</div>
+</main>
+<!-- BottomNavBar Component -->
+<nav class="glass-effect flex justify-around items-center w-full h-20 px-2 pb-safe fixed bottom-0 z-50 border-t border-outline shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
+<div class="flex flex-col items-center justify-center text-on-surface-variant/60 px-4 py-1.5 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-['Manrope'] text-[11px] font-bold">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant/60 px-4 py-1.5 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="add_box">add_box</span>
+<span class="font-['Manrope'] text-[11px] font-bold">Upload</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant/60 px-4 py-1.5 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="bar_chart_4_bars">bar_chart_4_bars</span>
+<span class="font-['Manrope'] text-[11px] font-bold">Analysis</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary px-4 py-1.5 active:scale-90 transition-all duration-200">
+<div class="bg-primary/10 rounded-xl p-1 px-3 flex flex-col items-center">
+<span class="material-symbols-outlined" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="font-['Manrope'] text-[11px] font-bold">Coach</span>
+</div>
+</div>
+</nav>
+</body></html>

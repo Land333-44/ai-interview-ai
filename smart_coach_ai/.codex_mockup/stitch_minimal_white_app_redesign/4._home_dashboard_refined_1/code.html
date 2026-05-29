@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Coach AI - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "outline": "#94a3b8",
+                    "primary": "#7B61FF",
+                    "surface-variant": "#f1f5f9",
+                    "tertiary-fixed": "#f1f5f9",
+                    "on-surface": "#1e293b",
+                    "inverse-on-surface": "#ffffff",
+                    "surface-container-highest": "#f8fafc",
+                    "error-container": "#fee2e2",
+                    "surface-container": "#ffffff",
+                    "tertiary-fixed-dim": "#e2e8f0",
+                    "tertiary": "#64748b",
+                    "outline-variant": "#f1f5f9",
+                    "surface-dim": "#f8fafc",
+                    "error": "#ef4444",
+                    "primary-fixed-dim": "#ddd6fe",
+                    "surface-container-low": "#ffffff",
+                    "on-background": "#1e293b",
+                    "on-secondary-fixed-variant": "#64748b",
+                    "on-surface-variant": "#64748b",
+                    "surface": "#ffffff",
+                    "background": "#fdfdff", 
+                    "on-primary-fixed-variant": "#7B61FF",
+                    "secondary": "#64748b",
+                    "on-tertiary-fixed": "#1e293b",
+                    "surface-bright": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "primary-fixed": "#ede9fe",
+                    "primary-container": "#7B61FF",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#64748b",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#1e293b",
+                    "inverse-primary": "#ddd6fe",
+                    "secondary-fixed": "#f1f5f9",
+                    "secondary-container": "#f1f5f9",
+                    "surface-container-high": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#ffffff",
+                    "surface-tint": "#7B61FF",
+                    "tertiary-container": "#64748b",
+                    "on-error-container": "#7f1d1d",
+                    "on-primary-fixed": "#1e1b4b",
+                    "on-secondary-container": "#64748b",
+                    "inverse-surface": "#1e293b",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#e2e8f0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.25rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "gutter": "12px",
+                    "container-padding": "20px",
+                    "sm": "8px",
+                    "unit": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "h2": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "h3": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+        .primary-shadow {
+            box-shadow: 0 10px 30px -5px rgba(123, 97, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-white/80 backdrop-blur-md border-b border-slate-100 flex justify-between items-center w-full px-5 h-16 sticky top-0 z-50">
+<div class="flex items-center">
+<div class="flex items-center gap-2.5">
+<img alt="Smart Coach AI Logo" class="w-9 h-9 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+<h1 class="font-['Manrope'] text-lg font-extrabold tracking-tight text-slate-900">Smart Coach AI</h1>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-[22px]" data-icon="notifications">notifications</span>
+</button>
+<div class="w-9 h-9 rounded-full overflow-hidden border-2 border-primary/10">
+<span class="material-symbols-outlined text-primary flex items-center justify-center w-full h-full bg-primary/5 text-lg">person</span>
+</div>
+</div>
+</header>
+<main class="px-container-padding pt-lg space-y-xl">
+<!-- Greeting Section -->
+<section class="space-y-1">
+<h2 class="font-h1 text-h1 text-slate-900 flex items-center gap-2">Hello, Youssef <span class="animate-bounce-slow">👋</span></h2>
+<p class="font-body-lg text-body-lg text-slate-500 font-medium">Ready to sharpen your speaking skills?</p>
+</section>
+<!-- Primary Call to Action -->
+<section>
+<button class="w-full h-[60px] bg-primary text-on-primary rounded-xl font-h3 text-h3 flex items-center justify-center gap-sm primary-shadow active:scale-[0.97] transition-all duration-200">
+<span class="material-symbols-outlined text-2xl" data-icon="add_circle">add_circle</span>
+                Start New Session
+            </button>
+</section>
+<!-- Choose a Scenario -->
+<section class="space-y-md">
+<div class="flex justify-between items-center">
+<h3 class="font-h2 text-h2 text-slate-900">Practice Scenarios</h3>
+<button class="text-sm font-bold text-primary hover:underline transition-all">View All</button>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<!-- Interview Card -->
+<div class="col-span-2 bg-white p-5 rounded-xl soft-shadow border border-slate-100 flex items-center justify-between group active:scale-[0.98] transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary border border-primary/10">
+<span class="material-symbols-outlined text-2xl" data-icon="record_voice_over" style="font-variation-settings: 'FILL' 1;">record_voice_over</span>
+</div>
+<div>
+<p class="font-bold text-lg text-slate-900">Interview</p>
+<p class="font-medium text-sm text-slate-500">Prep for your dream job</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary group-hover:translate-x-1 transition-all" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Pitch Card -->
+<div class="bg-white p-5 rounded-xl soft-shadow border border-slate-100 space-y-3 active:scale-[0.98] transition-all cursor-pointer group">
+<div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center text-amber-500 border border-amber-100">
+<span class="material-symbols-outlined" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<p class="font-bold text-slate-900">Pitch</p>
+<p class="text-xs font-medium text-slate-500 leading-relaxed">Convince and win stakeholders</p>
+</div>
+</div>
+<!-- Presentation Card -->
+<div class="bg-white p-5 rounded-xl soft-shadow border border-slate-100 space-y-3 active:scale-[0.98] transition-all cursor-pointer group">
+<div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-blue-500 border border-blue-100">
+<span class="material-symbols-outlined" data-icon="present_to_all" style="font-variation-settings: 'FILL' 1;">present_to_all</span>
+</div>
+<div>
+<p class="font-bold text-slate-900">Presentation</p>
+<p class="text-xs font-medium text-slate-500 leading-relaxed">Command the stage with flair</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Progress Chart Section -->
+<section class="space-y-md">
+<h3 class="font-h2 text-h2 text-slate-900">Your Progress</h3>
+<div class="bg-white p-6 rounded-xl soft-shadow border border-slate-100">
+<div class="flex items-start justify-between mb-8">
+<div>
+<p class="text-[11px] font-bold text-slate-400 tracking-wider uppercase mb-1">Current Mastery</p>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-extrabold text-slate-900 tracking-tight">84</span>
+<span class="text-xl font-bold text-primary">%</span>
+</div>
+</div>
+<div class="bg-emerald-50 text-emerald-600 px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-emerald-100">
+<span class="material-symbols-outlined text-[16px] font-bold" data-icon="trending_up">trending_up</span>
+<span class="text-[11px] font-extrabold">Improving Fast</span>
+</div>
+</div>
+<!-- Improved Progress Chart visualization -->
+<div class="relative h-28 flex items-end justify-between px-1">
+<svg class="absolute inset-0 w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 400 100">
+<defs>
+<lineargradient id="lineGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#7B61FF" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#7B61FF" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,85 C50,80 80,70 120,55 S200,50 250,40 S350,15 400,5" fill="none" stroke="#7B61FF" stroke-linecap="round" stroke-width="4"></path>
+<circle cx="400" cy="5" fill="#7B61FF" r="5"></circle>
+<path d="M0,85 C50,80 80,70 120,55 S200,50 250,40 S350,15 400,5 V100 H0 Z" fill="url(#lineGradient)"></path>
+</svg>
+<div class="flex justify-between w-full mt-4 text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+<span>Oct 12</span>
+<span>Oct 26</span>
+<span class="text-primary">Today</span>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Feedback Chip -->
+<section class="bg-slate-900 p-5 rounded-xl border border-slate-800 flex gap-4 items-start shadow-xl">
+<div class="w-10 h-10 shrink-0 bg-primary/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="space-y-1.5">
+<p class="text-[11px] font-bold text-primary tracking-widest uppercase">Expert Tip</p>
+<p class="font-medium text-[13px] text-slate-200 leading-relaxed">
+                    "Your articulation has improved by <span class="text-primary font-bold">12%</span> this week. Focus on slowing down your 'Pitch' intro for maximum impact."
+                </p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-white/90 backdrop-blur-lg fixed bottom-0 w-full z-50 border-t border-slate-100 shadow-[0_-8px_30px_rgba(0,0,0,0.04)] flex justify-around items-center h-20 px-4 pb-safe">
+<a class="flex flex-col items-center justify-center text-primary group" href="#">
+<div class="bg-primary/10 rounded-xl p-2 mb-1 group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+</div>
+<span class="font-bold text-[10px] tracking-wide uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 group" href="#">
+<div class="p-2 mb-1 group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="add_circle">add_circle</span>
+</div>
+<span class="font-bold text-[10px] tracking-wide uppercase">Practice</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 group" href="#">
+<div class="p-2 mb-1 group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="analytics">analytics</span>
+</div>
+<span class="font-bold text-[10px] tracking-wide uppercase">Stats</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 group" href="#">
+<div class="p-2 mb-1 group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="psychology">psychology</span>
+</div>
+<span class="font-bold text-[10px] tracking-wide uppercase">Coach</span>
+</a>
+</nav>
+</body></html>

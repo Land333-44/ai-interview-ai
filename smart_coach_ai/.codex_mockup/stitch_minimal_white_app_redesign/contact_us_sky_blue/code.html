@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#1a0063",
+                    "on-primary-container": "#fffbff",
+                    "primary": "#5b3cdd",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f0f1f1",
+                    "surface-bright": "#f9f9f9",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#e5e2e1",
+                    "surface-tint": "#5d3fe0",
+                    "tertiary-fixed-dim": "#c6c5d2",
+                    "primary-container": "#7459f7",
+                    "on-tertiary-fixed": "#1a1b24",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#e5deff",
+                    "tertiary-fixed": "#e3e1ee",
+                    "secondary-container": "#e2dfde",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "on-surface-variant": "#484555",
+                    "tertiary": "#5b5b66",
+                    "inverse-surface": "#2f3131",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-background": "#1a1c1c",
+                    "outline-variant": "#c9c4d8",
+                    "inverse-primary": "#c9bfff",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-container": "#eeeeee",
+                    "secondary": "#5f5e5e",
+                    "on-tertiary-fixed-variant": "#464650",
+                    "on-surface": "#1a1c1c",
+                    "outline": "#797587",
+                    "surface-dim": "#dadada",
+                    "surface-container-low": "#f3f3f4",
+                    "background": "#f9f9f9",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#c9bfff",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-secondary-container": "#636262",
+                    "tertiary-container": "#74737f",
+                    "surface-container-high": "#e8e8e8",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-primary-fixed-variant": "#441cc8",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "error-container": "#ffdad6",
+                    "surface": "#f9f9f9",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "gutter": "12px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "unit": "4px",
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "h2": ["Manrope"],
+                    "h3": ["Manrope"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #f9f9f9;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar Section -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] sticky top-0 z-50 h-16 flex justify-between items-center w-full px-5">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-200 text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Manrope'] text-lg font-bold tracking-tight text-slate-900 dark:text-white">Get in Touch</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-primary-fixed p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<button class="active:scale-95 transition-transform duration-200 text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="px-container-padding py-lg max-w-md mx-auto space-y-xl">
+<!-- Hero Section -->
+<section class="text-center space-y-sm">
+<div class="flex justify-center mb-md">
+<div class="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="support_agent">support_agent</span>
+</div>
+</div>
+<h2 class="font-h1 text-h1 text-on-surface">Get in Touch</h2>
+<p class="font-body-lg text-body-lg text-secondary">How can we help you today?</p>
+</section>
+<!-- Quick Contact Bento Grid -->
+<section class="grid grid-cols-2 gap-sm">
+<button class="col-span-2 bg-white p-md rounded-xl shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] border border-slate-100 flex items-center gap-md active:scale-[0.98] transition-all">
+<div class="bg-[#F4F2FF] p-sm rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="forum" style="font-variation-settings: 'FILL' 1;">forum</span>
+</div>
+<div class="text-left">
+<p class="font-h3 text-h3">Live Chat</p>
+<p class="font-label-sm text-label-sm text-secondary">Response in 2 mins</p>
+</div>
+</button>
+<button class="bg-white p-md rounded-xl shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] border border-slate-100 flex flex-col items-start gap-sm active:scale-[0.98] transition-all">
+<div class="bg-[#E5F6FF] p-sm rounded-lg">
+<span class="material-symbols-outlined text-blue-500" data-icon="mail" style="font-variation-settings: 'FILL' 1;">mail</span>
+</div>
+<div>
+<p class="font-h3 text-h3">Email Support</p>
+<p class="font-label-sm text-label-sm text-secondary">24h turnaround</p>
+</div>
+</button>
+<button class="bg-white p-md rounded-xl shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] border border-slate-100 flex flex-col items-start gap-sm active:scale-[0.98] transition-all">
+<div class="bg-[#FFF5E5] p-sm rounded-lg">
+<span class="material-symbols-outlined text-orange-400" data-icon="quiz" style="font-variation-settings: 'FILL' 1;">quiz</span>
+</div>
+<div>
+<p class="font-h3 text-h3">FAQ</p>
+<p class="font-label-sm text-label-sm text-secondary">Quick answers</p>
+</div>
+</button>
+</section>
+<!-- Contact Form Section -->
+<section class="bg-white p-lg rounded-xl shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] border border-slate-100 space-y-lg">
+<h3 class="font-h2 text-h2 text-on-surface">Send a Message</h3>
+<form class="space-y-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-secondary block">Name</label>
+<input class="w-full h-12 px-md bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md text-body-md" placeholder="Your full name" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-secondary block">Email</label>
+<input class="w-full h-12 px-md bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md text-body-md" placeholder="example@email.com" type="email"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-secondary block">Message</label>
+<textarea class="w-full p-md bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md text-body-md resize-none" placeholder="Tell us how we can help..." rows="4"></textarea>
+</div>
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-h3 text-h3 shadow-lg shadow-primary/20 active:scale-95 transition-all duration-200 flex items-center justify-center gap-sm" type="submit">
+                    Send Message
+                    <span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</form>
+</section>
+<!-- Visual Element / Brand Context -->
+<section class="rounded-2xl overflow-hidden relative h-48 flex items-end p-lg">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A clean, minimalist digital background featuring soft, flowing sky blue and lavender gradients. The aesthetic is modern and professional, using high-key lighting to create a bright, airy atmosphere. Subtle geometric patterns are layered over the colors, reflecting a high-end corporate design language focused on trust and clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8T3w7QHXyGEH-JjZlqjPPKKkx0Y9-3hqAWF7GmeREO3YyNYND-N7BYa_N9UJWJ6RjaC_CoL0onShdbOaWBAAzMKkOJCUcYAscTO_NEUrjrJvW9V6uvdrC1Yxf94-m-P-ROFOjScDnfAPimMpkr3xjFfixs7i_CfYl3gjYV81VenUGSgf8eezMSnfkr2KM1OzVazBOqCZbCSwWr_lF8pWmTkC43DfVV60nT5lytCZDYE09_pyD3oRbRlwm_J2_bbHPf1nLxQoUOAdm"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+<div class="relative z-10 text-white">
+<p class="font-h3 text-h3">Smart Coach AI Community</p>
+<p class="font-body-md text-body-md opacity-90">Join 50,000+ users transforming their lives.</p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Section -->
+<nav class="fixed bottom-0 w-full z-50 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-[0_-4px_15px_0_rgba(0,0,0,0.04)] flex justify-around items-center h-20 px-2 pb-safe">
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Upload</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Analysis</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#7B61FF] dark:text-[#A291FF] bg-[#F4F2FF] dark:bg-indigo-900/20 rounded-2xl px-4 py-1.5 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Coach</span>
+</div>
+</nav>
+</body></html>

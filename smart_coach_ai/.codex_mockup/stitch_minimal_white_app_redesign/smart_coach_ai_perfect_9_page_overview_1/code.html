@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Coach AI - App Showcase</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "inverse-primary": "#c9bfff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#5b5b66",
+                        "on-surface": "#1a1c1c",
+                        "on-primary-fixed": "#1a0063",
+                        "on-secondary-container": "#636262",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#474746",
+                        "surface-container": "#eeeeee",
+                        "surface": "#f9f9f9",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "primary-fixed": "#e5deff",
+                        "on-tertiary-container": "#fffbff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-surface-variant": "#484555",
+                        "outline-variant": "#c9c4d8",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "surface-dim": "#dadada",
+                        "surface-container-high": "#e8e8e8",
+                        "secondary-container": "#e2dfde",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#464650",
+                        "surface-tint": "#5d3fe0",
+                        "on-tertiary-fixed": "#1a1b24",
+                        "tertiary-container": "#74737f",
+                        "secondary": "#5f5e5e",
+                        "surface-container-low": "#f3f3f4",
+                        "on-background": "#1a1c1c",
+                        "on-primary": "#ffffff",
+                        "primary": "#87CEEB",
+                        "background": "#f9f9f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "outline": "#797587",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-primary-fixed-variant": "#441cc8",
+                        "primary-fixed-dim": "#c9bfff",
+                        "inverse-surface": "#2f3131",
+                        "primary-container": "#87CEEB",
+                        "inverse-on-surface": "#f0f1f1",
+                        "tertiary-fixed-dim": "#c6c5d2",
+                        "tertiary-fixed": "#e3e1ee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "lg": "24px",
+                        "gutter": "12px",
+                        "container-padding": "20px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"], "h1": ["Manrope"], "body-lg": ["Manrope"], "body-md": ["Manrope"], "label-sm": ["Manrope"], "h3": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mobile-frame {
+            width: 280px;
+            height: 580px;
+            border: 8px solid #1a1c1c;
+            border-radius: 36px;
+            overflow: hidden;
+            position: relative;
+            background: #ffffff;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 20px;
+            background: #1a1c1c;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 60;
+        }
+        .screen-content {
+            height: 100%;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .screen-content::-webkit-scrollbar {
+            display: none;
+        }
+        .sky-blue-theme {
+            --primary-color: #87CEEB;
+        }
+    </style>
+</head>
+<body class="bg-surface-bright text-on-surface font-body-md">
+<!-- Header -->
+<header class="flex justify-between items-center w-full px-5 h-20 bg-white border-b border-slate-100 sticky top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">lightbulb</span>
+<h1 class="font-h1 text-h3 text-slate-900 tracking-tight">Smart Coach AI</h1>
+</div>
+<nav class="hidden md:flex gap-6">
+<span class="font-label-sm text-primary">Overview</span>
+<span class="font-label-sm text-slate-400">Documentation</span>
+</nav>
+</header>
+<main class="max-w-7xl mx-auto px-container-padding py-xl">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-8 justify-items-center">
+<!-- 1. Onboarding -->
+<div class="flex flex-col items-center">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="screen-content flex flex-col p-6 pt-10 sky-blue-theme">
+<img alt="AI Hero" class="w-full aspect-square rounded-xl object-cover mb-8" data-alt="A high-tech digital illustration of a sleek AI brain core emitting soft sky-blue light pulses. The background is a clean, minimalist white environment with subtle floating geometric data particles. The lighting is ethereal and professional, reflecting a modern corporate coaching atmosphere. The central AI core has intricate glowing circuits in various shades of blue." src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+<h2 class="font-h1 text-h2 text-slate-900 mb-4">Precision Coaching.</h2>
+<p class="text-slate-500 font-body-md mb-8">Elevate your performance with AI-driven insights tailored just for you.</p>
+<button class="mt-auto w-full bg-[#87CEEB] text-white font-bold py-4 rounded-xl shadow-lg">Get Started</button>
+</div>
+</div>
+<p class="mt-6 font-label-sm text-slate-400 tracking-[0.2em]">STEP 01: ONBOARDING</p>
+</div>
+<!-- 2. Login -->
+<div class="flex flex-col items-center">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="screen-content flex flex-col p-6 pt-12 sky-blue-theme">
+<div class="flex justify-center mb-10">
+<span class="material-symbols-outlined text-primary text-5xl">lightbulb</span>
+</div>
+<h3 class="font-h2 text-h2 mb-2">Welcome Back</h3>
+<p class="text-slate-400 mb-8 font-body-md">Sign in to continue your progress.</p>
+<div class="space-y-4">
+<div>
+<label class="font-label-sm text-slate-500 block mb-1">Email</label>
+<input class="w-full border-[#E9ECEF] rounded-lg bg-slate-50 p-3 focus:ring-primary focus:border-primary" placeholder="name@example.com" type="text"/>
+</div>
+<div>
+<label class="font-label-sm text-slate-500 block mb-1">Password</label>
+<input class="w-full border-[#E9ECEF] rounded-lg bg-slate-50 p-3 focus:ring-primary focus:border-primary" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<button class="w-full bg-[#87CEEB] text-white font-bold py-4 rounded-xl mt-8 shadow-sm">Login</button>
+</div>
+</div>
+<p class="mt-6 font-label-sm text-slate-400 tracking-[0.2em]">STEP 02: LOGIN</p>
+</div>
+<!-- 3. Sign Up -->
+<div class="flex flex-col items-center">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="screen-content flex flex-col p-6 pt-12 sky-blue-theme">
+<h3 class="font-h2 text-h2 mb-2">Create Account</h3>
+<p class="text-slate-400 mb-8 font-body-md">Start your AI journey today.</p>
+<div class="space-y-3 mb-8">
+<button class="w-full flex items-center justify-center gap-3 border border-slate-200 py-3 rounded-xl hover:bg-slate-50 transition-colors">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAZm91-YgiEazrWUo54IeMIR62KPIUmjlgw5BWFQ-KYdzhndLf3pELYNnPtKyToVwkoSDEQtrXTY19oCHP7R7QgbKJnUe05vJkR_KdWlmVE7odblgiMjnZDYFOupUGQTM744mVq-igBS2pqACdFhmaQ8eGppy64z51NYwFE4xJuEStxu87Vgo-Wa5hly5GSjwOrWDurtaQHU7c59pMOVcJLYXN2_5s_0OeFCaAEYKcfOp-fGd3yx3l9kyyhd4yWPeqd9r1VmwU2usk"/>
+<span class="font-body-md font-semibold">Google</span>
+</button>
+<button class="w-full flex items-center justify-center gap-3 border border-slate-200 py-3 rounded-xl hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined">ios</span>
+<span class="font-body-md font-semibold">Apple</span>
+</button>
+</div>
+<div class="relative flex py-5 items-center">
+<div class="flex-grow border-t border-slate-100"></div>
+<span class="flex-shrink mx-4 text-slate-400 font-label-sm uppercase">Or Email</span>
+<div class="flex-grow border-t border-slate-100"></div>
+</div>
+<button class="w-full bg-[#87CEEB] text-white font-bold py-4 rounded-xl mt-4">Sign Up</button>
+</div>
+</div>
+<p class="mt-6 font-label-sm text-slate-400 tracking-[0.2em]">STEP 03: SIGN UP</p>
+</div>
+<!-- 4. Dashboard -->
+<div class="flex flex-col items-center">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="screen-content bg-slate-50 sky-blue-theme">
+<header class="bg-white p-6 pt-10 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-h2 text-h3">Dashboard</h4>
+<span class="material-symbols-outlined text-slate-400">notifications</span>
+</div>
+<div class="bg-primary/10 p-4 rounded-xl flex items-center gap-4">
+<div class="bg-primary p-2 rounded-lg text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<p class="text-slate-900 font-bold">Performance Peak</p>
+<p class="text-slate-500 text-xs">You're doing better than 84% of peers</p>
+</div>
+</div>
+</header>
+<div class="p-6 space-y-4">
+<div class="bg-white p-4 rounded-xl shadow-sm">
+<p class="font-label-sm text-slate-400 mb-2">WEEKLY GOAL</p>
+<div class="flex justify-between items-end mb-2">
+<span class="text-h2 font-bold">12/15</span>
+<span class="text-xs text-primary font-bold">80%</span>
+</div>
+<div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[80%]"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white p-4 rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-primary mb-2">timer</span>
+<p class="text-xs text-slate-400">Time</p>
+<p class="font-bold">4.2 hrs</p>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-primary mb-2">bolt</span>
+<p class="text-xs text-slate-400">Focus</p>
+<p class="font-bold">92/100</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p class="mt-6 font-label-sm text-slate-400 tracking-[0.2em]">STEP 04: DASHBOARD</p>
+</div>
+<!-- 5. Upload (Clean) -->
+<div class="flex flex-col items-center">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="screen-content p-6 pt-12 sky-blue-theme">
+<div class="flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-primary">cloud_upload</span>
+<h4 class="font-h2 text-h3">Upload Data</h4>
+</div>
+<div class="border-2 border-dashed border-slate-200 rounded-2xl p-10 flex flex-col items-center justify-center text-center bg-slate-50/50 mb-8 h-64">
+<span class="material-symbols-outlined text-primary text-5xl mb-4">video_library</span>
+<p class="font-body-lg font-bold">Drop your video here</p>
+<p class="text-xs text-slate-400 mt-2">Support MP4, MOV up to 500MB</p>
+</div>
+<div class="space-y-3">
+<div class="bg-white border border-slate-100 p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">movie</span>
+<span class="text-sm font-medium">session_01.mp4</span>
+</div>
+<span class="material-symbols-outlined text-error text-sm">close</span>
+</div>
+</div>
+<button class="w-full bg-[#87CEEB] text-white font-bold py-4 rounded-xl mt-auto shadow-md">Process Now</button>
+</div>
+</div>
+<p class="mt-6 font-label-sm text-slate-400 tracking-[0.2em]">STEP 05: UPLOAD</p>
+</div>
+<!-- 6. Analyzing (Clean) -->
+<div class="flex flex-col items-center">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="screen-content flex flex-col items-center justify-center p-6 sky-blue-theme">
+<div class="relative w-48 h-48 mb-8">
+<div class="absolute inset-0 rounded-full border-4 border-slate-100"></div>
+<div class="absolute inset-0 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
+<div class="absolute inset-4 rounded-full overflow-hidden">
+<img alt="Analyzing" class="w-full h-full object-cover grayscale opacity-50" data-alt="A macro-photography shot of a high-resolution digital sensor array. Millions of microscopic points of light shimmer with a cool blue and silver glow, suggesting intense data processing and computation. The atmosphere is technical, sophisticated, and fast-paced, with a focus on precision and digital analysis." src="https://lh3.googleusercontent.com/aida/ADBb0ugBfy5Kxykx6VRSG_RKDzIa0SbhBs6z_g98JeSzKd3fP33mDvpQ30oimByftaHHNkJ3__u6lJmHYdiS1ohb18UGD1dEMYC5J-h2c6Gvor4BPXwtnNttjDiOvV7dIOh8-gNlvtOTZhUChXgVQrpWlIGreIvcNDj_U-DTIz54FUEyH4KOWDMO4ZXeh2j6A9ybZMoxgfq9NSRhSt18-OUNqs9El3c7KpBrmx24fXGF7B3BFyQlWBU3h41LBMVQoqW_Itp3N4KD2Ko0JI8"/>
+</div>
+</div>
+<h4 class="font-h2 text-h2 mb-2 text-center">Analyzing Data</h4>
+<p class="text-slate-500 text-center font-body-md px-4">Our AI is currently breaking down your performance frame by frame.</p>
+<div class="mt-12 space-y-3 w-full">
+<div class="flex items-center justify-between px-4 py-2 bg-slate-50 rounded-lg">
+<span class="text-xs font-bold text-slate-400">TRACKING NODES</span>
+<span class="text-xs font-bold text-primary">COMPLETED</span>
+</div>
+<div class="flex items-center justify-between px-4 py-2 bg-slate-50 rounded-lg">
+<span class="text-xs font-bold text-slate-400">VELOCITY CHECK</span>
+<span class="text-xs font-bold text-primary">IN PROGRESS</span>
+</div>
+</div>
+</div>
+</div>
+<p class="mt-6 font-label-sm text-slate-400 tracking-[0.2em]">STEP 06: ANALYZING</p>
+</div>
+<!-- 7. Results -->
+<div class="flex flex-col items-center">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="screen-content bg-slate-50 sky-blue-theme">
+<header class="bg-white p-6 pt-10 shadow-sm flex items-center justify-between">
+<h4 class="font-h2 text-h3">Results</h4>
+<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold">READY</span>
+</header>
+<div class="p-6 space-y-6">
+<div class="bg-white p-5 rounded-2xl shadow-sm">
+<p class="text-xs font-bold text-slate-400 mb-4 tracking-widest">SCORE OVERVIEW</p>
+<div class="flex justify-around items-center">
+<div class="text-center">
+<p class="text-3xl font-extrabold text-slate-900">88</p>
+<p class="text-[10px] text-slate-400">FORM</p>
+</div>
+<div class="h-10 w-px bg-slate-100"></div>
+<div class="text-center">
+<p class="text-3xl font-extrabold text-slate-900">92</p>
+<p class="text-[10px] text-slate-400">SPEED</p>
+</div>
+<div class="h-10 w-px bg-slate-100"></div>
+<div class="text-center">
+<p class="text-3xl font-extrabold text-slate-900">74</p>
+<p class="text-[10px] text-slate-400">CONSISTENCY</p>
+</div>
+</div>
+</div>
+<div class="bg-primary p-5 rounded-2xl text-white shadow-lg">
+<p class="font-bold mb-2">AI Summary</p>
+<p class="text-sm leading-relaxed opacity-90">Your posture improved by 12% compared to last week. Focus on your follow-through to increase consistency.</p>
+</div>
+<button class="w-full bg-white border border-slate-200 py-4 rounded-xl font-bold text-slate-900 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-primary">download</span>
+                                Download Report
+                            </button>
+</div>
+</div>
+</div>
+<p class="mt-6 font-label-sm text-slate-400 tracking-[0.2em]">STEP 07: RESULTS</p>
+</div>
+<!-- 8. Advice -->
+<div class="flex flex-col items-center">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="screen-content bg-slate-50 sky-blue-theme">
+<header class="bg-white p-6 pt-10 shadow-sm">
+<h4 class="font-h2 text-h3">Coach's Advice</h4>
+</header>
+<div class="p-6 space-y-4">
+<div class="bg-[#e3f2fd] p-5 rounded-2xl border-l-4 border-primary">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<span class="font-bold text-slate-900">Key Adjustment</span>
+</div>
+<p class="text-sm text-slate-700 leading-relaxed">Try widening your stance by 2 inches. This will lower your center of gravity and provide better stability during high-impact moves.</p>
+</div>
+<div class="bg-white p-5 rounded-2xl shadow-sm">
+<p class="font-bold text-slate-900 mb-3">Next Workout</p>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-sm text-slate-600">Balance Drills (15 mins)</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-sm text-slate-600">Core Strength (20 mins)</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-[#87CEEB] text-slate-900 font-extrabold py-5 rounded-2xl mt-4 shadow-xl flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">forum</span>
+                                Talk to Coach
+                            </button>
+</div>
+</div>
+</div>
+<p class="mt-6 font-label-sm text-slate-400 tracking-[0.2em]">STEP 08: ADVICE</p>
+</div>
+<!-- 9. AI Coach Chat -->
+<div class="flex flex-col items-center">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="screen-content flex flex-col sky-blue-theme">
+<header class="p-5 pt-10 bg-white border-b border-slate-100 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">AI Coach</h4>
+<p class="text-[10px] text-green-500 font-bold">ONLINE</p>
+</div>
+</header>
+<div class="flex-grow p-4 space-y-4 bg-slate-50">
+<div class="flex justify-start">
+<div class="bg-white p-3 rounded-2xl rounded-tl-none max-w-[85%] shadow-sm">
+<p class="text-sm">Hello! Based on your last upload, would you like to focus on stability or power today?</p>
+</div>
+</div>
+<div class="flex justify-end">
+<div class="bg-primary p-3 rounded-2xl rounded-tr-none max-w-[85%] text-white shadow-md">
+<p class="text-sm">Let's work on stability. My balance felt a bit off during the second half.</p>
+</div>
+</div>
+<div class="flex justify-start">
+<div class="bg-white p-3 rounded-2xl rounded-tl-none max-w-[85%] shadow-sm">
+<p class="text-sm">Great choice. Let's start with a single-leg reach drill. Ready?</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-white border-t border-slate-100">
+<div class="flex gap-2">
+<input class="flex-grow border-slate-100 rounded-full bg-slate-50 px-4 text-sm py-2" placeholder="Type a message..." type="text"/>
+<button class="bg-primary w-10 h-10 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<p class="mt-6 font-label-sm text-slate-400 tracking-[0.2em]">STEP 09: AI COACH CHAT</p>
+</div>
+</div>
+</main>
+<footer class="mt-20 py-10 border-t border-slate-100 bg-white text-center">
+<div class="flex flex-col items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<p class="font-h1 text-h3 text-slate-900">Smart Coach AI</p>
+</div>
+<p class="text-slate-400 font-label-sm uppercase tracking-[0.3em]">© 2024 AI PERFORMANCE SYSTEMS</p>
+</div>
+</footer>
+</body></html>

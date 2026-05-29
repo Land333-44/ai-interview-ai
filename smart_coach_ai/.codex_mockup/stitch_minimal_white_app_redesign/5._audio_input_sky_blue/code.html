@@ -1,0 +1,195 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000a",
+                    "secondary": "#5f5e5e",
+                    "primary-container": "#7459f7",
+                    "outline-variant": "#c9c4d8",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-container-high": "#e8e8e8",
+                    "on-secondary-container": "#636262",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-container-low": "#f3f3f4",
+                    "surface-bright": "#f9f9f9",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#74737f",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#5d3fe0",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#e2dfde",
+                    "inverse-surface": "#2f3131",
+                    "on-primary-fixed-variant": "#441cc8",
+                    "tertiary-fixed-dim": "#c6c5d2",
+                    "outline": "#797587",
+                    "on-background": "#1a1c1c",
+                    "on-tertiary-fixed": "#1a1b24",
+                    "on-primary-container": "#fffbff",
+                    "primary-fixed-dim": "#c9bfff",
+                    "surface": "#f9f9f9",
+                    "on-tertiary-fixed-variant": "#464650",
+                    "inverse-primary": "#c9bfff",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#1a0063",
+                    "surface-container": "#eeeeee",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-surface-variant": "#484555",
+                    "background": "#f9f9f9",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-variant": "#e2e2e2",
+                    "surface-dim": "#dadada",
+                    "primary-fixed": "#e5deff",
+                    "primary": "#5b3cdd",
+                    "tertiary-fixed": "#e3e1ee",
+                    "tertiary": "#5b5b66"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "12px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "unit": "4px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "container-padding": "20px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Manrope"],
+                    "h2": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "h3": ["Manrope"],
+                    "body-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .waveform-bar {
+            @apply bg-primary/20 rounded-full;
+            height: 4px;
+            width: 3px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-sky-100/50 dark:border-sky-900/30 shadow-sm shadow-sky-100/20 dark:shadow-none">
+<div class="flex items-center justify-between px-6 h-16 max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="text-slate-600 active:scale-95 duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="text-xl font-bold text-sky-500 dark:text-sky-300 flex items-center gap-2 font-manrope font-semibold tracking-tight">
+<span class="material-symbols-outlined text-sky-400">lightbulb</span>
+                    Smart Coach AI
+                </div>
+</div>
+<button class="text-slate-400 hover:bg-sky-50 rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<main class="flex-1 mt-16 pb-32 px-container-padding flex flex-col gap-lg">
+<!-- Input Method Switcher -->
+<div class="mt-lg flex p-1 bg-surface-container-low rounded-xl">
+<button class="flex-1 py-3 text-label-sm font-label-sm text-secondary hover:text-primary transition-colors">VIDEO</button>
+<button class="flex-1 py-3 bg-white shadow-sm rounded-lg text-label-sm font-label-sm text-primary flex items-center justify-center gap-1">
+                AUDIO
+            </button>
+<button class="flex-1 py-3 text-label-sm font-label-sm text-secondary hover:text-primary transition-colors">TEXT</button>
+</div>
+<!-- Central Recording Area -->
+<div class="flex-1 flex flex-col items-center justify-center py-xl gap-xl">
+<div class="relative flex items-center justify-center">
+<!-- Outer Pulse Glow -->
+<div class="absolute w-56 h-56 rounded-full bg-[#87CEEB]/10 animate-pulse"></div>
+<div class="absolute w-44 h-44 rounded-full bg-[#87CEEB]/20 animate-pulse delay-75"></div>
+<!-- Main Record Button -->
+<button class="relative w-32 h-32 rounded-full flex items-center justify-center shadow-lg shadow-primary/30 active:scale-90 transition-transform duration-200 bg-[#87CEEB]" style="box-shadow: 0 10px 15px -3px rgba(135, 206, 235, 0.3);">
+<span class="material-symbols-outlined text-white text-[48px]" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+</div>
+<div class="text-center flex flex-col gap-sm">
+<h2 class="font-h2 text-h2 text-on-surface">Recording ready</h2>
+<p class="font-body-md text-body-md text-secondary max-w-[260px] mx-auto">Tap button to start capturing your audio session</p>
+</div>
+<!-- Waveform Visualizer Placeholder -->
+<div class="flex items-center justify-center gap-1 h-12 w-full px-xl"><div class="w-1 h-4 bg-[#87CEEB]/20 rounded-full"></div><div class="w-1 h-6 bg-[#87CEEB]/30 rounded-full"></div><div class="w-1 h-8 bg-[#87CEEB]/40 rounded-full"></div><div class="w-1 h-10 bg-[#87CEEB]/50 rounded-full"></div><div class="w-1 h-6 bg-[#87CEEB]/40 rounded-full"></div><div class="w-1 h-12 bg-[#87CEEB]/60 rounded-full"></div><div class="w-1 h-8 bg-[#87CEEB]/40 rounded-full"></div><div class="w-1 h-10 bg-[#87CEEB]/50 rounded-full"></div><div class="w-1 h-6 bg-[#87CEEB]/30 rounded-full"></div><div class="w-1 h-4 bg-[#87CEEB]/20 rounded-full"></div></div>
+</div>
+<!-- AI TIPS Card -->
+<div class="bg-tertiary-fixed rounded-2xl p-md flex gap-md items-start shadow-sm border border-outline-variant/30">
+<div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px] text-[#87CEEB]">auto_awesome</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm uppercase text-[#87CEEB]">AI Tips</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Speak clearly and minimize background noise for the most accurate emotional analysis.</p>
+</div>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full h-14 text-on-primary font-h3 text-h3 rounded-2xl shadow-xl shadow-primary/20 active:scale-95 transition-transform duration-200 mt-4 bg-[#87CEEB]" style="box-shadow: 0 20px 25px -5px rgba(135, 206, 235, 0.2);">
+            Start Recording
+        </button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border-t border-sky-50 dark:border-slate-800 shadow-[0_-4px_20px_rgba(135,206,235,0.1)] flex justify-around items-center px-4 pb-6 pt-3">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-sky-400 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[11px] font-medium font-manrope mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-sky-50 dark:bg-sky-900/40 text-sky-600 dark:text-sky-300 rounded-2xl px-5 py-1.5 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="text-[11px] font-medium font-manrope mt-1">Upload</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-sky-400 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-[11px] font-medium font-manrope mt-1">Analysis</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-sky-400 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="text-[11px] font-medium font-manrope mt-1">Coach</span>
+</a>
+</nav>
+
+
+</body></html>

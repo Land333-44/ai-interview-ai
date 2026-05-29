@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-error-container": "#93000a",
+                "on-tertiary": "#ffffff",
+                "on-background": "#1a1c1c",
+                "surface-variant": "#e2e2e2",
+                "on-secondary-fixed-variant": "#474746",
+                "on-error": "#ffffff",
+                "outline": "#797587",
+                "primary-fixed": "#e5deff",
+                "inverse-on-surface": "#f0f1f1",
+                "secondary-fixed-dim": "#c8c6c5",
+                "on-tertiary-fixed-variant": "#464650",
+                "error-container": "#ffdad6",
+                "surface-container-high": "#e8e8e8",
+                "outline-variant": "#c9c4d8",
+                "tertiary-container": "#74737f",
+                "primary-fixed-dim": "#c9bfff",
+                "tertiary-fixed-dim": "#c6c5d2",
+                "inverse-surface": "#2f3131",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-container": "#fffbff",
+                "on-primary-container": "#fffbff",
+                "surface-dim": "#dadada",
+                "background": "#f9f9f9",
+                "primary": "#5b3cdd",
+                "on-surface": "#1a1c1c",
+                "primary-container": "#7459f7",
+                "tertiary-fixed": "#e3e1ee",
+                "surface-container-low": "#f3f3f4",
+                "surface-container-highest": "#e2e2e2",
+                "tertiary": "#5b5b66",
+                "on-tertiary-fixed": "#1a1b24",
+                "surface-bright": "#f9f9f9",
+                "on-surface-variant": "#484555",
+                "on-primary-fixed-variant": "#441cc8",
+                "on-secondary-container": "#636262",
+                "surface": "#f9f9f9",
+                "on-primary-fixed": "#1a0063",
+                "secondary-container": "#e2dfde",
+                "surface-tint": "#5d3fe0",
+                "surface-container": "#eeeeee",
+                "on-primary": "#ffffff",
+                "inverse-primary": "#c9bfff",
+                "on-secondary": "#ffffff",
+                "secondary-fixed": "#e5e2e1",
+                "secondary": "#5f5e5e",
+                "on-secondary-fixed": "#1c1b1b",
+                "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "gutter": "12px",
+                "sm": "8px",
+                "lg": "24px",
+                "container-padding": "20px",
+                "xs": "4px",
+                "xl": "32px",
+                "md": "16px",
+                "unit": "4px"
+            },
+            "fontFamily": {
+                "label-sm": ["Manrope"],
+                "h3": ["Manrope"],
+                "h2": ["Manrope"],
+                "body-lg": ["Manrope"],
+                "body-md": ["Manrope"],
+                "h1": ["Manrope"]
+            },
+            "fontSize": {
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ai-pulse {
+            position: relative;
+        }
+        .ai-pulse::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(91, 60, 221, 0.08) 0%, rgba(91, 60, 221, 0) 70%);
+            animation: pulse-ring 3s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.9); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(0.9); opacity: 0.5; }
+        }
+        .progress-glow {
+            box-shadow: 0 0 12px rgba(91, 60, 221, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex flex-col font-body-md text-on-surface selection:bg-primary/20">
+<!-- Top Navigation Bar -->
+<header class="bg-white/80 backdrop-blur-md border-b border-surface-container sticky top-0 z-50 h-16 flex justify-between items-center w-full px-5">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-low active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="record_voice_over" style="font-variation-settings: 'FILL' 1;">record_voice_over</span>
+</div>
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-low active:scale-90 transition-all duration-200 relative">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
+</button>
+</header>
+<main class="flex-grow flex flex-col items-center px-container-padding py-xl max-w-md mx-auto w-full">
+<!-- AI Brain Visual -->
+<div class="relative mt-4 mb-xl">
+<div class="w-40 h-40 rounded-full flex items-center justify-center ai-pulse bg-gradient-to-b from-primary/5 to-transparent">
+<div class="w-24 h-24 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] rounded-full flex items-center justify-center border border-surface-container">
+<span class="material-symbols-outlined text-primary text-5xl" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+</div>
+</div>
+<!-- Header Content -->
+<div class="text-center space-y-2 mb-10">
+<h2 class="font-h1 text-h1 text-on-surface tracking-tight">Analyzing session...</h2>
+<p class="font-body-md text-on-surface-variant max-w-[280px] mx-auto opacity-70">Our AI is processing your input to generate personalized insights.</p>
+</div>
+<!-- Progress Section -->
+<div class="w-full bg-white rounded-2xl p-6 shadow-sm border border-surface-container mb-8">
+<div class="flex justify-between items-center mb-5">
+<span class="font-label-sm text-primary/60 uppercase tracking-widest text-[10px]">Processing Pipeline</span>
+<span class="font-h3 text-h3 text-primary">75%</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%] rounded-full transition-all duration-1000 ease-in-out progress-glow"></div>
+</div>
+</div>
+<!-- Checklist Section -->
+<div class="w-full space-y-3">
+<div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-surface-container shadow-sm">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-500 border border-emerald-100">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 0;">check_circle</span>
+</div>
+<span class="font-body-md font-medium text-on-surface">Transcribing speech audio</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-surface-container shadow-sm">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-500 border border-emerald-100">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 0;">check_circle</span>
+</div>
+<span class="font-body-md font-medium text-on-surface">Emotional analysis (Hume AI)</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-surface-container shadow-sm">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-500 border border-emerald-100">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 0;">check_circle</span>
+</div>
+<span class="font-body-md font-medium text-on-surface">Identifying core sentiments</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-surface-container shadow-sm">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-500 border border-emerald-100">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 0;">check_circle</span>
+</div>
+<span class="font-body-md font-medium text-on-surface">Optimizing LLM context</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-primary/[0.04] rounded-xl border border-primary/10 shadow-sm">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 text-primary">
+<div class="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+</div>
+<span class="font-body-md font-semibold text-primary">Generating personalized advice</span>
+</div>
+</div>
+<!-- AI Tip Chip -->
+<div class="mt-xl p-6 bg-surface-container-low/50 rounded-2xl border border-surface-container flex items-start gap-4 w-full">
+<div class="w-10 h-10 flex-shrink-0 bg-white rounded-lg shadow-sm border border-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="lightbulb">lightbulb</span>
+</div>
+<div class="space-y-1">
+<span class="font-label-sm text-on-surface-variant/60 uppercase text-[10px] tracking-[0.15em]">Growth Mindset</span>
+<p class="font-body-md text-on-surface-variant leading-relaxed">Analysis is most accurate when you speak naturally and share genuine feelings without filtering.</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="bg-white/90 backdrop-blur-lg border-t border-surface-container shadow-[0_-4px_20px_rgba(0,0,0,0.02)] fixed bottom-0 w-full z-50 h-20 px-2 pb-safe flex justify-around items-center">
+<button class="flex flex-col items-center justify-center text-on-surface-variant/40 px-4 py-1.5 transition-all duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="grid_view">grid_view</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/40 px-4 py-1.5 transition-all duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="add_circle">add_circle</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Upload</span>
+</button>
+<div class="flex flex-col items-center justify-center px-6 py-2 bg-primary/5 rounded-2xl text-primary">
+<span class="material-symbols-outlined mb-0.5" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Analysis</span>
+</div>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/40 px-4 py-1.5 transition-all duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="smart_toy">smart_toy</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Coach</span>
+</button>
+</nav>
+<!-- Spacer for Bottom Nav -->
+<div class="h-24"></div>
+</body></html>

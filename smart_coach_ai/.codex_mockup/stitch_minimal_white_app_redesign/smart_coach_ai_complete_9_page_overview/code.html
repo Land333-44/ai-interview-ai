@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Coach AI: Full 9-Screen Journey</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e8e8",
+                        "primary-fixed": "#e5deff",
+                        "on-primary-fixed": "#1a0063",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#1a1b24",
+                        "surface-container": "#eeeeee",
+                        "surface-variant": "#e2e2e2",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "on-error-container": "#93000a",
+                        "primary": "#5b3cdd",
+                        "on-surface": "#1a1c1c",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-primary-fixed-variant": "#441cc8",
+                        "on-secondary-container": "#636262",
+                        "surface-tint": "#5d3fe0",
+                        "secondary-container": "#e2dfde",
+                        "secondary": "#5f5e5e",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "background": "#f9f9f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#fffbff",
+                        "primary-fixed-dim": "#c9bfff",
+                        "on-tertiary-fixed-variant": "#464650",
+                        "on-primary-container": "#fffbff",
+                        "inverse-primary": "#c9bfff",
+                        "inverse-on-surface": "#f0f1f1",
+                        "surface-container-low": "#f3f3f4",
+                        "on-background": "#1a1c1c",
+                        "surface": "#f9f9f9",
+                        "outline": "#797587",
+                        "inverse-surface": "#2f3131",
+                        "tertiary-fixed-dim": "#c6c5d2",
+                        "on-surface-variant": "#484555",
+                        "tertiary-container": "#74737f",
+                        "primary-container": "#7459f7",
+                        "on-secondary-fixed-variant": "#474746",
+                        "tertiary-fixed": "#e3e1ee",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c9c4d8",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "tertiary": "#5b5b66",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "brand-sky": "#87CEEB"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "unit": "4px",
+                        "md": "16px",
+                        "container-padding": "20px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .mobile-frame {
+            aspect-ratio: 9 / 19.5;
+            width: 100%;
+            max-width: 320px;
+            background: #ffffff;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 8px solid #1a1c1c;
+            position: relative;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 25px;
+            background: #1a1c1c;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+            z-index: 60;
+        }
+        .canvas-bg {
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Top Navigation Header -->
+<header class="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] h-20 flex items-center justify-between px-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-brand-sky rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<h1 class="font-h1 text-h2 text-on-surface tracking-tight">Smart Coach AI: Full 9-Screen Journey</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-label-sm font-label-sm px-4 py-2 bg-primary-fixed text-on-primary-fixed rounded-full">v2.4 Production Ready</span>
+<span class="material-symbols-outlined text-outline">notifications</span>
+</div>
+</header>
+<main class="max-w-[1400px] mx-auto py-16 px-gutter">
+<!-- Intro Section -->
+<div class="mb-16 text-center max-w-2xl mx-auto">
+<h2 class="font-h1 text-h1 text-on-surface mb-4">Complete User Experience Flow</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Explore the end-to-end journey of the Smart Coach AI application, from the first touchpoint to advanced AI-driven performance coaching.</p>
+</div>
+<!-- 3x3 Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-12 place-items-center canvas-bg py-10 rounded-3xl">
+<!-- Step 01: Get Started -->
+<div class="flex flex-col items-center gap-6">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="h-full w-full relative flex flex-col justify-end p-8 text-white overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover z-0" data-alt="A professional athlete in dynamic motion, captured with high-speed photography in a sleek, modern indoor training facility. The lighting is dramatic yet clean, emphasizing muscle definition and professional grade performance. The color palette is dominated by cool whites and soft purples, reflecting a high-end corporate athletic brand identity." src="https://lh3.googleusercontent.com/aida/ADBb0ujT5xiqGZM0XmZZBrqf5yoiSaGliU5qxvpkKHHtuYqlE31zvNnhxRKV3w9AidLc1cvAmQB_DnN5lkuF09V2rzW3ru-C6xW4p-P4GsEDo88p5M8l8KJy7SILkLY8dxAgB-GdLVWuk_JtAE3ISwLNVbjpfbZ0UsGfx5oozhScO0HJRPToLPz44kExxuyJ_7wi8wqLZq4feYFVg8k-p91IFDxZGNfDOIh2Z5rmEHF4FHXySh_Wxyx3lFTs2YQQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent z-10"></div>
+<div class="relative z-20 space-y-4">
+<h3 class="font-h1 text-h1">Unlock Your Peak Performance</h3>
+<p class="font-body-md opacity-90">Advanced AI coaching that learns your style and pushes your limits.</p>
+<div class="h-14 w-full bg-white text-primary rounded-xl flex items-center justify-center font-bold">Get Started</div>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm font-label-sm text-brand-sky tracking-[0.2em] uppercase">Step 01</span>
+<p class="font-h3 text-h3 text-on-surface">Get Started</p>
+</div>
+</div>
+<!-- Step 02: Log In -->
+<div class="flex flex-col items-center gap-6">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="h-full w-full bg-white p-8 flex flex-col pt-24">
+<span class="material-symbols-outlined text-primary text-5xl mb-8">account_circle</span>
+<h3 class="font-h1 text-h2 mb-2">Welcome Back</h3>
+<p class="font-body-md text-on-surface-variant mb-10">Continue your coaching journey.</p>
+<div class="space-y-4">
+<div class="h-14 w-full border border-outline-variant rounded-xl flex items-center px-4 font-body-md text-on-surface-variant">Email Address</div>
+<div class="h-14 w-full border border-outline-variant rounded-xl flex items-center px-4 font-body-md text-on-surface-variant">Password</div>
+<div class="h-14 w-full bg-primary text-white rounded-xl flex items-center justify-center font-bold">Log In</div>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm font-label-sm text-brand-sky tracking-[0.2em] uppercase">Step 02</span>
+<p class="font-h3 text-h3 text-on-surface">Log In</p>
+</div>
+</div>
+<!-- Step 03: Sign Up -->
+<div class="flex flex-col items-center gap-6">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="h-full w-full bg-white p-8 flex flex-col pt-24">
+<span class="material-symbols-outlined text-primary text-5xl mb-8">person_add</span>
+<h3 class="font-h1 text-h2 mb-2">Create Account</h3>
+<p class="font-body-md text-on-surface-variant mb-10">Join the world's most advanced coaching platform.</p>
+<div class="space-y-4">
+<div class="h-14 w-full border border-outline-variant rounded-xl flex items-center px-4 font-body-md text-on-surface-variant">Full Name</div>
+<div class="h-14 w-full border border-outline-variant rounded-xl flex items-center px-4 font-body-md text-on-surface-variant">Email Address</div>
+<div class="h-14 w-full border border-outline-variant rounded-xl flex items-center px-4 font-body-md text-on-surface-variant">Create Password</div>
+<div class="h-14 w-full bg-primary text-white rounded-xl flex items-center justify-center font-bold">Sign Up</div>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm font-label-sm text-brand-sky tracking-[0.2em] uppercase">Step 03</span>
+<p class="font-h3 text-h3 text-on-surface">Sign Up</p>
+</div>
+</div>
+<!-- Step 04: Dashboard -->
+<div class="flex flex-col items-center gap-6">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="h-full w-full bg-surface pt-16 flex flex-col">
+<div class="px-6 flex justify-between items-center mb-6">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Good Morning,</p>
+<h4 class="font-h3 text-h3">Alex Rivera</h4>
+</div>
+<div class="w-12 h-12 rounded-full border-2 border-primary p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="Close up portrait of a young professional athlete with a determined expression. The lighting is crisp and modern, featuring soft studio shadows. The overall aesthetic is clean and high-fidelity, typical of premium lifestyle fitness photography." src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+</div>
+</div>
+<div class="px-6 space-y-4 overflow-y-auto">
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+<div class="flex justify-between items-center mb-4">
+<span class="font-bold text-on-surface">Active Session</span>
+<span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-md font-bold">LIVE</span>
+</div>
+<div class="w-full h-32 rounded-xl bg-slate-100 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A wide-angle shot of a minimalist home gym interior with high-end equipment. Soft morning light streams through a large window, creating a serene and focused training environment. The color palette consists of neutral tones and wood textures, reflecting a calm, professional lifestyle." src="https://lh3.googleusercontent.com/aida/ADBb0ugBfy5Kxykx6VRSG_RKDzIa0SbhBs6z_g98JeSzKd3fP33mDvpQ30oimByftaHHNkJ3__u6lJmHYdiS1ohb18UGD1dEMYC5J-h2c6Gvor4BPXwtnNttjDiOvV7dIOh8-gNlvtOTZhUChXgVQrpWlIGreIvcNDj_U-DTIz54FUEyH4KOWDMO4ZXeh2j6A9ybZMoxgfq9NSRhSt18-OUNqs9El3c7KpBrmx24fXGF7B3BFyQlWBU3h41LBMVQoqW_Itp3N4KD2Ko0JI8"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-primary text-white p-4 rounded-2xl">
+<p class="text-xs font-bold opacity-80 mb-1">Performance</p>
+<p class="text-xl font-extrabold">92%</p>
+</div>
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+<p class="text-xs font-bold text-on-surface-variant mb-1">Recovery</p>
+<p class="text-xl font-extrabold text-on-surface">84%</p>
+</div>
+</div>
+</div>
+<div class="mt-auto flex justify-around items-center h-20 border-t border-slate-100 bg-white">
+<span class="material-symbols-outlined text-primary">dashboard</span>
+<span class="material-symbols-outlined text-outline">add_circle</span>
+<span class="material-symbols-outlined text-outline">analytics</span>
+<span class="material-symbols-outlined text-outline">smart_toy</span>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm font-label-sm text-brand-sky tracking-[0.2em] uppercase">Step 04</span>
+<p class="font-h3 text-h3 text-on-surface">Dashboard</p>
+</div>
+</div>
+<!-- Step 05: Upload -->
+<div class="flex flex-col items-center gap-6">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="h-full w-full bg-white p-8 flex flex-col">
+<div class="mt-12 flex items-center justify-between mb-8">
+<h3 class="font-h1 text-h2">New Analysis</h3>
+<span class="material-symbols-outlined text-on-surface">close</span>
+</div>
+<div class="border-2 border-dashed border-primary/30 bg-primary/5 flex-1 rounded-3xl flex flex-col items-center justify-center text-center p-6 mb-6">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">video_library</span>
+</div>
+<p class="font-h3 text-h3 text-on-surface mb-2">Upload Footage</p>
+<p class="font-body-md text-on-surface-variant">Drop your performance video here for AI analysis.</p>
+</div>
+<div class="h-16 w-full bg-primary text-white rounded-xl flex items-center justify-center font-bold">Select from Library</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm font-label-sm text-brand-sky tracking-[0.2em] uppercase">Step 05</span>
+<p class="font-h3 text-h3 text-on-surface">Upload</p>
+</div>
+</div>
+<!-- Step 06: Analyzing -->
+<div class="flex flex-col items-center gap-6">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="h-full w-full bg-white p-8 flex flex-col items-center justify-center text-center">
+<div class="relative w-48 h-48 mb-10">
+<div class="absolute inset-0 rounded-full border-[10px] border-slate-100"></div>
+<div class="absolute inset-0 rounded-full border-[10px] border-primary border-t-transparent animate-spin"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-extrabold text-on-surface">65%</span>
+<span class="text-xs font-bold text-on-surface-variant">ANALYZING</span>
+</div>
+</div>
+<h3 class="font-h1 text-h3 mb-4">Processing Biometrics</h3>
+<p class="font-body-md text-on-surface-variant max-w-[200px]">Our neural engine is scanning 247 motion markers in your video.</p>
+<div class="mt-12 space-y-3 w-full">
+<div class="flex items-center gap-3 text-left p-3 bg-surface rounded-xl">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<span class="text-sm font-bold">Frame calibration complete</span>
+</div>
+<div class="flex items-center gap-3 text-left p-3 bg-surface rounded-xl opacity-50">
+<span class="material-symbols-outlined">circle</span>
+<span class="text-sm font-bold">Optimizing posture markers</span>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm font-label-sm text-brand-sky tracking-[0.2em] uppercase">Step 06</span>
+<p class="font-h3 text-h3 text-on-surface">Analyzing</p>
+</div>
+</div>
+<!-- Step 07: Results -->
+<div class="flex flex-col items-center gap-6">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="h-full w-full bg-surface pt-16 flex flex-col overflow-y-auto">
+<div class="px-6 mb-8 flex justify-between items-end">
+<h3 class="font-h1 text-h2">Analysis Results</h3>
+<span class="text-xs font-bold text-primary">JUL 24, 2024</span>
+</div>
+<div class="px-6 space-y-6 pb-10">
+<div class="aspect-video w-full rounded-2xl overflow-hidden relative border-2 border-white shadow-lg">
+<img class="w-full h-full object-cover" data-alt="A frame-by-frame breakdown of a tennis serve, with bright neon AI overlays highlighting joint angles and movement vectors. The background is a clean blue court, and the lighting is clear outdoor daylight. The overall style is futuristic and high-tech, using precise digital notations." src="https://lh3.googleusercontent.com/aida/ADBb0uhWtrK0_uKfeCbsSGXSMGOldfc6fPKuwZXEbSODyHK0xQQza9AzzA2RBoDeQw7DDbvKcHMfVm0pX3rTCuV2GO12FrJwquA_6N6kegV73h-58E0tCKEbiO3fpRM30X5mvtJ3XhNuycZ__P-ER3UyxNtknvHXiabWPDU8hFNQI-7rWA8aXkuDDREhwL5kBYYOpiqGw0MwJs2x6QKVuFmxJTBMMUvUwUVZE25DinyEiRkV5S3VWIw-SdoTLWs"/>
+<div class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded">ANGLE MISALIGNMENT</div>
+</div>
+<div class="bg-white p-6 rounded-3xl shadow-sm space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-bold">Form Accuracy</span>
+<span class="text-primary font-extrabold text-xl">88%</span>
+</div>
+<div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[88%]"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+<p class="text-[10px] font-bold text-on-surface-variant mb-1 uppercase tracking-wider">Power Output</p>
+<p class="text-lg font-extrabold text-on-surface">High</p>
+</div>
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+<p class="text-[10px] font-bold text-on-surface-variant mb-1 uppercase tracking-wider">Stamina Grade</p>
+<p class="text-lg font-extrabold text-on-surface">A-</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm font-label-sm text-brand-sky tracking-[0.2em] uppercase">Step 07</span>
+<p class="font-h3 text-h3 text-on-surface">Results</p>
+</div>
+</div>
+<!-- Step 08: AI Coach Advice -->
+<div class="flex flex-col items-center gap-6">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="h-full w-full bg-white flex flex-col p-8 pt-20">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-3xl">smart_toy</span>
+</div>
+<div>
+<h4 class="font-h3 text-h3">Coach AI Insights</h4>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Optimized for you</p>
+</div>
+</div>
+<div class="space-y-6 flex-1">
+<div class="bg-tertiary-fixed p-5 rounded-2xl border border-tertiary-fixed-dim">
+<div class="flex items-center gap-2 mb-2 text-primary">
+<span class="material-symbols-outlined text-sm">tips_and_updates</span>
+<span class="text-xs font-bold uppercase">Key Adjustment</span>
+</div>
+<p class="font-body-md text-on-surface leading-relaxed">Lower your center of gravity by 3 inches during the pivot to increase rotational force by approximately 12%.</p>
+</div>
+<div class="p-5 rounded-2xl border border-slate-100 bg-slate-50">
+<h5 class="text-sm font-bold mb-3 text-on-surface">Recommended Drill</h5>
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A short video thumbnail showing a focused training drill in a bright gym. A person is performing a specific balancing exercise with precision. The lighting is crisp and modern, emphasizing the form and detail of the exercise." src="https://lh3.googleusercontent.com/aida/ADBb0ugCd9XK6BVr3GyY1Si7v2RaU1TLTp5AtJGXDgF-O42fh_A_HSeD5IwYYyF8CZkGOpJazY-EecU7NeYGGh5-yOXGoZyJIBC-hsjEoQhb_ucO2ihy3A24VXVA8g-wkZBQvj6E68SEg8uraWL8SkkcC0PLW9Xasz1Amh9PnnLecB8Q-G62z1SmGTwRLDUV5Dlke7hbo9qcH2qq6ukYz7Af7Q1r7MLvJr-biwg89UXiI5nr8VWSNT7aJPynDVQdh9RXhq_qo4eItpz-Jxw"/>
+</div>
+<p class="text-xs font-semibold leading-snug">Balance Beam Pivot (3 sets of 10 reps)</p>
+</div>
+</div>
+</div>
+<div class="h-14 w-full bg-on-surface text-white rounded-xl flex items-center justify-center font-bold">Chat with Coach</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm font-label-sm text-brand-sky tracking-[0.2em] uppercase">Step 08</span>
+<p class="font-h3 text-h3 text-on-surface">AI Coach Advice</p>
+</div>
+</div>
+<!-- Step 09: AI Coach Chat -->
+<div class="flex flex-col items-center gap-6">
+<div class="mobile-frame">
+<div class="notch"></div>
+<div class="h-full w-full bg-white flex flex-col">
+<div class="h-20 flex items-center px-6 pt-6 border-b border-slate-50 bg-white">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center mr-3">
+<span class="material-symbols-outlined text-primary text-xl">smart_toy</span>
+</div>
+<div>
+<p class="text-sm font-extrabold">Smart Coach AI</p>
+<p class="text-[10px] text-green-500 font-bold">Online &amp; Ready</p>
+</div>
+</div>
+<div class="flex-1 p-6 space-y-4 overflow-y-auto bg-surface/30">
+<div class="flex justify-end">
+<div class="bg-primary text-white p-4 rounded-2xl rounded-tr-none max-w-[80%]">
+<p class="text-sm">How can I improve my follow-through?</p>
+</div>
+</div>
+<div class="flex justify-start">
+<div class="bg-white border border-slate-100 p-4 rounded-2xl rounded-tl-none shadow-sm max-w-[80%]">
+<p class="text-sm text-on-surface-variant">Focus on keeping your wrist locked until the point of contact, then let the momentum carry your arm across your body in a fluid arc. Try this in slow motion first.</p>
+</div>
+</div>
+<div class="flex justify-start">
+<div class="bg-white border border-slate-100 p-4 rounded-2xl rounded-tl-none shadow-sm max-w-[80%]">
+<p class="text-sm text-on-surface-variant">I've prepared a specific drill for this. Would you like to see it?</p>
+</div>
+</div>
+</div>
+<div class="p-6 bg-white border-t border-slate-100">
+<div class="h-14 w-full bg-surface-container rounded-full flex items-center px-6 justify-between">
+<span class="text-on-surface-variant text-sm">Type your question...</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">send</span>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm font-label-sm text-brand-sky tracking-[0.2em] uppercase">Step 09</span>
+<p class="font-h3 text-h3 text-on-surface">AI Coach Chat</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="py-20 border-t border-slate-100 mt-20 bg-white">
+<div class="max-w-4xl mx-auto text-center px-gutter">
+<div class="flex items-center justify-center gap-3 mb-6">
+<div class="w-8 h-8 bg-brand-sky rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<span class="font-h3 text-h3">Smart Coach AI</span>
+</div>
+<p class="font-body-md text-on-surface-variant mb-10">Revolutionizing personal performance through artificial intelligence and computer vision. This presentation represents the complete user journey and design system adherence for the Smart Coach platform.</p>
+<div class="flex justify-center gap-12">
+<div class="text-center">
+<p class="text-2xl font-extrabold text-on-surface">9</p>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Key Screens</p>
+</div>
+<div class="text-center">
+<p class="text-2xl font-extrabold text-on-surface">24</p>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">AI Modules</p>
+</div>
+<div class="text-center">
+<p class="text-2xl font-extrabold text-on-surface">100%</p>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Precision</p>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Coach AI - 9-Page Flow Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#87CEEB",
+                        "tertiary": "#5b5b66",
+                        "on-surface": "#1a1c1c",
+                        "on-primary-fixed": "#1a0063",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-secondary-container": "#636262",
+                        "inverse-primary": "#c9bfff",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#e5e2e1",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c9c4d8",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#484555",
+                        "surface-container": "#eeeeee",
+                        "primary-fixed": "#e5deff",
+                        "on-tertiary-container": "#fffbff",
+                        "surface": "#f9f9f9",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "surface-tint": "#87CEEB",
+                        "on-tertiary-fixed": "#1a1b24",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#464650",
+                        "secondary": "#5f5e5e",
+                        "surface-container-low": "#f3f3f4",
+                        "tertiary-container": "#74737f",
+                        "surface-container-high": "#e8e8e8",
+                        "secondary-container": "#e2dfde",
+                        "surface-variant": "#e2e2e2",
+                        "surface-dim": "#dadada",
+                        "primary-fixed-dim": "#c9bfff",
+                        "inverse-surface": "#2f3131",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-primary-fixed-variant": "#441cc8",
+                        "tertiary-fixed-dim": "#c6c5d2",
+                        "tertiary-fixed": "#e3e1ee",
+                        "primary-container": "#87CEEB",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-background": "#1a1c1c",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "outline": "#797587",
+                        "background": "#f9f9f9"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "xs": "4px",
+                        "unit": "4px",
+                        "lg": "24px",
+                        "gutter": "12px",
+                        "container-padding": "20px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "8px"
+                    },
+                    fontFamily: {
+                        "h3": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Manrope"]
+                    },
+                    fontSize: {
+                        "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                        "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #f9f9f9; }
+        .mobile-mockup {
+            width: 320px;
+            height: 693px;
+            border-radius: 36px;
+            border: 8px solid #1a1a1a;
+            position: relative;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            margin: 0 auto;
+        }
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 24px;
+            background: #1a1a1a;
+            border-bottom-left-radius: 14px;
+            border-bottom-right-radius: 14px;
+            z-index: 100;
+        }
+        .canvas-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        /* Mobile content scaling to fit smaller mockup frames in overview */
+        .mockup-content {
+            transform: scale(0.85);
+            transform-origin: top center;
+            height: 117.6%; /* inverse of scale */
+            width: 117.6%;
+            position: absolute;
+            top: 0;
+            left: -8.8%; 
+        }
+        /* Adjusted positioning for scaled content */
+        .mockup-inner {
+            padding-top: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<div class="min-h-screen py-16 px-8 flex flex-col items-center">
+<!-- Header Aligned to Grid -->
+<header class="w-full max-w-[1100px] mb-16 text-center border-b border-slate-200 pb-12">
+<div class="flex items-center justify-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<h1 class="font-h1 text-on-surface mb-4">Smart Coach AI Flow Overview</h1>
+<p class="font-body-lg text-tertiary max-w-2xl mx-auto">A comprehensive view of the 9-step coaching journey, from onboarding to AI-driven strategic analysis.</p>
+</header>
+<main class="canvas-container">
+<!-- 01: Onboarding -->
+<div class="flex flex-col items-center">
+<div class="mobile-mockup">
+<div class="notch"></div>
+<div class="mockup-inner pt-12 px-6 text-center">
+<div class="w-full aspect-square rounded-2xl overflow-hidden mb-6 shadow-md">
+<img alt="AI Robot Assistant" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+</div>
+<h2 class="font-h2 text-on-surface mb-3">Your Professional AI Life Coach</h2>
+<p class="font-body-md text-tertiary mb-8">Unlock potential with real-time video, audio, and text analysis.</p>
+<button class="w-full bg-primary text-white py-3 rounded-xl font-h3 shadow-lg shadow-primary/30">Get Started</button>
+</div>
+</div>
+<span class="mt-6 font-label-sm uppercase tracking-widest text-tertiary">Step 01: Onboarding</span>
+</div>
+<!-- 02: Login -->
+<div class="flex flex-col items-center">
+<div class="mobile-mockup">
+<div class="notch"></div>
+<div class="mockup-inner px-6 pt-20">
+<div class="header-logo mb-8 justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<h2 class="font-h2 text-center mb-1">Welcome Back</h2>
+<p class="font-body-md text-tertiary text-center mb-8">Log in to continue</p>
+<div class="space-y-4">
+<div>
+<label class="font-label-sm text-tertiary block mb-1">EMAIL</label>
+<input class="w-full border-slate-200 border-2 rounded-xl p-3 focus:border-primary focus:ring-0" placeholder="coach@smartai.com" type="email"/>
+</div>
+<div>
+<label class="font-label-sm text-tertiary block mb-1">PASSWORD</label>
+<input class="w-full border-slate-200 border-2 rounded-xl p-3 focus:border-primary focus:ring-0" placeholder="••••••••" type="password"/>
+</div>
+<div class="text-right"><a class="text-primary font-label-sm" href="#">Forgot?</a></div>
+<button class="w-full bg-primary text-white py-3 rounded-xl font-h3 shadow-lg shadow-primary/30">Login</button>
+</div>
+</div>
+</div>
+<span class="mt-6 font-label-sm uppercase tracking-widest text-tertiary">Step 02: Login</span>
+</div>
+<!-- 03: Sign Up -->
+<div class="flex flex-col items-center">
+<div class="mobile-mockup">
+<div class="notch"></div>
+<div class="mockup-inner px-6 pt-20">
+<h2 class="font-h1 mb-1">Create Account</h2>
+<p class="font-body-md text-tertiary mb-8">Start your transformation today</p>
+<div class="space-y-3">
+<button class="w-full border-2 border-slate-200 py-3 rounded-xl flex items-center justify-center gap-2 font-h3 text-sm"><span class="material-symbols-outlined text-xl">account_circle</span> Google</button>
+<button class="w-full border-2 border-slate-200 py-3 rounded-xl flex items-center justify-center gap-2 font-h3 text-sm"><span class="material-symbols-outlined text-xl">ios</span> Apple</button>
+</div>
+<div class="flex items-center my-6"><div class="flex-1 h-px bg-slate-200"></div><span class="px-3 text-xs text-tertiary">OR</span><div class="flex-1 h-px bg-slate-200"></div></div>
+<div class="space-y-4">
+<input class="w-full border-slate-200 border-2 rounded-xl p-3" placeholder="Email Address" type="email"/>
+<input class="w-full border-slate-200 border-2 rounded-xl p-3" placeholder="Password" type="password"/>
+<button class="w-full bg-primary text-white py-3 rounded-xl font-h3 shadow-lg shadow-primary/30">Sign Up</button>
+</div>
+</div>
+</div>
+<span class="mt-6 font-label-sm uppercase tracking-widest text-tertiary">Step 03: Sign Up</span>
+</div>
+<!-- 04: Input Selection -->
+<div class="flex flex-col items-center">
+<div class="mobile-mockup">
+<div class="notch"></div>
+<div class="mockup-inner bg-slate-50">
+<div class="flex items-center justify-between px-5 h-14 bg-white border-b border-slate-100 shrink-0">
+<div class="header-logo"><span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">lightbulb</span><span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">hub</span></div>
+<span class="material-symbols-outlined text-tertiary text-xl">account_circle</span>
+</div>
+<div class="p-4 flex-1">
+<h2 class="font-h3 mb-4">Choose Input Type</h2>
+<div class="grid gap-3">
+<div class="bg-white p-4 rounded-xl border border-slate-100 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary"><span class="material-symbols-outlined">videocam</span></div>
+<div class="flex-1"><h3 class="text-sm font-bold">Video</h3><p class="text-[10px] text-tertiary">Body language &amp; tone</p></div>
+</div>
+<div class="bg-white p-4 rounded-xl border-2 border-primary flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white"><span class="material-symbols-outlined">mic</span></div>
+<div class="flex-1"><h3 class="text-sm font-bold">Audio</h3><p class="text-[10px] text-tertiary">Emotional vocal analysis</p></div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-slate-100 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary"><span class="material-symbols-outlined">description</span></div>
+<div class="flex-1"><h3 class="text-sm font-bold">Text</h3><p class="text-[10px] text-tertiary">Sentiment breakdown</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<span class="mt-6 font-label-sm uppercase tracking-widest text-tertiary">Step 04: Selection</span>
+</div>
+<!-- 05: Upload -->
+<div class="flex flex-col items-center">
+<div class="mobile-mockup">
+<div class="notch"></div>
+<div class="mockup-inner">
+<div class="flex items-center justify-between px-5 h-14 border-b border-slate-100 shrink-0">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+<span class="font-h3 text-sm">Upload Audio</span>
+<span class="w-6"></span>
+</div>
+<div class="p-6 flex-1 flex flex-col">
+<div class="border-2 border-dashed border-primary/40 rounded-2xl bg-primary/5 flex-1 flex flex-col items-center justify-center p-4 text-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-3">cloud_upload</span>
+<h3 class="font-h3 text-sm text-primary mb-1">Drop audio file</h3>
+<p class="text-[10px] text-tertiary mb-4">MP3, WAV up to 50MB</p>
+<button class="bg-primary text-white px-5 py-2 rounded-full text-xs font-bold">Select File</button>
+</div>
+<div class="mt-6">
+<h4 class="text-[10px] font-bold text-tertiary mb-3 tracking-widest">RECENT</h4>
+<div class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl">
+<span class="material-symbols-outlined text-primary">audio_file</span>
+<div class="flex-1">
+<p class="text-xs font-bold">Client_Call_01.mp3</p>
+<p class="text-[10px] text-tertiary">2.4 MB • 12:45</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<span class="mt-6 font-label-sm uppercase tracking-widest text-tertiary">Step 05: Upload</span>
+</div>
+<!-- 06: Analyzing -->
+<div class="flex flex-col items-center">
+<div class="mobile-mockup">
+<div class="notch"></div>
+<div class="mockup-inner bg-slate-900 text-white items-center text-center px-6">
+<div class="relative w-48 h-48 mt-12 mb-8">
+<svg class="w-full h-full animate-pulse" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="#87CEEB" stroke-dasharray="2 2" stroke-width="0.5"></circle>
+<circle cx="50" cy="50" fill="none" r="30" stroke="#87CEEB" stroke-width="2"></circle>
+<circle cx="50" cy="50" fill="#87CEEB" r="4"></circle>
+<path d="M50 20 L50 35 M80 50 L65 50 M50 80 L50 65 M20 50 L35 50" stroke="#87CEEB" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+</div>
+<h2 class="font-h1 text-xl mb-3 text-primary">Analyzing...</h2>
+<p class="text-xs text-slate-400 mb-8">Processing your audio to extract emotional markers.</p>
+<div class="w-full space-y-4 text-left">
+<div class="flex items-center gap-3"><span class="material-symbols-outlined text-green-400 text-lg">check_circle</span><span class="text-xs text-slate-200">Transcription complete</span></div>
+<div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary animate-spin text-lg">sync</span><span class="text-xs text-white">Sentiment mapping (78%)</span></div>
+<div class="flex items-center gap-3 opacity-40"><span class="material-symbols-outlined text-lg">radio_button_unchecked</span><span class="text-xs">Strategy generation</span></div>
+</div>
+</div>
+</div>
+<span class="mt-6 font-label-sm uppercase tracking-widest text-tertiary">Step 06: Analyzing</span>
+</div>
+<!-- 07: Results -->
+<div class="flex flex-col items-center">
+<div class="mobile-mockup">
+<div class="notch"></div>
+<div class="mockup-inner bg-slate-50">
+<div class="bg-white p-4 pt-10 pb-6 border-b border-slate-100 text-center shrink-0">
+<h2 class="font-h3">Your Results</h2>
+<p class="text-[10px] text-tertiary">Session ID #4552</p>
+</div>
+<div class="p-4 space-y-4 overflow-y-auto">
+<div class="bg-white p-4 rounded-xl border border-slate-100">
+<h3 class="text-xs font-bold mb-3">Emotional Breakdown</h3>
+<div class="space-y-3">
+<div><div class="flex justify-between mb-1"><span class="text-[10px] font-bold">CONFIDENCE</span><span class="text-[10px] text-primary">85%</span></div><div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-primary h-1.5 rounded-full" style="width: 85%"></div></div></div>
+<div><div class="flex justify-between mb-1"><span class="text-[10px] font-bold">STRESS</span><span class="text-[10px] text-red-400">22%</span></div><div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-red-400 h-1.5 rounded-full" style="width: 22%"></div></div></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-white p-3 rounded-xl border border-slate-100 text-center"><span class="material-symbols-outlined text-primary text-lg mb-1">timer</span><p class="text-[8px] text-tertiary uppercase">Pace</p><p class="text-xs font-bold">Optimal</p></div>
+<div class="bg-white p-3 rounded-xl border border-slate-100 text-center"><span class="material-symbols-outlined text-primary text-lg mb-1">trending_up</span><p class="text-[8px] text-tertiary uppercase">Growth</p><p class="text-xs font-bold">+12%</p></div>
+</div>
+</div>
+<div class="p-4 bg-white border-t border-slate-100 mt-auto">
+<button class="w-full bg-primary text-white py-3 rounded-xl font-h3 text-xs">Full Insights</button>
+</div>
+</div>
+</div>
+<span class="mt-6 font-label-sm uppercase tracking-widest text-tertiary">Step 07: Results</span>
+</div>
+<!-- 08: AI Coach Advice -->
+<div class="flex flex-col items-center">
+<div class="mobile-mockup">
+<div class="notch"></div>
+<div class="mockup-inner">
+<div class="flex items-center justify-between px-5 h-14 bg-white border-b border-slate-100 shrink-0">
+<span class="material-symbols-outlined text-tertiary text-lg">menu</span>
+<span class="font-h3 text-sm">Coach Strategy</span>
+<span class="material-symbols-outlined text-primary text-lg">star</span>
+</div>
+<div class="p-4 overflow-y-auto">
+<div class="bg-primary/10 p-4 rounded-xl mb-4 border border-primary/20">
+<div class="flex items-center gap-2 mb-2"><span class="material-symbols-outlined text-primary text-xl">smart_toy</span><h3 class="text-xs font-bold text-primary">Strategy Plan</h3></div>
+<p class="text-[10px] text-tertiary">Top 3 tactical improvements for your next session.</p>
+</div>
+<div class="space-y-4">
+<div class="flex gap-3"><div class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">1</div><div><h4 class="text-xs font-bold">Pause for Impact</h4><p class="text-[10px] text-tertiary">Count to two after major points.</p></div></div>
+<div class="flex gap-3"><div class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">2</div><div><h4 class="text-xs font-bold">Active Listening</h4><p class="text-[10px] text-tertiary">Increase verbal confirmations by 15%.</p></div></div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 border-t border-slate-100 mt-auto">
+<button class="w-full bg-white border-2 border-primary text-primary py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">chat</span> Chat with AI
+                        </button>
+</div>
+</div>
+</div>
+<span class="mt-6 font-label-sm uppercase tracking-widest text-tertiary">Step 08: Coach Advice</span>
+</div>
+<!-- 09: AI Coach Chat -->
+<div class="flex flex-col items-center">
+<div class="mobile-mockup">
+<div class="notch"></div>
+<div class="mockup-inner bg-[#F8FAFC]">
+<div class="flex items-center gap-3 px-5 h-16 bg-white border-b border-slate-100 shrink-0">
+<div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-primary"><span class="material-symbols-outlined text-lg">smart_toy</span></div>
+<div><h3 class="text-xs font-bold leading-none">Smart Coach</h3><p class="text-[8px] text-green-500 font-bold tracking-widest uppercase mt-1">ONLINE NOW</p></div>
+</div>
+<div class="flex-1 p-3 overflow-y-auto space-y-3">
+<div class="flex justify-end"><div class="bg-primary text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow-sm"><p class="text-[11px]">How can I improve my confidence score?</p></div></div>
+<div class="flex gap-2">
+<div class="w-6 h-6 bg-slate-200 rounded-full flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[12px]">smart_toy</span></div>
+<div class="bg-white p-3 rounded-2xl rounded-tl-none max-w-[85%] shadow-sm border border-slate-100"><p class="text-[11px]">Focus on projecting from your diaphragm. Shall we try a breathing exercise?</p></div>
+</div>
+</div>
+<div class="p-3 bg-white border-t border-slate-100 flex items-center gap-2 shrink-0">
+<button class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-tertiary"><span class="material-symbols-outlined text-lg">add</span></button>
+<input class="flex-1 border-none bg-slate-100 rounded-full px-4 py-2 text-[11px] focus:ring-1 focus:ring-primary" placeholder="Ask anything..." type="text"/>
+<button class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center"><span class="material-symbols-outlined text-lg">send</span></button>
+</div>
+</div>
+</div>
+<span class="mt-6 font-label-sm uppercase tracking-widest text-tertiary">Step 09: Coach Chat</span>
+</div>
+</main>
+<!-- Footer Aligned to Grid -->
+<footer class="w-full max-w-[1100px] mt-16 pt-12 border-t border-slate-200 text-center text-tertiary font-label-sm tracking-widest">
+        © 2024 SMART COACH AI • COMPREHENSIVE DESIGN FLOW
+    </footer>
+</div>
+</body></html>

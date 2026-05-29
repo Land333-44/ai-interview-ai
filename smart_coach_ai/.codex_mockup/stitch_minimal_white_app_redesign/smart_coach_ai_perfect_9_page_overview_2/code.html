@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Coach AI - Journey Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#87CEEB", // Sky Blue requested
+                        "surface-dim": "#dadada",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#464650",
+                        "on-background": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#474746",
+                        "tertiary-fixed-dim": "#c6c5d2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary-container": "#fffbff",
+                        "surface": "#f9f9f9",
+                        "outline-variant": "#c9c4d8",
+                        "primary-container": "#B0E2FF",
+                        "surface-container": "#eeeeee",
+                        "surface-container-highest": "#e2e2e2",
+                        "inverse-primary": "#c9bfff",
+                        "secondary-container": "#e2dfde",
+                        "tertiary-container": "#74737f",
+                        "surface-variant": "#e2e2e2",
+                        "primary-fixed-dim": "#c9bfff",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#636262",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#5b5b66",
+                        "on-primary-fixed-variant": "#441cc8",
+                        "inverse-on-surface": "#f0f1f1",
+                        "background": "#f9f9f9",
+                        "surface-container-high": "#e8e8e8",
+                        "primary-fixed": "#e5deff",
+                        "on-primary-fixed": "#1a0063",
+                        "on-error-container": "#93000a",
+                        "outline": "#797587",
+                        "on-tertiary-fixed": "#1a1b24",
+                        "on-primary-container": "#fffbff",
+                        "surface-tint": "#5d3fe0",
+                        "surface-container-low": "#f3f3f4",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#2f3131",
+                        "tertiary-fixed": "#e3e1ee",
+                        "on-surface-variant": "#484555",
+                        "secondary": "#5f5e5e",
+                        "on-surface": "#1a1c1c",
+                        "error-container": "#ffdad6"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "3xl": "2rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "container-padding": "20px",
+                        "md": "16px",
+                        "gutter": "12px"
+                    },
+                    fontFamily: {
+                        "h2": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    fontSize: {
+                        "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                        "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .phone-frame {
+            width: 280px;
+            height: 560px;
+            border-radius: 40px;
+            border: 8px solid #1a1c1c;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        .notch {
+            width: 120px;
+            height: 25px;
+            background: #1a1c1c;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 20;
+        }
+        .canvas-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="canvas-bg font-['Manrope'] text-on-surface">
+<!-- Header -->
+<header class="w-full h-20 bg-white border-b border-slate-200 flex items-center justify-between px-10 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<span class="font-h1 text-h3 text-on-surface">Smart Coach AI</span>
+</div>
+<nav class="hidden md:flex gap-8 text-label-sm uppercase tracking-widest text-secondary">
+<a class="hover:text-primary transition-colors" href="#">Overview</a>
+<a class="hover:text-primary transition-colors" href="#">Journey</a>
+<a class="hover:text-primary transition-colors" href="#">Components</a>
+</nav>
+<button class="bg-primary text-white px-6 py-2 rounded-full font-bold text-sm shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+            Share Design
+        </button>
+</header>
+<main class="max-w-[1200px] mx-auto py-20 px-6">
+<!-- Section Title -->
+<div class="text-center mb-16">
+<h1 class="font-h1 text-h1 text-on-surface mb-4">The User Journey</h1>
+<p class="text-body-lg text-secondary max-w-2xl mx-auto">A seamless 9-step transition from onboarding to professional AI-powered performance coaching.</p>
+</div>
+<!-- 3x3 Grid of Screens -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-12 place-items-center">
+<!-- STEP 01: ONBOARDING -->
+<div class="flex flex-col items-center gap-6">
+<div class="phone-frame">
+<div class="notch"></div>
+<div class="p-6 h-full flex flex-col justify-between pt-12">
+<div class="flex-1 flex flex-col items-center justify-center text-center">
+<div class="w-48 h-48 rounded-full bg-primary-container/30 mb-8 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A friendly and approachable AI robot character with glowing blue eyes and a sleek white body, floating in a clean, minimalist digital space with soft blue ambient lighting. The style is modern, professional, and welcoming, designed for a high-end coaching application interface." src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+</div>
+<h2 class="font-h2 text-h2 mb-4">Master Every Moment</h2>
+<p class="text-body-md text-secondary px-4">AI-powered coaching to help you communicate with confidence and precision.</p>
+</div>
+<button class="w-full bg-primary text-white py-4 rounded-2xl font-bold shadow-lg shadow-primary/30">Get Started</button>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm text-secondary uppercase tracking-[0.2em]">Step 01</span>
+<h3 class="font-h3 text-on-surface">ONBOARDING</h3>
+</div>
+</div>
+<!-- STEP 02: LOGIN -->
+<div class="flex flex-col items-center gap-6">
+<div class="phone-frame">
+<div class="notch"></div>
+<div class="p-6 h-full flex flex-col pt-16">
+<div class="mb-10 text-center">
+<h2 class="font-h2 text-h2 mb-2">Welcome Back</h2>
+<p class="text-body-md text-secondary">Sign in to continue your progress.</p>
+</div>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-label-sm text-secondary ml-1">Email</label>
+<input class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" type="text" value="youssef@example.com"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm text-secondary ml-1">Password</label>
+<input class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" type="password" value="••••••••••••"/>
+</div>
+<a class="block text-right text-label-sm text-primary font-bold" href="#">Forgot Password?</a>
+</div>
+<div class="mt-auto">
+<button class="w-full bg-primary text-white py-4 rounded-2xl font-bold mb-4">Log In</button>
+<p class="text-center text-body-md text-secondary">Don't have an account? <span class="text-primary font-bold">Sign Up</span></p>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm text-secondary uppercase tracking-[0.2em]">Step 02</span>
+<h3 class="font-h3 text-on-surface">LOGIN</h3>
+</div>
+</div>
+<!-- STEP 03: SIGN UP -->
+<div class="flex flex-col items-center gap-6">
+<div class="phone-frame">
+<div class="notch"></div>
+<div class="p-6 h-full flex flex-col pt-16">
+<div class="mb-8">
+<h2 class="font-h2 text-h2 mb-2">Create Account</h2>
+<p class="text-body-md text-secondary">Join 10k+ professionals today.</p>
+</div>
+<div class="space-y-4">
+<div class="space-y-1">
+<label class="text-label-sm text-secondary ml-1">Full Name</label>
+<input class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none" placeholder="John Doe" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-sm text-secondary ml-1">Email</label>
+<input class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none" placeholder="email@provider.com" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-sm text-secondary ml-1">Password</label>
+<input class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="mt-8 space-y-4">
+<button class="w-full bg-primary text-white py-4 rounded-2xl font-bold shadow-lg shadow-primary/10">Sign Up</button>
+<div class="flex items-center gap-2 py-2">
+<div class="h-px bg-slate-200 flex-1"></div>
+<span class="text-label-sm text-secondary">OR</span>
+<div class="h-px bg-slate-200 flex-1"></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 py-3 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-red-500">google</span>
+<span class="text-label-sm">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 py-3 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-on-surface">ios</span>
+<span class="text-label-sm">Apple</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm text-secondary uppercase tracking-[0.2em]">Step 03</span>
+<h3 class="font-h3 text-on-surface">SIGN UP</h3>
+</div>
+</div>
+<!-- STEP 04: DASHBOARD -->
+<div class="flex flex-col items-center gap-6">
+<div class="phone-frame">
+<div class="notch"></div>
+<div class="p-6 h-full flex flex-col pt-12">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h2 class="font-h2 text-h2">Hello, Youssef</h2>
+<p class="text-body-md text-secondary">Ready for today's session?</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-slate-200 border-2 border-white shadow-sm overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young, confident man with a warm smile, wearing a modern business casual outfit. The lighting is soft and bright, set against a clean studio background, reflecting a professional and accessible tone for a dashboard profile image." src="https://lh3.googleusercontent.com/aida/ADBb0ujT5xiqGZM0XmZZBrqf5yoiSaGliU5qxvpkKHHtuYqlE31zvNnhxRKV3w9AidLc1cvAmQB_DnN5lkuF09V2rzW3ru-C6xW4p-P4GsEDo88p5M8l8KJy7SILkLY8dxAgB-GdLVWuk_JtAE3ISwLNVbjpfbZ0UsGfx5oozhScO0HJRPToLPz44kExxuyJ_7wi8wqLZq4feYFVg8k-p91IFDxZGNfDOIh2Z5rmEHF4FHXySh_Wxyx3lFTs2YQQ"/>
+</div>
+</div>
+<!-- Progress Card -->
+<div class="bg-primary p-4 rounded-2xl text-white mb-6 shadow-xl shadow-primary/20">
+<div class="flex justify-between items-center mb-2">
+<span class="text-label-sm opacity-80">Weekly Growth</span>
+<span class="text-label-sm font-bold">+12%</span>
+</div>
+<div class="h-16 flex items-end gap-1 px-1">
+<div class="w-full bg-white/30 h-1/2 rounded-t-sm"></div>
+<div class="w-full bg-white/30 h-3/4 rounded-t-sm"></div>
+<div class="w-full bg-white/60 h-1/3 rounded-t-sm"></div>
+<div class="w-full bg-white h-full rounded-t-sm"></div>
+<div class="w-full bg-white/40 h-2/3 rounded-t-sm"></div>
+</div>
+</div>
+<!-- Scenarios -->
+<div class="space-y-4 flex-1">
+<h3 class="font-label-sm text-label-sm text-secondary uppercase">Scenario Training</h3>
+<div class="grid grid-cols-1 gap-3">
+<div class="p-3 bg-white border border-slate-100 rounded-xl flex items-center gap-3 shadow-sm">
+<div class="w-10 h-10 bg-blue-50 text-blue-500 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">work</span>
+</div>
+<div>
+<p class="font-bold text-body-md">Job Interview</p>
+<p class="text-label-sm text-secondary">15 min practice</p>
+</div>
+</div>
+<div class="p-3 bg-white border border-slate-100 rounded-xl flex items-center gap-3 shadow-sm">
+<div class="w-10 h-10 bg-orange-50 text-orange-500 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">show_chart</span>
+</div>
+<div>
+<p class="font-bold text-body-md">Investor Pitch</p>
+<p class="text-label-sm text-secondary">8 min practice</p>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full bg-on-surface text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 mt-4">
+<span class="material-symbols-outlined">add_circle</span>
+                            Start New Session
+                        </button>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm text-secondary uppercase tracking-[0.2em]">Step 04</span>
+<h3 class="font-h3 text-on-surface">DASHBOARD</h3>
+</div>
+</div>
+<!-- STEP 05: UPLOAD -->
+<div class="flex flex-col items-center gap-6">
+<div class="phone-frame">
+<div class="notch"></div>
+<div class="p-6 h-full flex flex-col pt-12">
+<div class="flex items-center gap-4 mb-8">
+<button class="p-2 rounded-full hover:bg-slate-100"><span class="material-symbols-outlined">arrow_back</span></button>
+<h2 class="font-h2 text-h2">New Session</h2>
+</div>
+<div class="flex bg-slate-100 p-1 rounded-xl mb-8">
+<button class="flex-1 py-2 text-label-sm font-bold bg-white rounded-lg shadow-sm">Audio</button>
+<button class="flex-1 py-2 text-label-sm text-secondary">Video</button>
+<button class="flex-1 py-2 text-label-sm text-secondary">Text</button>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-3xl bg-slate-50/50 p-6 text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-4xl">cloud_upload</span>
+</div>
+<h3 class="font-h3 text-h3 mb-2">Upload File</h3>
+<p class="text-body-md text-secondary mb-6">Supported formats: MP3, WAV, M4A up to 50MB.</p>
+<button class="bg-primary/20 text-primary px-6 py-2 rounded-full font-bold text-sm">Browse Files</button>
+</div>
+<div class="mt-8 space-y-4">
+<div class="flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">mic</span>
+<span class="text-body-md">presentation_draft.mp3</span>
+</div>
+<span class="material-symbols-outlined text-error">close</span>
+</div>
+<button class="w-full bg-primary text-white py-4 rounded-2xl font-bold shadow-lg shadow-primary/20">Analyze Now</button>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm text-secondary uppercase tracking-[0.2em]">Step 05</span>
+<h3 class="font-h3 text-on-surface">UPLOAD</h3>
+</div>
+</div>
+<!-- STEP 06: ANALYZING -->
+<div class="flex flex-col items-center gap-6">
+<div class="phone-frame">
+<div class="notch"></div>
+<div class="p-6 h-full flex flex-col items-center justify-center pt-12 text-center">
+<div class="relative mb-12">
+<div class="w-32 h-32 rounded-full border-4 border-primary border-t-transparent animate-[spin_3s_linear_infinite] absolute -top-2 -left-2"></div>
+<div class="w-28 h-28 rounded-full bg-white shadow-lg flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A high-tech digital AI avatar with glowing cyan circuitry lines across its smooth white surface. The avatar is set against a clean, modern high-contrast light mode background. The composition is focused on the upper torso and head, conveying a sense of advanced analytical intelligence and digital precision." src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+</div>
+</div>
+<h2 class="font-h2 text-h2 mb-2">Analyzing Voice...</h2>
+<p class="text-body-md text-secondary mb-10">Our AI is processing your tone, pace, and emotional resonance.</p>
+<div class="w-full space-y-4 text-left">
+<div class="flex items-center gap-3 p-3 bg-white rounded-xl shadow-sm border border-slate-50">
+<span class="material-symbols-outlined text-green-500" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-body-md font-medium">Extracting Audio Features</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white rounded-xl shadow-sm border border-slate-50">
+<span class="material-symbols-outlined text-green-500" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-body-md font-medium">Linguistic Sentiment Analysis</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white/50 rounded-xl border border-slate-50">
+<div class="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+<span class="text-body-md font-medium text-on-surface">Detecting Behavioral Patterns</span>
+</div>
+</div>
+<div class="w-full mt-10">
+<div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%] rounded-full"></div>
+</div>
+<span class="text-label-sm text-secondary mt-2 block">75% Completed</span>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm text-secondary uppercase tracking-[0.2em]">Step 06</span>
+<h3 class="font-h3 text-on-surface">ANALYZING</h3>
+</div>
+</div>
+<!-- STEP 07: RESULTS -->
+<div class="flex flex-col items-center gap-6">
+<div class="phone-frame">
+<div class="notch"></div>
+<div class="p-6 h-full flex flex-col pt-12">
+<h2 class="font-h1 text-h2 mb-6">Your Results</h2>
+<div class="bg-white rounded-3xl p-5 border border-slate-100 shadow-sm mb-6">
+<h3 class="text-label-sm font-bold uppercase text-secondary mb-4">Top 5 Emotions</h3>
+<div class="space-y-5">
+<div class="space-y-1">
+<div class="flex justify-between text-body-md">
+<span>Confidence</span>
+<span class="font-bold">88%</span>
+</div>
+<div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-green-400 w-[88%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-body-md">
+<span>Nervousness</span>
+<span class="font-bold">12%</span>
+</div>
+<div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-blue-400 w-[12%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-body-md">
+<span>Excitement</span>
+<span class="font-bold">64%</span>
+</div>
+<div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-orange-400 w-[64%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-body-md">
+<span>Empathy</span>
+<span class="font-bold">45%</span>
+</div>
+<div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-purple-400 w-[45%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-body-md">
+<span>Authority</span>
+<span class="font-bold">72%</span>
+</div>
+<div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[72%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto">
+<button class="w-full bg-on-surface text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2">
+                                View Full Report
+                                <span class="material-symbols-outlined">trending_up</span>
+</button>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm text-secondary uppercase tracking-[0.2em]">Step 07</span>
+<h3 class="font-h3 text-on-surface">RESULTS</h3>
+</div>
+</div>
+<!-- STEP 08: ADVICE -->
+<div class="flex flex-col items-center gap-6">
+<div class="phone-frame">
+<div class="notch"></div>
+<div class="p-6 h-full flex flex-col pt-12">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a highly advanced AI coach with friendly features, wearing a minimalist digital uniform. The coach is rendered in a soft, bright lighting setup that creates a professional and trustworthy presence. The background is a clean, neutral gradient that emphasizes the focus on the coaching persona." src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+</div>
+<div>
+<h2 class="font-h2 text-h3">AI Coach Pro</h2>
+<span class="text-label-sm text-green-500 flex items-center gap-1">
+<span class="w-2 h-2 bg-green-500 rounded-full"></span> Online
+                                </span>
+</div>
+</div>
+<div class="bg-primary/5 rounded-3xl p-5 border border-primary/20 mb-6">
+<h3 class="font-h3 text-body-lg text-on-surface mb-3">Overall Assessment</h3>
+<p class="text-body-md text-secondary leading-relaxed">"You maintain excellent eye contact and pace. However, your tone during the 'Closing' segment became slightly flat. Focus on varying your pitch to maintain engagement."</p>
+</div>
+<div class="space-y-3 mb-6">
+<h3 class="text-label-sm font-bold text-secondary uppercase">Action Items</h3>
+<div class="flex items-start gap-3 p-3 bg-white border border-slate-100 rounded-xl">
+<span class="material-symbols-outlined text-primary">check_box_outline_blank</span>
+<span class="text-body-md">Add pauses after key statistics.</span>
+</div>
+<div class="flex items-start gap-3 p-3 bg-white border border-slate-100 rounded-xl">
+<span class="material-symbols-outlined text-primary">check_box_outline_blank</span>
+<span class="text-body-md">Emphasize benefit-driven verbs.</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-surface py-4 rounded-2xl font-extrabold shadow-xl shadow-primary/40 flex items-center justify-center gap-2 mt-auto">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+                            Chat with AI Coach
+                        </button>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm text-secondary uppercase tracking-[0.2em]">Step 08</span>
+<h3 class="font-h3 text-on-surface">ADVICE</h3>
+</div>
+</div>
+<!-- STEP 09: CHAT -->
+<div class="flex flex-col items-center gap-6">
+<div class="phone-frame">
+<div class="notch"></div>
+<div class="h-full flex flex-col pt-12">
+<div class="px-6 py-4 border-b border-slate-100 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up face of a friendly AI robot guide with transparent blue interface elements floating around it. The visual style is crisp and modern, featuring a bright, airy background consistent with a professional productivity application. The lighting is balanced and highlights the sleek design of the robot coach." src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+</div>
+<span class="font-bold text-body-md">AI Coaching Chat</span>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="bg-slate-100 p-3 rounded-2xl rounded-tl-none">
+<p class="text-body-md">How can I help you improve your delivery today, Youssef?</p>
+</div>
+<span class="text-[10px] text-secondary mt-1 ml-1">10:45 AM</span>
+</div>
+<div class="flex flex-col items-end ml-auto max-w-[85%]">
+<div class="bg-primary text-white p-3 rounded-2xl rounded-tr-none shadow-md">
+<p class="text-body-md">Can you give me examples of how to vary my pitch in the closing?</p>
+</div>
+<span class="text-[10px] text-secondary mt-1 mr-1">10:46 AM</span>
+</div>
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="bg-slate-100 p-3 rounded-2xl rounded-tl-none">
+<p class="text-body-md">Certainly! Try raising your pitch slightly on the final call to action to create a 'questioning' yet 'inviting' cadence. Like this...</p>
+</div>
+<span class="text-[10px] text-secondary mt-1 ml-1">10:46 AM</span>
+</div>
+</div>
+<div class="p-4 border-t border-slate-100 bg-white">
+<div class="flex items-center gap-2 bg-slate-50 p-2 rounded-2xl">
+<button class="p-1 text-slate-400 hover:text-primary"><span class="material-symbols-outlined">attach_file</span></button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-body-md py-1" placeholder="Type a message..." type="text"/>
+<button class="w-10 h-10 bg-primary text-white rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center">
+<span class="text-label-sm text-secondary uppercase tracking-[0.2em]">Step 09</span>
+<h3 class="font-h3 text-on-surface">AI COACH CHAT</h3>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-white border-t border-slate-200 py-12 px-10 text-center">
+<div class="flex flex-col items-center gap-6">
+<div class="flex items-center gap-2 opacity-50">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="font-bold">Smart Coach AI</span>
+</div>
+<p class="text-label-sm text-secondary">© 2024 Design System Journey. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">terminal</span></a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+</div>
+</div>
+</footer>
+</body></html>

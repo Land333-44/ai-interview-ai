@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-error": "#ffffff",
+                        "outline": "#797587",
+                        "primary-fixed": "#e5deff",
+                        "inverse-on-surface": "#f0f1f1",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-tertiary-fixed-variant": "#464650",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e8e8e8",
+                        "outline-variant": "#c9c4d8",
+                        "tertiary-container": "#74737f",
+                        "primary-fixed-dim": "#c9bfff",
+                        "tertiary-fixed-dim": "#c6c5d2",
+                        "inverse-surface": "#2f3131",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#fffbff",
+                        "on-primary-container": "#fffbff",
+                        "surface-dim": "#dadada",
+                        "background": "#f9f9f9",
+                        "primary": "#7B61FF",
+                        "on-surface": "#1a1c1c",
+                        "primary-container": "#E0E7FF",
+                        "tertiary-fixed": "#e3e1ee",
+                        "surface-container-low": "#f3f3f4",
+                        "surface-container-highest": "#e2e2e2",
+                        "tertiary": "#5b5b66",
+                        "on-tertiary-fixed": "#1a1b24",
+                        "surface-bright": "#f9f9f9",
+                        "on-surface-variant": "#484555",
+                        "on-primary-fixed-variant": "#441cc8",
+                        "on-secondary-container": "#636262",
+                        "surface": "#ffffff",
+                        "on-primary-fixed": "#1a0063",
+                        "secondary-container": "#F5F3FF",
+                        "surface-tint": "#7B61FF",
+                        "surface-container": "#eeeeee",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#c9bfff",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#e5e2e1",
+                        "secondary": "#5f5e5e",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "error": "#EF4444"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "container-padding": "20px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "h1": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                        "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    },
+                    "boxShadow": {
+                        "soft": "0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.02)",
+                        "button": "0 8px 24px -6px rgba(123, 97, 255, 0.5)"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fcfcfc;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<nav class="bg-white/80 backdrop-blur-md border-b border-gray-100 flex justify-between items-center w-full px-container-padding h-16 fixed top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="active:scale-90 transition-transform duration-200 text-on-surface">
+<span class="material-symbols-outlined text-[24px]" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex items-center gap-2">
+<img alt="Smart Coach AI Logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+<h1 class="font-h2 text-xl text-on-surface">Your Results</h1>
+</div>
+</div>
+<div class="flex items-center">
+<button class="relative active:scale-90 transition-transform duration-200 text-secondary p-2">
+<span class="material-symbols-outlined text-[24px]" data-icon="notifications">notifications</span>
+</button>
+</div>
+</nav>
+<main class="pt-24 px-container-padding space-y-md max-w-md mx-auto">
+<!-- Analysis Summary Header -->
+<div class="py-2">
+<p class="text-secondary font-label-sm uppercase tracking-widest mb-1 opacity-70">Session Insights</p>
+<h2 class="text-on-surface font-h1">Emotional Profile</h2>
+</div>
+<!-- Top 5 Emotions Section -->
+<section class="bg-white rounded-2xl p-6 shadow-soft border border-gray-100">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<div class="w-1 h-5 bg-primary rounded-full"></div>
+<h3 class="font-h3 text-on-surface">Top 5 Emotions</h3>
+</div>
+<div class="w-8 h-8 bg-secondary-container flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="trending_up">trending_up</span>
+</div>
+</div>
+<div class="space-y-6">
+<!-- Confidence -->
+<div>
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-3">
+<span class="text-xl">🦁</span>
+<span class="font-body-lg text-on-surface">Confidence</span>
+</div>
+<span class="font-bold text-primary">72%</span>
+</div>
+<div class="h-3 w-full bg-gray-50 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-1000 ease-out" style="width: 72%"></div>
+</div>
+</div>
+<!-- Nervousness -->
+<div>
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-3">
+<span class="text-xl">😟</span>
+<span class="font-body-lg text-on-surface">Nervousness</span>
+</div>
+<span class="font-bold text-secondary">45%</span>
+</div>
+<div class="h-3 w-full bg-gray-50 rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full transition-all duration-1000 ease-out" style="width: 45%; background-color: #5b5b66;"></div>
+</div>
+</div>
+<!-- Excitement -->
+<div>
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-3">
+<span class="text-xl">🤩</span>
+<span class="font-body-lg text-on-surface">Excitement</span>
+</div>
+<span class="font-bold text-primary/60">33%</span>
+</div>
+<div class="h-3 w-full bg-gray-50 rounded-full overflow-hidden">
+<div class="h-full bg-primary/40 rounded-full transition-all duration-1000 ease-out" style="width: 33%"></div>
+</div>
+</div>
+<!-- Stress -->
+<div>
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-3">
+<span class="text-xl">😰</span>
+<span class="font-body-lg text-on-surface">Stress</span>
+</div>
+<span class="font-bold text-error">28%</span>
+</div>
+<div class="h-3 w-full bg-gray-50 rounded-full overflow-hidden">
+<div class="h-full bg-error rounded-full transition-all duration-1000 ease-out" style="width: 28%"></div>
+</div>
+</div>
+<!-- Sadness -->
+<div>
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-3">
+<span class="text-xl">😢</span>
+<span class="font-body-lg text-on-surface">Sadness</span>
+</div>
+<span class="font-bold text-secondary/30">12%</span>
+</div>
+<div class="h-3 w-full bg-gray-50 rounded-full overflow-hidden">
+<div class="h-full bg-gray-200 rounded-full transition-all duration-1000 ease-out" style="width: 12%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Analysis Section -->
+<section class="bg-secondary-container/50 rounded-[2rem] p-6 border border-primary/5">
+<div class="flex items-center gap-3 mb-5">
+<div class="w-10 h-10 bg-primary/10 flex items-center justify-center rounded-xl border border-primary/10">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="smart_toy">smart_toy</span>
+</div>
+<h3 class="font-label-sm text-primary uppercase tracking-[0.15em] font-bold">AI Analysis (LLaMA 70B)</h3>
+</div>
+<div class="space-y-6">
+<p class="font-body-md text-on-surface leading-relaxed text-[15px]">
+                    Based on your recent verbal and physiological markers, your performance demonstrates a strong core of <span class="font-bold text-primary">Confidence</span>. However, the presence of micro-stressors suggests a slight misalignment during high-stakes questioning.
+                </p>
+<div class="p-6 bg-white/80 backdrop-blur-sm rounded-2xl border border-white shadow-sm">
+<div class="flex gap-3">
+<span class="text-primary/20 text-3xl font-serif leading-none h-6">“</span>
+<p class="font-body-md text-on-surface-variant italic text-[14px] leading-relaxed">
+                            Your engagement level was peak at the 3-minute mark, but we noticed a drop in vocal resonance during the summary phase. Practice centering exercises to maintain authority.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Button -->
+<div class="pt-4 pb-4">
+<button class="w-full h-14 bg-primary text-on-primary font-body-lg font-bold rounded-2xl shadow-button active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-3 group">
+<span>View Advice &amp; Recommendations</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-white border-t border-gray-100 h-20 px-4 pb-safe flex justify-around items-center">
+<a class="flex flex-col items-center justify-center text-secondary/50 px-4 py-1.5 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[26px]" data-icon="grid_view">grid_view</span>
+<span class="text-[10px] font-bold uppercase tracking-wider mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary/50 px-4 py-1.5 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[26px]" data-icon="add_circle">add_circle</span>
+<span class="text-[10px] font-bold uppercase tracking-wider mt-1">Upload</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary px-5 py-1.5 active:scale-90 transition-all duration-200 relative" href="#">
+<div class="absolute -top-1 w-10 h-[3px] bg-primary rounded-full"></div>
+<span class="material-symbols-outlined text-[26px]" data-icon="bar_chart" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+<span class="text-[10px] font-bold uppercase tracking-wider mt-1">Analysis</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary/50 px-4 py-1.5 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[26px]" data-icon="smart_toy">smart_toy</span>
+<span class="text-[10px] font-bold uppercase tracking-wider mt-1">Coach</span>
+</a>
+</nav>
+</body></html>

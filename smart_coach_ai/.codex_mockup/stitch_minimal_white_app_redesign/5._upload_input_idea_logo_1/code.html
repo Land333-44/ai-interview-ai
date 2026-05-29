@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e2e2e2",
+                    "on-tertiary-fixed-variant": "#464650",
+                    "on-tertiary-fixed": "#1a1b24",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-primary-fixed-variant": "#441cc8",
+                    "surface-container-high": "#e8e8e8",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#7459f7",
+                    "on-tertiary-container": "#fffbff",
+                    "on-surface-variant": "#484555",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container": "#eeeeee",
+                    "background": "#f9f9f9",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f9f9f9",
+                    "on-background": "#1a1c1c",
+                    "tertiary-fixed": "#e3e1ee",
+                    "inverse-surface": "#2f3131",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-error": "#ffffff",
+                    "tertiary": "#5b5b66",
+                    "secondary": "#5f5e5e",
+                    "surface-tint": "#5d3fe0",
+                    "surface-variant": "#e2e2e2",
+                    "surface-dim": "#dadada",
+                    "secondary-fixed": "#e5e2e1",
+                    "primary-fixed": "#e5deff",
+                    "tertiary-fixed-dim": "#c6c5d2",
+                    "surface-container-low": "#f3f3f4",
+                    "on-surface": "#1a1c1c",
+                    "on-secondary-container": "#636262",
+                    "outline": "#797587",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#c9bfff",
+                    "on-primary-fixed": "#1a0063",
+                    "outline-variant": "#c9c4d8",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#5b3cdd",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#e2dfde",
+                    "on-primary-container": "#fffbff",
+                    "tertiary-container": "#74737f",
+                    "inverse-primary": "#c9bfff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "xs": "4px",
+                    "unit": "4px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "container-padding": "20px",
+                    "sm": "8px",
+                    "gutter": "12px"
+            },
+            "fontFamily": {
+                    "h2": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "h3": ["Manrope"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift-light {
+            background-color: rgba(123, 97, 255, 0.02);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<nav class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] flex justify-between items-center w-full px-5 h-16 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#7B61FF] dark:text-[#A291FF] cursor-pointer active:scale-95 transition-transform" data-icon="arrow_back">arrow_back</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#7B61FF]" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<h1 class="font-['Manrope'] text-lg font-bold tracking-tight text-slate-900 dark:text-white">Smart Coach AI</h1>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 p-2 rounded-full transition-colors" data-icon="notifications">notifications</span>
+</nav>
+<main class="px-container-padding pt-lg space-y-xl">
+<!-- Header Section -->
+<section class="space-y-sm">
+<h2 class="font-h1 text-h1 text-on-surface">Choose your input type</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Select the most convenient way to provide your performance data for AI analysis.</p>
+</section>
+<!-- Input Selector Chips -->
+<section class="flex flex-wrap gap-md">
+<div class="flex-1 min-w-[100px] bg-surface-container-low border border-outline-variant rounded-xl p-md flex flex-col items-center gap-sm cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="videocam">videocam</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Video</span>
+</div>
+<div class="flex-1 min-w-[100px] bg-[#F4F2FF] border-2 border-[#7B61FF] rounded-xl p-md flex flex-col items-center gap-sm cursor-pointer shadow-sm">
+<span class="material-symbols-outlined text-[#7B61FF]" data-icon="mic" style="font-variation-settings: 'FILL' 1;">mic</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-[#7B61FF]">Audio</span>
+</div>
+<div class="flex-1 min-w-[100px] bg-surface-container-low border border-outline-variant rounded-xl p-md flex flex-col items-center gap-sm cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="description">description</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Text</span>
+</div>
+</section>
+<!-- Upload Dropzone Area -->
+<section class="relative">
+<div class="w-full aspect-[4/3] rounded-3xl border-2 border-dashed border-outline-variant bg-surface-container-lowest flex flex-col items-center justify-center p-xl text-center space-y-md shadow-[0_4px_15px_0_rgba(0,0,0,0.06)]">
+<div class="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<div class="space-y-xs">
+<p class="font-h3 text-h3 text-on-surface">Upload audio file</p>
+<p class="font-body-md text-body-md text-on-surface-variant">MP3, WAV, or M4A up to 50MB</p>
+</div>
+<button class="mt-md bg-white border border-outline-variant px-lg py-sm rounded-full font-label-sm text-label-sm text-primary hover:bg-primary-fixed transition-colors active:scale-95">
+                    Browse Files
+                </button>
+</div>
+<!-- Asymmetric Accent Image -->
+<div class="absolute -top-4 -right-2 w-24 h-24 rounded-2xl overflow-hidden shadow-xl rotate-6 border-4 border-white z-10 hidden sm:block">
+<img alt="Abstract representation of audio waves" class="w-full h-full object-cover" data-alt="A macro close-up of vibrant, purple and white fluid silk textures swirling together, creating a sense of smooth motion and organic audio wave patterns. The lighting is bright and ethereal, perfectly matching a clean light-mode UI aesthetic. The composition is dynamic and artistic, symbolizing the flow of information and sound." src="https://lh3.googleusercontent.com/aida/ADBb0uhWtrK0_uKfeCbsSGXSMGOldfc6fPKuwZXEbSODyHK0xQQza9AzzA2RBoDeQw7DDbvKcHMfVm0pX3rTCuV2GO12FrJwquA_6N6kegV73h-58E0tCKEbiO3fpRM30X5mvtJ3XhNuycZ__P-ER3UyxNtknvHXiabWPDU8hFNQI-7rWA8aXkuDDREhwL5kBYYOpiqGw0MwJs2x6QKVuFmxJTBMMUvUwUVZE25DinyEiRkV5S3VWIw-SdoTLWs"/>
+</div>
+</section>
+<!-- AI Insight Box -->
+<section class="bg-[#F4F2FF] rounded-2xl p-lg space-y-md border border-[#E5DEFF]">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[#7B61FF]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-[#7B61FF]">AI INSIGHT</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-tertiary-fixed-variant leading-relaxed">
+                "Uploading high-quality audio helps me identify subtle vocal cues and pace variations in your coaching session. Aim for a quiet environment for 98% accuracy."
+            </p>
+</section>
+<!-- Featured Resource / Visual Anchor -->
+<section class="grid grid-cols-2 gap-md pt-md">
+<div class="rounded-2xl overflow-hidden aspect-square relative shadow-md">
+<img alt="Coach in a recording setup" class="w-full h-full object-cover" data-alt="A professional coach sitting in a modern, sun-drenched home office with large windows. He is wearing high-end headphones and speaking into a professional studio microphone. The atmosphere is warm, bright, and highly professional, utilizing a palette of soft whites and corporate purples. The focus is sharp on the coach, with a gentle bokeh background." src="https://lh3.googleusercontent.com/aida/ADBb0ujT5xiqGZM0XmZZBrqf5yoiSaGliU5qxvpkKHHtuYqlE31zvNnhxRKV3w9AidLc1cvAmQB_DnN5lkuF09V2rzW3ru-C6xW4p-P4GsEDo88p5M8l8KJy7SILkLY8dxAgB-GdLVWuk_JtAE3ISwLNVbjpfbZ0UsGfx5oozhScO0HJRPToLPz44kExxuyJ_7wi8wqLZq4feYFVg8k-p91IFDxZGNfDOIh2Z5rmEHF4FHXySh_Wxyx3lFTs2YQQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-md">
+<p class="text-white font-label-sm text-[10px]">GUIDE</p>
+<p class="text-white font-h3 text-sm">Best recording practices</p>
+</div>
+</div>
+<div class="rounded-2xl overflow-hidden aspect-square relative shadow-md">
+<img alt="Audio spectrum analysis" class="w-full h-full object-cover" data-alt="A sophisticated digital visualization of an audio waveform displayed on a sleek, tablet-like interface. The waveform is rendered in glowing purple and violet lines against a clean, light gray surface. Soft, ambient shadows give the display depth. The overall feel is one of advanced technology and precise analysis." src="https://lh3.googleusercontent.com/aida/ADBb0ugBfy5Kxykx6VRSG_RKDzIa0SbhBs6z_g98JeSzKd3fP33mDvpQ30oimByftaHHNkJ3__u6lJmHYdiS1ohb18UGD1dEMYC5J-h2c6Gvor4BPXwtnNttjDiOvV7dIOh8-gNlvtOTZhUChXgVQrpWlIGreIvcNDj_U-DTIz54FUEyH4KOWDMO4ZXeh2j6A9ybZMoxgfq9NSRhSt18-OUNqs9El3c7KpBrmx24fXGF7B3BFyQlWBU3h41LBMVQoqW_Itp3N4KD2Ko0JI8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-md">
+<p class="text-white font-label-sm text-[10px]">TIPS</p>
+<p class="text-white font-h3 text-sm">Voice modulation basics</p>
+</div>
+</div>
+</section>
+<!-- Primary Action Button -->
+<section class="pt-lg pb-xl">
+<button class="w-full h-14 bg-[#7B61FF] text-white rounded-2xl font-h3 text-h3 flex items-center justify-center gap-md shadow-lg shadow-primary/20 active:scale-95 transition-all">
+                Continue to Analysis
+                <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-[0_-4px_15px_0_rgba(0,0,0,0.04)] flex justify-around items-center h-20 px-2 pb-safe">
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 cursor-pointer active:scale-90 transition-all">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#7B61FF] dark:text-[#A291FF] bg-[#F4F2FF] dark:bg-indigo-900/20 rounded-2xl px-4 py-1.5 cursor-pointer active:scale-90 transition-all">
+<span class="material-symbols-outlined" data-icon="add_circle" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Upload</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 cursor-pointer active:scale-90 transition-all">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Analysis</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 cursor-pointer active:scale-90 transition-all">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Coach</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Coach AI - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "outline": "#94a3b8", // subtle gray for secondary elements
+                    "primary": "#7B61FF", // mauve/purple accent
+                    "surface-variant": "#f1f5f9",
+                    "tertiary-fixed": "#f1f5f9",
+                    "on-surface": "#334155", // dark gray for primary text
+                    "inverse-on-surface": "#ffffff",
+                    "surface-container-highest": "#f8fafc",
+                    "error-container": "#fee2e2",
+                    "surface-container": "#ffffff",
+                    "tertiary-fixed-dim": "#e2e8f0",
+                    "tertiary": "#64748b",
+                    "outline-variant": "#f1f5f9", // subtle gray for borders
+                    "surface-dim": "#f8fafc",
+                    "error": "#ef4444",
+                    "primary-fixed-dim": "#ddd6fe",
+                    "surface-container-low": "#ffffff",
+                    "on-background": "#334155",
+                    "on-secondary-fixed-variant": "#64748b",
+                    "on-surface-variant": "#64748b",
+                    "surface": "#ffffff",
+                    "background": "#ffffff", // pure white background
+                    "on-primary-fixed-variant": "#7B61FF",
+                    "secondary": "#64748b",
+                    "on-tertiary-fixed": "#334155",
+                    "surface-bright": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "primary-fixed": "#ede9fe",
+                    "primary-container": "#7B61FF",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#64748b",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#334155",
+                    "inverse-primary": "#ddd6fe",
+                    "secondary-fixed": "#f1f5f9",
+                    "secondary-container": "#f1f5f9",
+                    "surface-container-high": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#ffffff",
+                    "surface-tint": "#7B61FF",
+                    "tertiary-container": "#64748b",
+                    "on-error-container": "#7f1d1d",
+                    "on-primary-fixed": "#1e1b4b",
+                    "on-secondary-container": "#64748b",
+                    "inverse-surface": "#1e293b",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#e2e8f0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "gutter": "12px",
+                    "container-padding": "20px",
+                    "sm": "8px",
+                    "unit": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "h2": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "h3": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-white border-b border-slate-100 flex justify-between items-center w-full px-5 h-16 sticky top-0 z-50">
+<div class="flex items-center"><div class="flex items-center gap-2">
+<img alt="Smart Coach AI Logo" class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABpy7yzaqYc2BOVx9yr_RM22Z9wiwEP6jyq2G-kufr6nN1GcCpRq0S9wqjELWveaJ5m4-R8ZKVoH4hLSnMt9jMMhWcA6Z9Hza-vAmRgevukJcd3RH8bUXWAdcDVpbDqvRm8rXNh24DUXE6-IauYEyfo6WFCmFw2Gl2cjCU_W1jDtNDB-VCk94fsyUWrA5h7aVfh-rvryhcvCJkWAznmG_KmokynjRTJzSR-6C2Zehe9Hih7MzEEn8c3xP0ZUra9_0oZlCYgsHGg874"/>
+<h1 class="font-['Manrope'] text-lg font-bold tracking-tight text-slate-900">Smart Coach AI</h1>
+</div></div>
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-200 text-slate-400">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugBfy5Kxykx6VRSG_RKDzIa0SbhBs6z_g98JeSzKd3fP33mDvpQ30oimByftaHHNkJ3__u6lJmHYdiS1ohb18UGD1dEMYC5J-h2c6Gvor4BPXwtnNttjDiOvV7dIOh8-gNlvtOTZhUChXgVQrpWlIGreIvcNDj_U-DTIz54FUEyH4KOWDMO4ZXeh2j6A9ybZMoxgfq9NSRhSt18-OUNqs9El3c7KpBrmx24fXGF7B3BFyQlWBU3h41LBMVQoqW_Itp3N4KD2Ko0JI8"/>
+</div>
+</div>
+</header>
+<main class="px-container-padding pt-lg space-y-xl">
+<!-- Greeting Section -->
+<section class="space-y-xs">
+<h2 class="font-h1 text-h1 text-on-surface">Hello, Youssef 👋</h2>
+<p class="font-body-lg text-body-lg text-outline">Ready to improve your speaking skills?</p>
+</section>
+<!-- Primary Call to Action -->
+<section>
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-h3 text-h3 flex items-center justify-center gap-sm shadow-[0_8px_25px_0_rgba(123,97,255,0.25)] active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+            Start New Session
+        </button>
+</section>
+<!-- Choose a Scenario -->
+<section class="space-y-md">
+<div class="flex justify-between items-end">
+<h3 class="font-h2 text-h2 text-on-surface">Choose a scenario</h3>
+<span class="font-label-sm text-label-sm text-primary">View All</span>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<!-- Interview Card -->
+<div class="col-span-2 bg-white p-md rounded-xl shadow-[0_4px_15px_0_rgba(0,0,0,0.04)] border border-slate-100 flex items-center justify-between group active:scale-[0.98] transition-all">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="record_voice_over" style="font-variation-settings: 'FILL' 1;">record_voice_over</span>
+</div>
+<div>
+<p class="font-h3 text-h3 text-on-surface">Interview</p>
+<p class="font-body-md text-body-md text-outline">Prep for your dream job</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Pitch Card -->
+<div class="bg-white p-md rounded-xl shadow-[0_4px_15px_0_rgba(0,0,0,0.04)] border border-slate-100 space-y-sm active:scale-[0.98] transition-all">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="lightbulb">lightbulb</span>
+</div>
+<p class="font-h3 text-h3 text-on-surface">Pitch</p>
+<p class="font-body-md text-body-md text-outline">Convince stakeholders</p>
+</div>
+<!-- Presentation Card -->
+<div class="bg-white p-md rounded-xl shadow-[0_4px_15px_0_rgba(0,0,0,0.04)] border border-slate-100 space-y-sm active:scale-[0.98] transition-all">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="present_to_all">present_to_all</span>
+</div>
+<p class="font-h3 text-h3 text-on-surface">Presentation</p>
+<p class="font-body-md text-body-md text-outline">Master the stage</p>
+</div>
+</div>
+</section>
+<!-- Progress Chart Section -->
+<section class="space-y-md">
+<h3 class="font-h2 text-h2 text-on-surface">Your Progress</h3>
+<div class="bg-white p-lg rounded-xl shadow-[0_4px_15px_0_rgba(0,0,0,0.04)] border border-slate-100">
+<div class="flex items-center justify-between mb-lg">
+<div>
+<p class="font-label-sm text-label-sm text-outline">CURRENT LEVEL</p>
+<p class="font-h1 text-h1 text-primary">84%</p>
+</div>
+<div class="bg-slate-50 text-slate-500 px-sm py-xs rounded-full flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-[10px]">AI Insight: Improving</span>
+</div>
+</div>
+<!-- Progress Line (SVG Path) -->
+<div class="relative h-32 flex items-end justify-between px-xs border-b border-slate-100">
+<svg class="absolute inset-0 w-full h-full overflow-visible" preserveaspectratio="none">
+<path d="M0,100 C20,90 40,95 60,70 S100,60 140,50 S200,40 260,30 S320,10 360,5" fill="none" stroke="#7B61FF" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="360" cy="5" fill="#7B61FF" r="5"></circle>
+</svg>
+<div class="flex justify-between w-full mt-2 pt-2 text-[10px] text-outline font-label-sm">
+<span>Oct 12</span>
+<span>Oct 19</span>
+<span>Oct 26</span>
+<span>Today</span>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Feedback Chip -->
+<section class="bg-slate-50 p-md rounded-xl border border-slate-100 flex gap-md items-start">
+<div class="p-xs bg-white rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="space-y-xs">
+<p class="font-h3 text-body-md text-on-surface">Expert Tip</p>
+<p class="font-body-md text-body-md text-outline leading-snug">"Your articulation has improved by 12% this week. Focus on slowing down your 'Pitch' intro for maximum impact."</p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-white fixed bottom-0 w-full z-50 border-t border-slate-100 shadow-[0_-4px_15px_0_rgba(0,0,0,0.02)] flex justify-around items-center h-20 px-2 pb-safe">
+<a class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-2xl px-4 py-1.5 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:bg-slate-50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Upload</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:bg-slate-50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Analysis</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:bg-slate-50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Coach</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "outline": "#9CA3AF", // Subtle gray for borders
+                        "primary": "#7B61FF", // Mauve/purple accent
+                        "surface-variant": "#F3F4F6",
+                        "tertiary-fixed": "#F5F3FF",
+                        "on-surface": "#1F2937", // Dark gray for primary text
+                        "inverse-on-surface": "#FFFFFF",
+                        "surface-container-highest": "#E5E7EB",
+                        "error-container": "#FEE2E2",
+                        "surface-container": "#F9FAFB",
+                        "tertiary-fixed-dim": "#EDE9FE",
+                        "tertiary": "#6B7280", // Secondary text gray
+                        "outline-variant": "#E5E7EB", // Subtle gray for borders
+                        "surface-dim": "#F3F4F6",
+                        "error": "#EF4444",
+                        "primary-fixed-dim": "#C4B5FD",
+                        "surface-container-low": "#FFFFFF",
+                        "on-background": "#1F2937",
+                        "on-secondary-fixed-variant": "#4B5563",
+                        "on-surface-variant": "#4B5563",
+                        "surface": "#FFFFFF", // Pure white background
+                        "background": "#FFFFFF", // Pure white background
+                        "on-primary-fixed-variant": "#5B21B6",
+                        "secondary": "#6B7280", // Secondary text gray
+                        "on-tertiary-fixed": "#1F2937",
+                        "surface-bright": "#FFFFFF",
+                        "on-tertiary-container": "#FFFFFF",
+                        "primary-fixed": "#EDE9FE",
+                        "primary-container": "#7B61FF",
+                        "on-tertiary": "#FFFFFF",
+                        "on-tertiary-fixed-variant": "#4B5563",
+                        "surface-container-lowest": "#FFFFFF",
+                        "on-secondary-fixed": "#111827",
+                        "inverse-primary": "#C4B5FD",
+                        "secondary-fixed": "#F3F4F6",
+                        "secondary-container": "#F3F4F6",
+                        "surface-container-high": "#F9FAFB",
+                        "on-secondary": "#FFFFFF",
+                        "on-primary-container": "#FFFFFF",
+                        "surface-tint": "#7B61FF",
+                        "tertiary-container": "#F3F4F6",
+                        "on-error-container": "#991B1B",
+                        "on-primary-fixed": "#1E1B4B",
+                        "on-secondary-container": "#374151",
+                        "inverse-surface": "#111827",
+                        "on-error": "#FFFFFF",
+                        "secondary-fixed-dim": "#D1D5DB"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "12px",
+                        "container-padding": "20px",
+                        "sm": "8px",
+                        "unit": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                        "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .level-1-shadow {
+            box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.04);
+        }
+        .ai-chip {
+            background-color: #F5F3FF; /* Very light mauve/purple */
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- Transactional Screen: Navigation shells suppressed per Design Mandate -->
+<main class="min-h-screen flex flex-col bg-white">
+<!-- Hero Visual Section -->
+<div class="relative h-64 md:h-80 overflow-hidden">
+<img alt="Sign up visuals" class="w-full h-full object-cover" data-alt="A clean, minimalist workspace featuring a high-tech tablet and digital interfaces that glow with soft purple and blue light. The setting is a professional, bright office environment with a focus on productivity and high-end tech gear. Soft morning light floods the scene, creating a sense of fresh beginnings and modern corporate reliability. The visual aesthetic is airy and professional, aligning with a high-contrast light mode UI design." src="https://lh3.googleusercontent.com/aida/ADBb0ugBfy5Kxykx6VRSG_RKDzIa0SbhBs6z_g98JeSzKd3fP33mDvpQ30oimByftaHHNkJ3__u6lJmHYdiS1ohb18UGD1dEMYC5J-h2c6Gvor4BPXwtnNttjDiOvV7dIOh8-gNlvtOTZhUChXgVQrpWlIGreIvcNDj_U-DTIz54FUEyH4KOWDMO4ZXeh2j6A9ybZMoxgfq9NSRhSt18-OUNqs9El3c7KpBrmx24fXGF7B3BFyQlWBU3h41LBMVQoqW_Itp3N4KD2Ko0JI8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-white via-white/10 to-transparent"></div>
+</div>
+<!-- Form Container -->
+<div class="px-container-padding -mt-12 relative z-10 flex-grow pb-xl">
+<div class="max-w-md mx-auto">
+<!-- Header -->
+<header class="mb-xl text-center md:text-left">
+<h1 class="font-h1 text-h1 text-on-background mb-xs">Create Account 🚀</h1>
+<p class="font-body-lg text-body-lg text-secondary">Start your journey</p>
+</header>
+<!-- Input Section -->
+<section class="bg-white level-1-shadow p-md rounded-xl border border-outline-variant/50">
+<form class="space-y-lg">
+<!-- Full Name Field -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-secondary px-xs block">FULL NAME</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-primary" style="font-size: 20px;">person</span>
+<input class="w-full h-[56px] pl-12 pr-4 rounded-lg bg-gray-50 border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-200 font-body-md text-on-surface placeholder:text-outline" placeholder="John Doe" type="text"/>
+</div>
+</div>
+<!-- Email Field -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-secondary px-xs block">EMAIL ADDRESS</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-primary" style="font-size: 20px;">mail</span>
+<input class="w-full h-[56px] pl-12 pr-4 rounded-lg bg-gray-50 border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-200 font-body-md text-on-surface placeholder:text-outline" placeholder="email@example.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-secondary px-xs block">PASSWORD</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-primary" style="font-size: 20px;">lock</span>
+<input class="w-full h-[56px] pl-12 pr-12 rounded-lg bg-gray-50 border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-200 font-body-md text-on-surface placeholder:text-outline" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 text-secondary hover:text-primary active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility</span>
+</button>
+</div>
+</div>
+<!-- Confirm Password Field -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-secondary px-xs block">CONFIRM PASSWORD</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-primary" style="font-size: 20px;">verified_user</span>
+<input class="w-full h-[56px] pl-12 pr-4 rounded-lg bg-gray-50 border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-200 font-body-md text-on-surface placeholder:text-outline" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-sm">
+<button class="w-full h-[56px] bg-primary text-on-primary font-h3 text-h3 rounded-lg shadow-md active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-sm" type="submit">
+                                Sign Up
+                                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</form>
+</section>
+<!-- AI Feedback Chip / Context -->
+<div class="mt-lg px-md py-sm ai-chip rounded-lg flex items-center gap-sm border border-primary/10">
+<span class="material-symbols-outlined text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<p class="font-body-md text-on-tertiary-fixed-variant">Passwords must be 8+ characters with a mix of symbols.</p>
+</div>
+<!-- Secondary Actions -->
+<footer class="mt-xl text-center">
+<p class="font-body-md text-secondary">
+                        Already have an account? 
+                        <a class="text-primary font-bold hover:underline active:opacity-70 transition-all" href="#">Log In</a>
+</p>
+<div class="mt-xl flex items-center justify-center gap-lg">
+<div class="h-[1px] w-12 bg-outline-variant"></div>
+<span class="font-label-sm text-label-sm text-secondary">OR CONTINUE WITH</span>
+<div class="h-[1px] w-12 bg-outline-variant"></div>
+</div>
+<div class="mt-lg flex justify-center gap-md">
+<button class="w-14 h-14 rounded-full border border-outline-variant bg-white flex items-center justify-center active:scale-90 transition-transform hover:bg-gray-50">
+<svg class="w-6 h-6" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+</button>
+<button class="w-14 h-14 rounded-full border border-outline-variant bg-white flex items-center justify-center active:scale-90 transition-transform hover:bg-gray-50">
+<span class="material-symbols-outlined text-on-surface" style="font-size: 28px;">phone_iphone</span>
+</button>
+</div>
+</footer>
+</div>
+</div>
+</main>
+</body></html>

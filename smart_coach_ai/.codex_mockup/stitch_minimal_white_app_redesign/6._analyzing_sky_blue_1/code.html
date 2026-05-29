@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#c9bfff",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#e2dfde",
+                    "outline": "#797587",
+                    "on-surface-variant": "#484555",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#c6c5d2",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#c9bfff",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-tertiary-fixed-variant": "#464650",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-tint": "#5d3fe0",
+                    "surface-variant": "#e2e2e2",
+                    "tertiary-container": "#74737f",
+                    "tertiary-fixed": "#e3e1ee",
+                    "surface-dim": "#dadada",
+                    "primary-container": "#7459f7",
+                    "on-background": "#1a1c1c",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "outline-variant": "#c9c4d8",
+                    "on-secondary-container": "#636262",
+                    "surface": "#f9f9f9",
+                    "background": "#f9f9f9",
+                    "on-primary-fixed-variant": "#441cc8",
+                    "surface-container-high": "#e8e8e8",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#f9f9f9",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-primary-fixed": "#1a0063",
+                    "tertiary": "#5b5b66",
+                    "on-secondary-fixed-variant": "#474746",
+                    "error-container": "#ffdad6",
+                    "secondary": "#5f5e5e",
+                    "primary-fixed": "#e5deff",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-container-low": "#f3f3f4",
+                    "on-surface": "#1a1c1c",
+                    "on-error-container": "#93000a",
+                    "primary": "#5b3cdd",
+                    "on-tertiary-fixed": "#1a1b24",
+                    "surface-container-highest": "#e2e2e2",
+                    "inverse-surface": "#2f3131",
+                    "surface-container": "#eeeeee",
+                    "on-primary-container": "#fffbff",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "gutter": "12px",
+                    "sm": "8px",
+                    "unit": "4px",
+                    "container-padding": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "h3": ["Manrope"],
+                    "h2": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                    "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .shimmer-bg {
+            background: linear-gradient(90deg, #f1f3f5 25%, #e9ecef 50%, #f1f3f5 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-sky-100/50 dark:border-sky-900/30 shadow-sm shadow-sky-100/20 dark:shadow-none">
+<div class="flex items-center justify-between px-6 h-16 max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="p-2 -ml-2 text-slate-600 dark:text-slate-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="text-xl font-bold text-sky-500 dark:text-sky-300 flex items-center gap-2 font-manrope font-semibold tracking-tight">
+<span class="material-symbols-outlined text-sky-400 dark:text-sky-300">lightbulb</span>
+                    Smart Coach AI
+                </div>
+</div>
+<button class="p-2 text-slate-600 dark:text-slate-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-32 px-container-padding max-w-lg mx-auto w-full flex flex-col items-center">
+<!-- Central Animation Area -->
+<div class="relative flex items-center justify-center mb-xl mt-lg">
+<!-- Pulsing outer rings -->
+<div class="absolute w-48 h-48 rounded-full bg-sky-100/50 pulse-ring"></div>
+<div class="absolute w-64 h-64 rounded-full border-2 border-sky-50/50 pulse-ring" style="animation-delay: 0.5s"></div>
+<!-- AI Icon Container -->
+<div class="relative w-32 h-32 rounded-full bg-white shadow-[0_8px_25px_rgba(0,0,0,0.06)] flex items-center justify-center z-10 border border-sky-50">
+<div class="bg-sky-50 p-4 rounded-full">
+<span class="material-symbols-outlined text-[48px] text-sky-500" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+</div>
+</div>
+<!-- Headline & Status -->
+<div class="text-center mb-lg">
+<h1 class="font-h1 text-h1 text-on-surface mb-xs">Analyzing session...</h1>
+<p class="text-body-md text-secondary font-body-md">Our AI is processing your input to provide tailored feedback.</p>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container-low h-3 rounded-full mb-xl overflow-hidden border border-sky-50">
+<div class="bg-sky-400 h-full rounded-full transition-all duration-1000 ease-out" style="width: 72%;"></div>
+</div>
+<!-- Step List (Checklist) -->
+<div class="w-full space-y-md mb-xl">
+<!-- Completed Step -->
+<div class="flex items-center justify-between p-md bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.06)] border border-sky-50">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Transcribing</span>
+</div>
+<span class="text-label-sm font-label-sm text-green-600">Done</span>
+</div>
+<!-- Completed Step -->
+<div class="flex items-center justify-between p-md bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.06)] border border-sky-50">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Emotional analysis</span>
+</div>
+<span class="text-label-sm font-label-sm text-green-600">Done</span>
+</div>
+<!-- Completed Step -->
+<div class="flex items-center justify-between p-md bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.06)] border border-sky-50">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Identifying sentiments</span>
+</div>
+<span class="text-label-sm font-label-sm text-green-600">Done</span>
+</div>
+<!-- Completed Step -->
+<div class="flex items-center justify-between p-md bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.06)] border border-sky-50">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Optimizing context</span>
+</div>
+<span class="text-label-sm font-label-sm text-green-600">Done</span>
+</div>
+<!-- Processing Step -->
+<div class="flex items-center justify-between p-md bg-sky-50/50 rounded-xl border border-sky-100">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center animate-spin">
+<span class="material-symbols-outlined text-sky-500 text-[20px]">progress_activity</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Generating advice</span>
+</div>
+<span class="text-label-sm font-label-sm text-sky-600">Processing...</span>
+</div>
+</div>
+<!-- Growth Mindset Tip -->
+<div class="w-full p-lg bg-sky-50 rounded-2xl border border-sky-100/50 flex gap-md items-start">
+<div class="p-2 bg-sky-100 rounded-lg text-sky-600">
+<span class="material-symbols-outlined">tips_and_updates</span>
+</div>
+<div>
+<p class="text-body-md text-on-surface leading-relaxed font-body-md">
+                    The analysis identifies subtle patterns in your progress. Remember that consistency in tracking is the fastest way to build lasting habits. <span class="font-bold text-sky-700">You're doing great!</span>
+</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border-t border-sky-50 dark:border-slate-800 shadow-[0_-4px_20px_rgba(135,206,235,0.1)] rounded-t-3xl">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-sky-400 dark:hover:text-sky-200 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[11px] font-medium font-manrope">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-sky-50 dark:bg-sky-900/40 text-sky-600 dark:text-sky-300 rounded-2xl px-5 py-1.5 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="text-[11px] font-medium font-manrope">Upload</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-sky-400 dark:hover:text-sky-200 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[11px] font-medium font-manrope">Analysis</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-sky-400 dark:hover:text-sky-200 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="text-[11px] font-medium font-manrope">Coach</span>
+</a>
+</nav>
+</body></html>

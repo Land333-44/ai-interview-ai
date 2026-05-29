@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-highest": "#e2e2e2",
+            "on-tertiary-fixed-variant": "#464650",
+            "on-tertiary-fixed": "#1a1b24",
+            "on-secondary-fixed-variant": "#474746",
+            "on-primary-fixed-variant": "#004a77",
+            "surface-container-high": "#e8e8e8",
+            "on-primary": "#003454",
+            "primary-container": "#c1e8ff",
+            "on-tertiary-container": "#fffbff",
+            "on-surface-variant": "#484555",
+            "surface-bright": "#f9f9f9",
+            "surface-container": "#eeeeee",
+            "background": "#f9f9f9",
+            "secondary-fixed-dim": "#c8c6c5",
+            "surface-container-lowest": "#ffffff",
+            "surface": "#f9f9f9",
+            "on-background": "#1a1c1c",
+            "tertiary-fixed": "#e3e1ee",
+            "inverse-surface": "#2f3131",
+            "on-secondary-fixed": "#1c1b1b",
+            "on-error": "#ffffff",
+            "tertiary": "#5b5b66",
+            "secondary": "#5f5e5e",
+            "surface-tint": "#87CEEB",
+            "surface-variant": "#e2e2e2",
+            "surface-dim": "#dadada",
+            "secondary-fixed": "#e5e2e1",
+            "primary-fixed": "#c1e8ff",
+            "tertiary-fixed-dim": "#c6c5d2",
+            "surface-container-low": "#f3f3f4",
+            "on-surface": "#1a1c1c",
+            "on-secondary-container": "#636262",
+            "outline": "#797587",
+            "inverse-on-surface": "#f0f1f1",
+            "on-error-container": "#93000a",
+            "error-container": "#ffdad6",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#87CEEB",
+            "on-primary-fixed": "#001e30",
+            "outline-variant": "#c9c4d8",
+            "on-tertiary": "#ffffff",
+            "primary": "#87CEEB",
+            "error": "#ba1a1a",
+            "secondary-container": "#e2dfde",
+            "on-primary-container": "#001e30",
+            "tertiary-container": "#74737f",
+            "inverse-primary": "#87CEEB"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "xl": "32px",
+            "xs": "4px",
+            "unit": "4px",
+            "md": "16px",
+            "lg": "24px",
+            "container-padding": "20px",
+            "sm": "8px",
+            "gutter": "12px"
+          },
+          "fontFamily": {
+            "h2": ["Manrope"],
+            "h1": ["Manrope"],
+            "body-lg": ["Manrope"],
+            "label-sm": ["Manrope"],
+            "h3": ["Manrope"],
+            "body-md": ["Manrope"]
+          },
+          "fontSize": {
+            "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+            "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+            "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-shadow-level-1 {
+      box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.06);
+    }
+    .custom-shadow-level-2 {
+      box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.10);
+    }
+    .tonal-shift-light {
+      background-color: #f9f9f9;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-[0_4px_15px_0_rgba(0,0,0,0.06)] docked full-width top-0 sticky z-50 flex justify-between items-center w-full px-5 h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined dark:text-[#A291FF] active:scale-95 transition-transform duration-200 cursor-pointer text-primary" data-icon="lightbulb">lightbulb</span>
+<h1 class="font-['Manrope'] text-lg font-bold tracking-tight dark:text-[#A291FF] text-primary">Smart Coach AI</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 cursor-pointer active:scale-95 transition-transform duration-200" data-icon="notifications">notifications</span>
+</div>
+</header>
+<main class="px-container-padding pt-lg pb-xl max-w-md mx-auto">
+<!-- Header Title Section -->
+<section class="mb-lg">
+<h2 class="font-h1 text-h1 text-on-surface mb-xs">Your Results</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Here is the breakdown of your emotional landscape during the session.</p>
+</section>
+<!-- Top 5 Emotions Card -->
+<section class="bg-surface-container-lowest rounded-xl p-md custom-shadow-level-1 border border-[#E9ECEF] mb-lg">
+<div class="flex items-center gap-sm mb-lg">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="bar_chart">bar_chart</span>
+</div>
+<h3 class="font-h3 text-h3">Top 5 Emotions</h3>
+</div>
+<!-- Charts Cluster -->
+<div class="space-y-md">
+<!-- Confidence -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Confidence</span>
+<span class="font-body-md text-body-md font-bold text-primary">88%</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[88%]"></div>
+</div>
+</div>
+<!-- Nervousness -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Nervousness</span>
+<span class="font-body-md text-body-md font-bold text-on-surface">42%</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-outline h-full rounded-full w-[42%]"></div>
+</div>
+</div>
+<!-- Excitement -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Excitement</span>
+<span class="font-body-md text-body-md font-bold text-primary">76%</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[76%]"></div>
+</div>
+</div>
+<!-- Stress -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Stress</span>
+<span class="font-body-md text-body-md font-bold text-on-surface">25%</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-outline-variant h-full rounded-full w-[25%]"></div>
+</div>
+</div>
+<!-- Sadness -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Sadness</span>
+<span class="font-body-md text-body-md font-bold text-on-surface">12%</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-outline-variant h-full rounded-full w-[12%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Analysis Block -->
+<section class="relative mb-xl">
+<div class="bg-tertiary-fixed rounded-2xl p-lg overflow-hidden relative">
+<!-- Background Image Accent -->
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-md">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-primary uppercase">AI Insight</span>
+</div>
+<blockquote class="italic font-h3 text-h3 text-on-tertiary-fixed mb-md leading-relaxed">
+            "Your speech pattern indicates high cognitive engagement. While stress levels are low, there's a unique peak in excitement during the middle segment."
+          </blockquote>
+<div class="flex items-center gap-3">
+<img alt="AI Profile" class="w-10 h-10 rounded-full object-cover border-2 border-white" data-alt="A professional headshot of a friendly, diverse female coach presented in a modern, clean UI context. The woman has a warm, encouraging smile and is set against a blurred, high-end office interior with soft daylight. The color palette is bright and airy, matching the modern corporate aesthetic of the light-themed application." src="https://lh3.googleusercontent.com/aida/ADBb0ugBfy5Kxykx6VRSG_RKDzIa0SbhBs6z_g98JeSzKd3fP33mDvpQ30oimByftaHHNkJ3__u6lJmHYdiS1ohb18UGD1dEMYC5J-h2c6Gvor4BPXwtnNttjDiOvV7dIOh8-gNlvtOTZhUChXgVQrpWlIGreIvcNDj_U-DTIz54FUEyH4KOWDMO4ZXeh2j6A9ybZMoxgfq9NSRhSt18-OUNqs9El3c7KpBrmx24fXGF7B3BFyQlWBU3h41LBMVQoqW_Itp3N4KD2Ko0JI8"/>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-tertiary-fixed">Coach AI</p>
+<p class="font-label-sm text-label-sm text-on-tertiary-fixed-variant">Emotional Intelligence Expert</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Primary Action -->
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-body-lg text-body-lg flex items-center justify-center gap-sm active:scale-95 transition-transform duration-200 shadow-lg shadow-primary/20">
+      View Advice &amp; Recommendations
+      <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+<div class="h-24"></div> <!-- Bottom Spacer for Nav -->
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-[0_-4px_15px_0_rgba(0,0,0,0.04)] fixed bottom-0 w-full z-50 h-20 px-2 pb-safe flex justify-around items-center">
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Upload</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#7B61FF] dark:text-[#A291FF] bg-[#F4F2FF] dark:bg-indigo-900/20 rounded-2xl px-4 py-1.5 active:scale-90 transition-all duration-200 cursor-pointer bg-primary-fixed text-on-primary-fixed">
+<span class="material-symbols-outlined" data-icon="analytics" data-weight="fill" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Analysis</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Coach</span>
+</div>
+</nav>
+</body></html>

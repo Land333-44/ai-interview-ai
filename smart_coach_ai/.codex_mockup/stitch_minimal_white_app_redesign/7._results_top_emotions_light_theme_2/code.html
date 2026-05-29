@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "outline": "#D1D5DB",
+                        "primary": "#7B61FF",
+                        "surface-variant": "#F3F4F6",
+                        "tertiary-fixed": "#F5F3FF",
+                        "on-surface": "#1F2937",
+                        "inverse-on-surface": "#F9FAFB",
+                        "surface-container-highest": "#E5E7EB",
+                        "error-container": "#FEE2E2",
+                        "surface-container": "#F3F4F6",
+                        "tertiary-fixed-dim": "#EDE9FE",
+                        "tertiary": "#6B7280",
+                        "outline-variant": "#E5E7EB",
+                        "surface-dim": "#F3F4F6",
+                        "error": "#EF4444",
+                        "primary-fixed-dim": "#C7D2FE",
+                        "surface-container-low": "#F9FAFB",
+                        "on-background": "#1F2937",
+                        "on-secondary-fixed-variant": "#4B5563",
+                        "on-surface-variant": "#4B5563",
+                        "surface": "#ffffff",
+                        "background": "#ffffff",
+                        "on-primary-fixed-variant": "#6366F1",
+                        "secondary": "#6B7280",
+                        "on-tertiary-fixed": "#111827",
+                        "surface-bright": "#ffffff",
+                        "on-tertiary-container": "#ffffff",
+                        "primary-fixed": "#E0E7FF",
+                        "primary-container": "#7B61FF",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#374151",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#111827",
+                        "inverse-primary": "#C7D2FE",
+                        "secondary-fixed": "#F3F4F6",
+                        "secondary-container": "#F3F4F6",
+                        "surface-container-high": "#F9FAFB",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#ffffff",
+                        "surface-tint": "#7B61FF",
+                        "tertiary-container": "#6B7280",
+                        "on-error-container": "#991B1B",
+                        "on-primary-fixed": "#312E81",
+                        "on-secondary-container": "#4B5563",
+                        "inverse-surface": "#111827",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#D1D5DB"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "12px",
+                        "container-padding": "20px",
+                        "sm": "8px",
+                        "unit": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h2": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "500"}],
+                        "h1": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-white font-body-md text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<nav class="bg-white border-b border-gray-100 shadow-sm flex justify-between items-center w-full px-5 h-16 fixed top-0 z-50">
+<div class="flex items-center gap-3">
+<button class="active:scale-95 transition-transform duration-200 text-on-surface">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<img alt="Smart Coach AI Logo" class="w-8 h-8 rounded-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABpy7yzaqYc2BOVx9yr_RM22Z9wiwEP6jyq2G-kufr6nN1GcCpRq0S9wqjELWveaJ5m4-R8ZKVoH4hLSnMt9jMMhWcA6Z9Hza-vAmRgevukJcd3RH8bUXWAdcDVpbDqvRm8rXNh24DUXE6-IauYEyfo6WFCmFw2Gl2cjCU_W1jDtNDB-VCk94fsyUWrA5h7aVfh-rvryhcvCJkWAznmG_KmokynjRTJzSR-6C2Zehe9Hih7MzEEn8c3xP0ZUra9_0oZlCYgsHGg874"/>
+<h1 class="font-['Manrope'] text-lg font-bold tracking-tight text-on-surface">Your Results</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-200 text-secondary">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</nav>
+<main class="pt-20 px-container-padding space-y-lg max-w-md mx-auto">
+<!-- Hero Analysis Section -->
+<!-- Top 5 Emotions Section -->
+<section class="bg-white rounded-xl p-md shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-h3 text-on-surface">Top 5 Emotions</h3>
+<span class="material-symbols-outlined text-primary" data-icon="trending_up">trending_up</span>
+</div>
+<div class="space-y-md">
+<!-- Confidence -->
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="text-lg">🦁</span>
+<span class="font-body-lg text-on-surface">Confidence</span>
+</div>
+<span class="font-label-sm text-primary">72%</span>
+</div>
+<div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 72%"></div>
+</div>
+</div>
+<!-- Nervousness -->
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="text-lg">😟</span>
+<span class="font-body-lg text-on-surface">Nervousness</span>
+</div>
+<span class="font-label-sm text-secondary">45%</span>
+</div>
+<div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<!-- Excitement -->
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="text-lg">🤩</span>
+<span class="font-body-lg text-on-surface">Excitement</span>
+</div>
+<span class="font-label-sm text-primary">33%</span>
+</div>
+<div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary/60 rounded-full" style="width: 33%"></div>
+</div>
+</div>
+<!-- Stress -->
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="text-lg">😰</span>
+<span class="font-body-lg text-on-surface">Stress</span>
+</div>
+<span class="font-label-sm text-error">28%</span>
+</div>
+<div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 28%"></div>
+</div>
+</div>
+<!-- Sadness -->
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="text-lg">😢</span>
+<span class="font-body-lg text-on-surface">Sadness</span>
+</div>
+<span class="font-label-sm text-outline">12%</span>
+</div>
+<div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-outline rounded-full" style="width: 12%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Analysis Section -->
+<section class="bg-[#F5F3FF] rounded-xl p-md border border-gray-100 relative overflow-hidden">
+<div class="flex items-center gap-2 mb-sm">
+<div class="p-1.5 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="smart_toy">smart_toy</span>
+</div>
+<h3 class="font-label-sm text-primary uppercase tracking-wider">AI Analysis (LLaMA 70B)</h3>
+</div>
+<div class="space-y-sm">
+<p class="font-body-md text-on-surface leading-relaxed">
+                    Based on your recent verbal and physiological markers, your performance demonstrates a strong core of <span class="font-bold text-primary">Confidence</span>. However, the presence of micro-stressors suggests a slight misalignment during high-stakes questioning.
+                </p>
+<div class="p-sm bg-white/80 rounded-lg border border-gray-100">
+<p class="font-body-md text-on-surface italic">
+                        "Your engagement level was peak at the 3-minute mark, but we noticed a drop in vocal resonance during the summary phase. Practice centering exercises to maintain authority."
+                    </p>
+</div>
+</div>
+</section>
+<!-- CTA Button -->
+<div class="pt-sm pb-lg">
+<button class="w-full h-14 bg-primary text-on-primary font-body-lg font-bold rounded-xl shadow-[0_8px_25px_0_rgba(123,97,255,0.25)] active:scale-95 transition-all duration-200 flex items-center justify-center gap-2">
+<span>View Advice &amp; Recommendations</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-white border-t border-gray-100 shadow-[0_-4px_15px_0_rgba(0,0,0,0.04)] h-20 px-2 pb-safe flex justify-around items-center">
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 hover:bg-gray-50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 hover:bg-gray-50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Upload</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-2xl px-4 py-1.5 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Analysis</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-1.5 hover:bg-gray-50 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span class="font-['Manrope'] text-[11px] font-semibold">Coach</span>
+</a>
+</nav>
+</body></html>

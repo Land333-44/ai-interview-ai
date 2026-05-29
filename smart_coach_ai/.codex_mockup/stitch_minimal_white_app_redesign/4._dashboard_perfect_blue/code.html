@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Coach AI - User Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary": "#5c5f60",
+            "surface-container-highest": "#d8e3fa",
+            "background": "#f9f9ff",
+            "secondary-fixed": "#d4e5ec",
+            "on-tertiary-fixed-variant": "#444748",
+            "on-primary-fixed": "#001f29",
+            "outline-variant": "#bfc8cd",
+            "surface-container": "#e7eeff",
+            "tertiary-container": "#c2c5c6",
+            "primary": "#0c6780",
+            "primary-fixed": "#baeaff",
+            "on-background": "#111c2c",
+            "on-error": "#ffffff",
+            "secondary-container": "#d1e3ea",
+            "surface-variant": "#d8e3fa",
+            "tertiary-fixed-dim": "#c4c7c8",
+            "on-tertiary-container": "#4e5253",
+            "tertiary-fixed": "#e1e3e4",
+            "surface-container-low": "#f0f3ff",
+            "secondary-fixed-dim": "#b8c9d0",
+            "on-surface": "#111c2c",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "primary-container": "#87ceeb",
+            "surface-bright": "#f9f9ff",
+            "secondary": "#506167",
+            "on-surface-variant": "#3f484c",
+            "inverse-on-surface": "#ebf1ff",
+            "on-primary": "#ffffff",
+            "on-secondary-container": "#55656b",
+            "on-primary-fixed-variant": "#004d62",
+            "surface-tint": "#0c6780",
+            "on-tertiary-fixed": "#191c1d",
+            "surface-dim": "#cfdaf1",
+            "outline": "#6f787d",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#005870",
+            "primary-fixed-dim": "#89d0ed",
+            "inverse-primary": "#89d0ed",
+            "on-secondary-fixed-variant": "#39494f",
+            "surface-container-high": "#dee8ff",
+            "surface": "#f9f9ff",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#263142",
+            "on-secondary-fixed": "#0d1e23"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "24px",
+            "xl": "80px",
+            "xs": "4px",
+            "sm": "12px",
+            "base": "8px",
+            "md": "24px",
+            "margin": "32px",
+            "lg": "48px"
+          },
+          "fontFamily": {
+            "body-md": ["Manrope"],
+            "label-sm": ["Manrope"],
+            "body-lg": ["Manrope"],
+            "h1": ["Manrope"],
+            "h2": ["Manrope"],
+            "h3": ["Manrope"]
+          },
+          "fontSize": {
+            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "label-sm": ["14px", {"lineHeight": "1.2", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body { font-family: 'Manrope', sans-serif; }
+    .sky-shadow { box-shadow: 0 4px 20px rgba(135, 206, 235, 0.1); }
+    .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar Component -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-sky-100/50 dark:border-sky-900/30 shadow-sm shadow-sky-100/20 dark:shadow-none fixed top-0 w-full z-50">
+<div class="flex items-center justify-between px-6 h-16 max-w-7xl mx-auto">
+<div class="text-xl font-bold text-sky-500 dark:text-sky-300 flex items-center gap-2 font-manrope font-semibold tracking-tight">
+<span class="material-symbols-outlined text-sky-400 dark:text-sky-300" data-icon="lightbulb">lightbulb</span>
+<span>Smart Coach AI</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:bg-sky-50 dark:hover:bg-sky-900/30 transition-colors active:scale-95 duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-sky-100">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a smiling young man in a minimalist, bright corporate environment with soft, diffused sky-blue lighting. The portrait is clean and high-key, reflecting a modern, serene aesthetic with professional clarity. The background is a soft-focus office with light white and pale blue tones." src="https://lh3.googleusercontent.com/aida/ADBb0uhWtrK0_uKfeCbsSGXSMGOldfc6fPKuwZXEbSODyHK0xQQza9AzzA2RBoDeQw7DDbvKcHMfVm0pX3rTCuV2GO12FrJwquA_6N6kegV73h-58E0tCKEbiO3fpRM30X5mvtJ3XhNuycZ__P-ER3UyxNtknvHXiabWPDU8hFNQI-7rWA8aXkuDDREhwL5kBYYOpiqGw0MwJs2x6QKVuFmxJTBMMUvUwUVZE25DinyEiRkV5S3VWIw-SdoTLWs"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-7xl mx-auto space-y-10">
+<!-- Welcome Section & Primary Action -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="space-y-2">
+<h1 class="font-h1 text-h1 text-on-background">Hello, Youssef</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg">Ready to master your next big moment? Your AI coach is analyzed and ready for a new session.</p>
+</div>
+<button class="bg-primary-container text-on-primary-container font-label-sm text-label-sm py-4 px-8 rounded-full flex items-center gap-3 active:scale-95 transition-transform shadow-lg shadow-sky-200/50">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span>Start New Session</span>
+</button>
+</section>
+<!-- Practice Scenarios - Bento Grid -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="font-h2 text-h2">Practice Scenarios</h2>
+<a class="text-primary font-label-sm text-label-sm flex items-center gap-1" href="#">View all <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[400px]">
+<!-- Job Interview (Most Popular) -->
+<div class="md:col-span-6 lg:col-span-7 group relative overflow-hidden rounded-3xl bg-white sky-shadow border border-sky-50 transition-all hover:shadow-xl hover:-translate-y-1">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" data-alt="A wide-angle shot of a minimalist, high-end meeting room with large glass windows overlooking a serene coastal horizon. The lighting is soft and golden-hour blue, creating a calm and professional atmosphere. The interior features clean lines, white furniture, and expansive whitespace, embodying a digital serenity aesthetic." src="https://lh3.googleusercontent.com/aida/ADBb0ugBfy5Kxykx6VRSG_RKDzIa0SbhBs6z_g98JeSzKd3fP33mDvpQ30oimByftaHHNkJ3__u6lJmHYdiS1ohb18UGD1dEMYC5J-h2c6Gvor4BPXwtnNttjDiOvV7dIOh8-gNlvtOTZhUChXgVQrpWlIGreIvcNDj_U-DTIz54FUEyH4KOWDMO4ZXeh2j6A9ybZMoxgfq9NSRhSt18-OUNqs9El3c7KpBrmx24fXGF7B3BFyQlWBU3h41LBMVQoqW_Itp3N4KD2Ko0JI8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+</div>
+<div class="absolute top-4 left-4 bg-primary text-white text-[10px] uppercase font-extrabold px-3 py-1 rounded-full tracking-widest z-10">Most Popular</div>
+<div class="absolute bottom-6 left-6 right-6 z-10 text-white">
+<h3 class="font-h3 text-h3 mb-2">Job Interview</h3>
+<p class="font-body-md text-body-md opacity-90 text-sm">Simulate high-stakes interviews with adaptive AI personas across multiple industries.</p>
+</div>
+</div>
+<!-- Pitch -->
+<div class="md:col-span-6 lg:col-span-5 flex flex-col gap-6">
+<div class="flex-1 group relative overflow-hidden rounded-3xl bg-white sky-shadow border border-sky-50 transition-all hover:shadow-xl">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A close-up shot of a modern, sleek digital interface showing a presentation slide with clean typography and sky-blue accents. The lighting is professional and bright, emphasizing clarity and intellectual focus. Soft shadows and translucent layers create a sense of depth and modern corporate minimalism." src="https://lh3.googleusercontent.com/aida/ADBb0ugaZoMHBkl4Buq3gA0FTW1E6W5gYjoee_0Pti0QjrD8eZDSfzpHCsFMRTJG_XLYsztuNXdis-tZf813AAIyECJMOwvFyiY5trEo9YxRmdpgI0MVVs5R14osDnVPJ5uuUCIHSjV_e1NVsD67PUVr5P2K025qTNxnTAoQNPHmVCtiAATldBWQzQlJIW-mmuAwKELJyvNleS2PQuAMBLGuarNIAHtW0YKs3NP_1Xn9gzz_ejfeh-GgycsQ9gg5sCjv5L8jh9t2CaxfYcc"/>
+</div>
+<div class="absolute inset-0 bg-sky-600/10 group-hover:bg-sky-600/0 transition-colors"></div>
+<div class="relative z-10 p-6 flex flex-col h-full justify-between">
+<div class="w-10 h-10 rounded-xl bg-white/90 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-background">Pitch</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Master the art of persuasion.</p>
+</div>
+</div>
+</div>
+<!-- Presentation -->
+<div class="flex-1 group relative overflow-hidden rounded-3xl bg-white sky-shadow border border-sky-50 transition-all hover:shadow-xl">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A minimalist lecture hall or auditorium with soft white seating and a large glowing screen in a sky-blue hue. The atmosphere is quiet, serene, and intellectually stimulating. The lighting is high-key and atmospheric, mirroring the expansive nature of a clear beach morning." src="https://lh3.googleusercontent.com/aida/ADBb0ugKIXfztuIBVX9TKNvlUgJpG3gEhyqgGLj6H2yVFST6YMU06vf5rMXDP9SncBLEHGR1QGVRANlGyMoCjmOkHEETfmQSZKj_w2mmSX6UCCHFCGiqk_BSiMorDNaJqu6ovz5EJ8PtKaE36ppH_xBN4aiayzgx8cNDJS4wc-2K57koNPPmrohL6i4uNd5JcL_tBm3uALODoQoSBCjVXUg63zPBL278IXhEeGYmtao0jxbGMhAVJZJUbNSymXHtoEUtAJrFieEbFMKVFtQ"/>
+</div>
+<div class="absolute inset-0 bg-white/40 group-hover:bg-white/20 transition-colors"></div>
+<div class="relative z-10 p-6 flex flex-col h-full justify-between">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="co_present">co_present</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-background">Presentation</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Refine your delivery and tone.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Your Progress & Stats -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 space-y-6">
+<h2 class="font-h2 text-h2">Your Progress</h2>
+<div class="bg-white rounded-3xl p-8 sky-shadow border border-sky-50">
+<div class="flex items-end gap-4 h-48">
+<div class="flex-1 bg-sky-100 rounded-t-xl h-2/3 flex flex-col items-center justify-end pb-4 transition-all hover:bg-sky-200">
+<span class="text-[10px] font-bold text-sky-600 mb-2">Mon</span>
+</div>
+<div class="flex-1 bg-sky-200 rounded-t-xl h-1/2 flex flex-col items-center justify-end pb-4 transition-all hover:bg-sky-300">
+<span class="text-[10px] font-bold text-sky-600 mb-2">Tue</span>
+</div>
+<div class="flex-1 bg-sky-400 rounded-t-xl h-3/4 flex flex-col items-center justify-end pb-4 transition-all hover:bg-sky-500">
+<span class="text-[10px] font-bold text-white mb-2">Wed</span>
+</div>
+<div class="flex-1 bg-sky-300 rounded-t-xl h-3/5 flex flex-col items-center justify-end pb-4 transition-all hover:bg-sky-400">
+<span class="text-[10px] font-bold text-sky-700 mb-2">Thu</span>
+</div>
+<div class="flex-1 bg-sky-600 rounded-t-xl h-[90%] flex flex-col items-center justify-end pb-4 transition-all hover:bg-sky-700">
+<span class="text-[10px] font-bold text-white mb-2">Fri</span>
+</div>
+<div class="flex-1 bg-sky-100 rounded-t-xl h-2/5 flex flex-col items-center justify-end pb-4 transition-all hover:bg-sky-200">
+<span class="text-[10px] font-bold text-sky-600 mb-2">Sat</span>
+</div>
+<div class="flex-1 bg-sky-50 rounded-t-xl h-1/4 flex flex-col items-center justify-end pb-4 transition-all hover:bg-sky-100">
+<span class="text-[10px] font-bold text-sky-400 mb-2">Sun</span>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-sky-50 flex justify-between items-center">
+<div>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Overall Mastery</p>
+<p class="text-2xl font-bold text-primary">84%</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-sky-50 text-sky-600 rounded-full font-label-sm text-[12px]">+12% this week</span>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<h2 class="font-h2 text-h2">Quick Insights</h2>
+<div class="space-y-4">
+<div class="bg-white p-6 rounded-3xl border border-sky-50 sky-shadow flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="timer">timer</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Practice Time</p>
+<p class="font-bold text-body-lg">12.4 Hours</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-3xl border border-sky-50 sky-shadow flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-highest text-primary flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="award">award_star</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Sessions Completed</p>
+<p class="font-bold text-body-lg">28 Sessions</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Expert Tip Card -->
+<section class="bg-primary text-white rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl group-hover:scale-110 transition-transform duration-1000"></div>
+<div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+<div class="space-y-6">
+<div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="psychology">psychology</span>
+            Expert Tip
+          </div>
+<h2 class="font-h1 text-h1 leading-tight">Master the 'STAR' Method</h2>
+<p class="font-body-md text-body-md opacity-90">Structure your interview answers by describing the Situation, Task, Action, and Result. This creates a compelling narrative that highlights your direct impact and problem-solving skills to recruiters.</p>
+<button class="bg-white text-primary px-8 py-3 rounded-full font-label-sm text-label-sm hover:bg-sky-50 transition-colors">Read Full Guide</button>
+</div>
+<div class="hidden md:block">
+<img class="rounded-3xl shadow-2xl transform rotate-3 group-hover:rotate-0 transition-transform duration-500" data-alt="A visually striking 3D conceptual illustration of a golden star floating in a clean, minimalist digital space. The background is a gradient of soft white to deep sky blue. The star is surrounded by soft glowing geometric shapes, symbolizing clarity, focus, and excellence. The lighting is professional and high-key, aligning with a digital serenity aesthetic." src="https://lh3.googleusercontent.com/aida/ADBb0ugNCEkW7KjOpvgSBqbOClusn4isbjxqTQKCIkFxGFIRLVvH6l9P6dH6z5NEA8qIhwGF296MLMb4uK7iFJPmpEAlspMybiNCPoWf23szRlvQLyeDZuV3lz-DiC3WMJUwN-m_lPcxxALIPLDcBe6CkeaZKMtKOqJQIkjDsDOUHf6poRijAu4SeovEDwppZ0pjLrI9B5hbF5UGHL1Y1jIUCMDkP3jnUy3Ym0Opa8MsiafJI7bNsuj8VcbR5sY"/>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Component -->
+<nav class="bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border-t border-sky-50 dark:border-slate-800 shadow-[0_-4px_20px_rgba(135,206,235,0.1)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 rounded-t-3xl">
+<div class="flex flex-col items-center justify-center bg-sky-50 dark:bg-sky-900/40 text-sky-600 dark:text-sky-300 rounded-2xl px-5 py-1.5 transition-transform active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[11px] font-medium font-manrope">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-sky-400 dark:hover:text-sky-200 transition-transform active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="text-[11px] font-medium font-manrope">Upload</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-sky-400 dark:hover:text-sky-200 transition-transform active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-[11px] font-medium font-manrope">Analysis</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-sky-400 dark:hover:text-sky-200 transition-transform active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="text-[11px] font-medium font-manrope">Coach</span>
+</div>
+</nav>
+</body></html>
