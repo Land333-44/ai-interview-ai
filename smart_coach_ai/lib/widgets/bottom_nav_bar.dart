@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../constants/app_colors.dart';
 import '../screens/coach_page.dart';
@@ -63,7 +64,7 @@ class SmartBottomNavBar extends StatelessWidget {
                     2 => ResultsPage.routeName,
                     _ => CoachPage.routeName,
                   };
-                  Navigator.pushReplacementNamed(context, route);
+                  context.go(route);
                 },
                 items: const [
                   BottomNavigationBarItem(

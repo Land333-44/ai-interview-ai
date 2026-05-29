@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:appwrite/appwrite.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
       if (session != null) {
         await AuthService().createProfileForCurrentUser();
         if (!mounted) return;
-        Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+        context.go(DashboardPage.routeName);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -108,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
     if (session != null) {
       await AuthService().createProfileForCurrentUser();
       if (!mounted) return;
-      Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+      context.go(DashboardPage.routeName);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -200,9 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            ForgotPasswordPage.routeName,
+                          context.push(ForgotPasswordPage.routeName,
                           );
                         },
                         child: const Text('Mot de passe oublié ?'),

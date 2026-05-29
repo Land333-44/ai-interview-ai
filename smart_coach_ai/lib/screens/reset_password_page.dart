@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
@@ -16,7 +17,7 @@ import 'login_page.dart';
 /// How the page receives those values:
 ///   • On **Flutter Web**: parsed directly from [Uri.base] (window.location).
 ///   • On **mobile / named route**: pass them as route arguments:
-///       Navigator.pushNamed(context, ResetPasswordPage.routeName,
+///       context.push(ResetPasswordPage.routeName,
 ///         arguments: {'userId': '...', 'secret': '...'});
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({super.key});

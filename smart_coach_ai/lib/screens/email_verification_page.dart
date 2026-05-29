@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter/services.dart';
 
 import '../constants/app_colors.dart';
@@ -150,7 +151,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
           behavior: SnackBarBehavior.floating,
         ),
       );
-      Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+      context.go(DashboardPage.routeName);
     } else {
       setState(() {
         _isLoading = false;
@@ -197,10 +198,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
             behavior: SnackBarBehavior.floating,
           ),
         );
-        Navigator.pushReplacementNamed(
-          context,
-          ResetPasswordPage.routeName,
-          arguments: {
+        context.go(ResetPasswordPage.routeName, extra: {
             'isAuthenticated': true,
             'email': _userEmail,
           },
@@ -216,7 +214,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
             behavior: SnackBarBehavior.floating,
           ),
         );
-        Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+        context.go(DashboardPage.routeName);
       }
     } else {
       setState(() {
@@ -674,7 +672,7 @@ class _VerificationHeader extends StatelessWidget {
           const Spacer(),
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, NotificationsPage.routeName);
+              context.push(NotificationsPage.routeName);
             },
             child: const Icon(
               Icons.notifications_none_rounded,

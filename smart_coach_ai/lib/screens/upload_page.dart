@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 import '../models/analysis_session_args.dart';
 import '../models/session_type.dart';
 import '../services/media_capture_service.dart';
+import '../widgets/bottom_nav_bar.dart';
 import '../widgets/sky_button.dart';
 import '../widgets/sky_card.dart';
 import '../widgets/sky_insight_card.dart';
@@ -21,6 +23,7 @@ class UploadPage extends StatefulWidget {
   static const String routeName = '/upload';
 
   final String? scenarioTitle;
+
   /// 0=audio, 1=text, 2=video, 3=image
   final int initialTab;
 
@@ -102,7 +105,7 @@ class _UploadPageState extends State<UploadPage>
     _pulseController.stop();
     _pulseController.reset();
     final path = await _media.stopRecording();
-    
+
     List<int>? newBytes;
     if (kIsWeb && path != null && path.startsWith('blob:')) {
       newBytes = await _media.getFileBytes(path);
@@ -118,11 +121,7 @@ class _UploadPageState extends State<UploadPage>
   }
 
   void _goToAnalysis(AnalysisSessionArgs args) {
-    Navigator.pushNamed(
-      context,
-      AnalysisPage.routeName,
-      arguments: args,
-    );
+    context.push(AnalysisPage.routeName, extra: args);
   }
 
   void _launchMediaAnalysis({
@@ -137,13 +136,15 @@ class _UploadPageState extends State<UploadPage>
       );
       return;
     }
-    _goToAnalysis(AnalysisSessionArgs(
-      type: type,
-      filePath: path,
-      fileName: name,
-      fileBytes: bytes,
-      scenarioTitle: widget.scenarioTitle,
-    ));
+    _goToAnalysis(
+      AnalysisSessionArgs(
+        type: type,
+        filePath: path,
+        fileName: name,
+        fileBytes: bytes,
+        scenarioTitle: widget.scenarioTitle,
+      ),
+    );
   }
 
   void _showStopDialog() {
@@ -229,16 +230,21 @@ class _UploadPageState extends State<UploadPage>
         ),
         actions: [
           TextButton(
-            onPressed: () =>
-                Navigator.pushReplacementNamed(context, DashboardPage.routeName),
+            onPressed: () => Navigator.pushReplacementNamed(
+              context,
+              DashboardPage.routeName,
+            ),
             child: Text(
               'Annuler',
-              style: AppTextStyles.body
-                  .copyWith(color: AppColors.danger, fontWeight: FontWeight.bold),
+              style: AppTextStyles.body.copyWith(
+                color: AppColors.danger,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
       ),
+      bottomNavigationBar: const SmartBottomNavBar(currentIndex: 1),
       body: Column(
         children: [
           // Tab Selector
@@ -288,13 +294,17 @@ class _UploadPageState extends State<UploadPage>
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.videocam_rounded,
-                          color: Colors.white54, size: 52),
+                      const Icon(
+                        Icons.videocam_rounded,
+                        color: Colors.white54,
+                        size: 52,
+                      ),
                       const SizedBox(height: 12),
                       Text(
                         'Aperçu Caméra',
-                        style: AppTextStyles.body
-                            .copyWith(color: Colors.white54),
+                        style: AppTextStyles.body.copyWith(
+                          color: Colors.white54,
+                        ),
                       ),
                     ],
                   ),
@@ -331,11 +341,11 @@ class _UploadPageState extends State<UploadPage>
             icon: Icons.arrow_forward_rounded,
             onTap: (_videoPath != null || _videoBytes != null)
                 ? () => _launchMediaAnalysis(
-                      type: SessionType.video,
-                      path: _videoPath,
-                      name: _videoName ?? 'video.mp4',
-                      bytes: _videoBytes,
-                    )
+                    type: SessionType.video,
+                    path: _videoPath,
+                    name: _videoName ?? 'video.mp4',
+                    bytes: _videoBytes,
+                  )
                 : null,
             height: 44,
           ),
@@ -379,7 +389,9 @@ class _UploadPageState extends State<UploadPage>
               children: [
                 // Mic circle with pulse animation
                 ScaleTransition(
-                  scale: _isRecording ? _pulseAnim : const AlwaysStoppedAnimation(1.0),
+                  scale: _isRecording
+                      ? _pulseAnim
+                      : const AlwaysStoppedAnimation(1.0),
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -465,11 +477,11 @@ class _UploadPageState extends State<UploadPage>
             icon: Icons.arrow_forward_rounded,
             onTap: (_audioPath != null || _audioBytes != null)
                 ? () => _launchMediaAnalysis(
-                      type: SessionType.audio,
-                      path: _audioPath,
-                      name: _audioName ?? 'audio.m4a',
-                      bytes: _audioBytes,
-                    )
+                    type: SessionType.audio,
+                    path: _audioPath,
+                    name: _audioName ?? 'audio.m4a',
+                    bytes: _audioBytes,
+                  )
                 : null,
             height: 44,
           ),
@@ -519,8 +531,11 @@ class _UploadPageState extends State<UploadPage>
                 color: AppColors.danger,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.stop_rounded,
-                  color: Colors.white, size: 28),
+              child: const Icon(
+                Icons.stop_rounded,
+                color: Colors.white,
+                size: 28,
+              ),
             ),
           ),
         ],
@@ -550,8 +565,11 @@ class _UploadPageState extends State<UploadPage>
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.image_rounded,
-                            color: AppColors.skyDark, size: 48),
+                        const Icon(
+                          Icons.image_rounded,
+                          color: AppColors.skyDark,
+                          size: 48,
+                        ),
                         const SizedBox(height: 8),
                         Text(
                           _imageName ?? 'Aucune photo sélectionnée',
@@ -609,11 +627,11 @@ class _UploadPageState extends State<UploadPage>
             icon: Icons.arrow_forward_rounded,
             onTap: (_imagePath != null || _imageBytes != null)
                 ? () => _launchMediaAnalysis(
-                      type: SessionType.image,
-                      path: _imagePath,
-                      name: _imageName ?? 'image.jpg',
-                      bytes: _imageBytes,
-                    )
+                    type: SessionType.image,
+                    path: _imagePath,
+                    name: _imageName ?? 'image.jpg',
+                    bytes: _imageBytes,
+                  )
                 : null,
           ),
           const SizedBox(height: 20),
@@ -639,18 +657,17 @@ class _UploadPageState extends State<UploadPage>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'COLLER OU TAPER VOTRE TEXTE',
-                  style: AppTextStyles.label,
-                ),
+                Text('COLLER OU TAPER VOTRE TEXTE', style: AppTextStyles.label),
                 const SizedBox(height: 12),
                 TextField(
                   controller: _textController,
                   maxLines: 10,
                   maxLength: 5000,
                   onChanged: (v) => setState(() => _textContent = v),
-                  style: AppTextStyles.body
-                      .copyWith(fontSize: 13, color: AppColors.text),
+                  style: AppTextStyles.body.copyWith(
+                    fontSize: 13,
+                    color: AppColors.text,
+                  ),
                   decoration: InputDecoration(
                     hintText:
                         'Tapez votre discours, réponse d\'entretien, ou collez un texte...',
@@ -661,8 +678,10 @@ class _UploadPageState extends State<UploadPage>
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          const BorderSide(color: AppColors.skyDark, width: 1.5),
+                      borderSide: const BorderSide(
+                        color: AppColors.skyDark,
+                        width: 1.5,
+                      ),
                     ),
                     contentPadding: const EdgeInsets.all(14),
                   ),
@@ -703,13 +722,18 @@ class _UploadPageState extends State<UploadPage>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.upload_file_rounded,
-                      color: AppColors.skyDark, size: 20),
+                  const Icon(
+                    Icons.upload_file_rounded,
+                    color: AppColors.skyDark,
+                    size: 20,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'Parcourir les documents (.txt)',
-                    style: AppTextStyles.button
-                        .copyWith(color: AppColors.skyDark, fontSize: 13),
+                    style: AppTextStyles.button.copyWith(
+                      color: AppColors.skyDark,
+                      fontSize: 13,
+                    ),
                   ),
                 ],
               ),
@@ -728,11 +752,13 @@ class _UploadPageState extends State<UploadPage>
             icon: Icons.arrow_forward_rounded,
             onTap: _textContent.trim().isEmpty
                 ? null
-                : () => _goToAnalysis(AnalysisSessionArgs(
+                : () => _goToAnalysis(
+                    AnalysisSessionArgs(
                       type: SessionType.text,
                       text: _textContent.trim(),
                       scenarioTitle: widget.scenarioTitle,
-                    )),
+                    ),
+                  ),
           ),
         ],
       ),

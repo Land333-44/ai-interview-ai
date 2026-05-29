@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 import '../services/api_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
+import '../widgets/bottom_nav_bar.dart';
 import 'notifications_page.dart';
 import 'upload_page.dart';
 
@@ -75,7 +77,9 @@ class _ChatPageState extends State<ChatPage> {
     if (_messages.isEmpty) {
       String greeting;
       if (_sessionContext != null && _sessionContext!.isNotEmpty) {
-        final scoreStr = _sessionScore != null ? ' (score : $_sessionScore/100)' : '';
+        final scoreStr = _sessionScore != null
+            ? ' (score : $_sessionScore/100)'
+            : '';
         greeting =
             'Salam ! Je suis Smart Coach AI. J\'ai analysé votre derni\u00e8re session$scoreStr.\n\n'
             '"${_sessionContext!}"\n\n'
@@ -91,7 +95,7 @@ class _ChatPageState extends State<ChatPage> {
             'sender': 'ai',
             'message_text': greeting,
             'created_at': DateTime.now().toIso8601String(),
-          }
+          },
         ];
         _loading = false;
       });
@@ -109,10 +113,12 @@ class _ChatPageState extends State<ChatPage> {
   List<Map<String, String>> _buildHistory() {
     final list = _messages
         .where((m) => _messageText(m).isNotEmpty)
-        .map((m) => {
-              'role': m['sender'] == 'ai' ? 'assistant' : 'user',
-              'content': _messageText(m),
-            })
+        .map(
+          (m) => {
+            'role': m['sender'] == 'ai' ? 'assistant' : 'user',
+            'content': _messageText(m),
+          },
+        )
         .toList();
     if (list.length <= 8) return list;
     return list.sublist(list.length - 8);
@@ -151,7 +157,10 @@ class _ChatPageState extends State<ChatPage> {
         aiReply.contains('GROQ')) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(aiReply), duration: const Duration(seconds: 5)),
+          SnackBar(
+            content: Text(aiReply),
+            duration: const Duration(seconds: 5),
+          ),
         );
       }
     }
@@ -177,11 +186,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void _openUploadTab(int tabIndex) {
-    Navigator.pushNamed(
-      context,
-      UploadPage.routeName,
-      arguments: tabIndex,
-    );
+    context.push(UploadPage.routeName, extra: tabIndex);
   }
 
   void _scrollToBottom() {
@@ -218,8 +223,9 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
+      bottomNavigationBar: const SmartBottomNavBar(currentIndex: 3),
       appBar: AppBar(
-        backgroundColor: AppColors.surface,
+        backgroundColor: AppColors.background,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: AppColors.navIcon),
@@ -243,8 +249,10 @@ class _ChatPageState extends State<ChatPage> {
               children: [
                 Text(
                   'Coach IA',
-                  style: AppTextStyles.title2
-                      .copyWith(fontSize: 14, color: AppColors.text),
+                  style: AppTextStyles.title2.copyWith(
+                    fontSize: 14,
+                    color: AppColors.text,
+                  ),
                 ),
                 Row(
                   children: [
@@ -273,10 +281,12 @@ class _ChatPageState extends State<ChatPage> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_none_rounded,
-                color: AppColors.navIcon),
+            icon: const Icon(
+              Icons.notifications_none_rounded,
+              color: AppColors.navIcon,
+            ),
             onPressed: () =>
-                Navigator.pushNamed(context, NotificationsPage.routeName),
+                context.push(NotificationsPage.routeName),
           ),
         ],
       ),
@@ -288,7 +298,10 @@ class _ChatPageState extends State<ChatPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.primaryLight,
                     borderRadius: BorderRadius.circular(10),
@@ -296,8 +309,11 @@ class _ChatPageState extends State<ChatPage> {
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.bar_chart_rounded,
-                          size: 14, color: AppColors.skyDark),
+                      const Icon(
+                        Icons.bar_chart_rounded,
+                        size: 14,
+                        color: AppColors.skyDark,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -314,49 +330,54 @@ class _ChatPageState extends State<ChatPage> {
               ),
             Expanded(
               child: _loading
-                ? const Center(
-                    child: CircularProgressIndicator(color: AppColors.primary))
-                : ListView.builder(
-                    controller: _scrollController,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 16),
-                    itemCount: _messages.length,
-                    itemBuilder: (context, i) {
-                      final msg = _messages[i];
-                      final isAi = msg['sender'] == 'ai';
-                      final time = _formatTime(_messageTime(msg));
-                      if (isAi) {
-                        return _CoachMessage(
-                          text: _messageText(msg),
-                          time: time,
-                        );
-                      } else {
-                        return _UserMessage(
-                          text: _messageText(msg),
-                          time: time,
-                        );
-                      }
-                    },
-                  ),
-          ),
-          if (_sending)
-            const Padding(
-              padding: EdgeInsets.only(left: 20, bottom: 8),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: _TypingIndicator(),
-              ),
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                      ),
+                    )
+                  : ListView.builder(
+                      controller: _scrollController,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 16,
+                      ),
+                      itemCount: _messages.length,
+                      itemBuilder: (context, i) {
+                        final msg = _messages[i];
+                        final isAi = msg['sender'] == 'ai';
+                        final time = _formatTime(_messageTime(msg));
+                        if (isAi) {
+                          return _CoachMessage(
+                            text: _messageText(msg),
+                            time: time,
+                          );
+                        } else {
+                          return _UserMessage(
+                            text: _messageText(msg),
+                            time: time,
+                          );
+                        }
+                      },
+                    ),
             ),
-          _MessageInput(
-            controller: _controller,
-            onSend: _sendMessage,
-            sending: _sending,
-          ),
-        ],
+            if (_sending)
+              const Padding(
+                padding: EdgeInsets.only(left: 20, bottom: 8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: _TypingIndicator(),
+                ),
+              ),
+            _MessageInput(
+              controller: _controller,
+              onSend: _sendMessage,
+              sending: _sending,
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _buildQuickChips() {
     return Padding(
@@ -456,8 +477,11 @@ class _CoachMessage extends StatelessWidget {
               border: Border.all(color: AppColors.outline),
             ),
             alignment: Alignment.center,
-            child: const Icon(Icons.psychology_rounded,
-                color: AppColors.skyDark, size: 16),
+            child: const Icon(
+              Icons.psychology_rounded,
+              color: AppColors.skyDark,
+              size: 16,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -465,8 +489,10 @@ class _CoachMessage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.primaryLight,
                     borderRadius: const BorderRadius.only(
@@ -523,8 +549,10 @@ class _UserMessage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                   decoration: const BoxDecoration(
                     color: AppColors.primary,
                     borderRadius: BorderRadius.only(
@@ -600,8 +628,11 @@ class _TypingIndicatorState extends State<_TypingIndicator>
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.psychology_rounded,
-              color: AppColors.skyDark, size: 14),
+          const Icon(
+            Icons.psychology_rounded,
+            color: AppColors.skyDark,
+            size: 14,
+          ),
           const SizedBox(width: 8),
           FadeTransition(
             opacity: _anim,

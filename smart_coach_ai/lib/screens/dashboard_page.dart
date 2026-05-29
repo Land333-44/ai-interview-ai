@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 import '../models/dashboard_stats.dart';
 import '../services/auth_service.dart';
 import '../services/dashboard_service.dart';
+import '../widgets/bottom_nav_bar.dart';
 import '../widgets/sky_button.dart';
 import '../widgets/sky_card.dart';
 import '../widgets/sky_insight_card.dart';
 import 'upload_page.dart';
 import 'chat_page.dart';
+import 'history_page.dart';
 import 'notifications_page.dart';
+import 'profile_page.dart';
+import 'settings_page.dart';
 import 'login_page.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -28,7 +33,6 @@ class _DashboardPageState extends State<DashboardPage>
   String _userName = 'Coach';
   DashboardStats _stats = DashboardStats.empty;
   bool _loading = true;
-  int _currentNavIndex = 0;
 
   late AnimationController _fabController;
   late Animation<double> _fabPulse;
@@ -36,8 +40,6 @@ class _DashboardPageState extends State<DashboardPage>
   // Staggered animation controllers for cards
   late List<AnimationController> _cardControllers;
   late List<Animation<double>> _cardAnimations;
-
-
 
   @override
   void initState() {
@@ -49,13 +51,14 @@ class _DashboardPageState extends State<DashboardPage>
       vsync: this,
       duration: const Duration(milliseconds: 1200),
     )..repeat(reverse: true);
-    _fabPulse = Tween<double>(begin: 1.0, end: 1.1).animate(
-      CurvedAnimation(parent: _fabController, curve: Curves.easeInOut),
-    );
+    _fabPulse = Tween<double>(
+      begin: 1.0,
+      end: 1.1,
+    ).animate(CurvedAnimation(parent: _fabController, curve: Curves.easeInOut));
 
     // Staggered card animations
     _cardControllers = List.generate(
-      6,
+      7,
       (i) => AnimationController(
         vsync: this,
         duration: const Duration(milliseconds: 500),
@@ -92,8 +95,9 @@ class _DashboardPageState extends State<DashboardPage>
       if (!mounted) return;
       setState(() {
         if (user != null) {
-          _userName =
-              user.name.isNotEmpty ? user.name.split(' ').first : 'Coach';
+          _userName = user.name.isNotEmpty
+              ? user.name.split(' ').first
+              : 'Coach';
         }
         _stats = stats;
         _loading = false;
@@ -107,7 +111,10 @@ class _DashboardPageState extends State<DashboardPage>
     await _auth.logout();
     if (mounted) {
       Navigator.pushNamedAndRemoveUntil(
-          context, LoginPage.routeName, (r) => false);
+        context,
+        LoginPage.routeName,
+        (r) => false,
+      );
     }
   }
 
@@ -137,16 +144,24 @@ class _DashboardPageState extends State<DashboardPage>
       floatingActionButton: ScaleTransition(
         scale: _fabPulse,
         child: FloatingActionButton.extended(
-          onPressed: () => Navigator.pushNamed(context, UploadPage.routeName),
+          onPressed: () => context.push(UploadPage.routeName),
           backgroundColor: AppColors.primary,
-          icon: const Icon(Icons.add_circle_outline_rounded, color: Colors.white),
-          label: Text('+ Nouvelle Session',
-              style: AppTextStyles.button.copyWith(fontSize: 12)),
+          icon: const Icon(
+            Icons.add_circle_outline_rounded,
+            color: Colors.white,
+          ),
+          label: Text(
+            '+ Nouvelle Session',
+            style: AppTextStyles.button.copyWith(fontSize: 12),
+          ),
         ),
       ),
+      bottomNavigationBar: const SmartBottomNavBar(currentIndex: 0),
       body: SafeArea(
         child: _loading
-            ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
+            ? const Center(
+                child: CircularProgressIndicator(color: AppColors.primary),
+              )
             : RefreshIndicator(
                 color: AppColors.primary,
                 onRefresh: _loadDashboard,
@@ -167,8 +182,10 @@ class _DashboardPageState extends State<DashboardPage>
                               shape: BoxShape.circle,
                             ),
                             alignment: Alignment.center,
-                            child: const Text('🎙️',
-                                style: TextStyle(fontSize: 18)),
+                            child: const Text(
+                              '🎙️',
+                              style: TextStyle(fontSize: 18),
+                            ),
                           ),
                           const SizedBox(width: 10),
                           Text(
@@ -184,10 +201,12 @@ class _DashboardPageState extends State<DashboardPage>
                         Stack(
                           children: [
                             IconButton(
-                              icon: const Icon(Icons.notifications_none_rounded,
-                                  color: AppColors.navIcon),
-                              onPressed: () => Navigator.pushNamed(
-                                  context, NotificationsPage.routeName),
+                              icon: const Icon(
+                                Icons.notifications_none_rounded,
+                                color: AppColors.navIcon,
+                              ),
+                              onPressed: () => context.push(NotificationsPage.routeName,
+                              ),
                             ),
                             if (_stats.unreadNotifications > 0)
                               Positioned(
@@ -205,16 +224,18 @@ class _DashboardPageState extends State<DashboardPage>
                           ],
                         ),
                         IconButton(
-                          icon: const Icon(Icons.logout_rounded,
-                              color: AppColors.navIcon, size: 20),
+                          icon: const Icon(
+                            Icons.logout_rounded,
+                            color: AppColors.navIcon,
+                            size: 20,
+                          ),
                           onPressed: _logout,
                         ),
                       ],
                     ),
 
                     SliverPadding(
-                      padding:
-                          const EdgeInsets.fromLTRB(20, 8, 20, 100),
+                      padding: const EdgeInsets.fromLTRB(20, 8, 20, 100),
                       sliver: SliverList(
                         delegate: SliverChildListDelegate([
                           // --- Greeting ---
@@ -307,27 +328,44 @@ class _DashboardPageState extends State<DashboardPage>
                                   )
                                 : ListView.separated(
                                     shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     itemCount: _stats.recentSessions.length,
-                                    separatorBuilder: (_, index) => const SizedBox(height: 12),
+                                    separatorBuilder: (_, index) =>
+                                        const SizedBox(height: 12),
                                     itemBuilder: (context, i) {
                                       final s = _stats.recentSessions[i];
-                                      final title = s['title']?.toString() ?? 'Session';
-                                      final type = s['analysisType']?.toString() ?? 'text';
-                                      final dateStr = s['runDate']?.toString() ?? s['\$createdAt']?.toString() ?? '';
+                                      final title =
+                                          s['title']?.toString() ?? 'Session';
+                                      final type =
+                                          s['analysisType']?.toString() ??
+                                          'text';
+                                      final dateStr =
+                                          s['runDate']?.toString() ??
+                                          s['\$createdAt']?.toString() ??
+                                          '';
                                       String formattedDate = '';
                                       try {
-                                        final dt = DateTime.parse(dateStr).toLocal();
-                                        formattedDate = '${dt.day}/${dt.month}/${dt.year}';
+                                        final dt = DateTime.parse(
+                                          dateStr,
+                                        ).toLocal();
+                                        formattedDate =
+                                            '${dt.day}/${dt.month}/${dt.year}';
                                       } catch (_) {}
 
                                       final rawScore = s['score'] ?? 0;
-                                      final score = rawScore is num ? rawScore.round() : int.tryParse(rawScore.toString()) ?? 0;
+                                      final score = rawScore is num
+                                          ? rawScore.round()
+                                          : int.tryParse(rawScore.toString()) ??
+                                                0;
 
                                       IconData icon = Icons.description_rounded;
-                                      if (type.toLowerCase() == 'audio') icon = Icons.mic_rounded;
-                                      if (type.toLowerCase() == 'video') icon = Icons.videocam_rounded;
-                                      if (type.toLowerCase() == 'image') icon = Icons.image_rounded;
+                                      if (type.toLowerCase() == 'audio')
+                                        icon = Icons.mic_rounded;
+                                      if (type.toLowerCase() == 'video')
+                                        icon = Icons.videocam_rounded;
+                                      if (type.toLowerCase() == 'image')
+                                        icon = Icons.image_rounded;
 
                                       return GestureDetector(
                                         onTap: () {
@@ -339,36 +377,68 @@ class _DashboardPageState extends State<DashboardPage>
                                           child: Row(
                                             children: [
                                               Container(
-                                                padding: const EdgeInsets.all(10),
+                                                padding: const EdgeInsets.all(
+                                                  10,
+                                                ),
                                                 decoration: BoxDecoration(
                                                   color: AppColors.primaryLight,
-                                                  borderRadius: BorderRadius.circular(12),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
                                                 ),
-                                                child: Icon(icon, color: AppColors.skyDark, size: 20),
+                                                child: Icon(
+                                                  icon,
+                                                  color: AppColors.skyDark,
+                                                  size: 20,
+                                                ),
                                               ),
                                               const SizedBox(width: 14),
                                               Expanded(
                                                 child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(title, style: AppTextStyles.title2.copyWith(fontSize: 14)),
+                                                    Text(
+                                                      title,
+                                                      style: AppTextStyles
+                                                          .title2
+                                                          .copyWith(
+                                                            fontSize: 14,
+                                                          ),
+                                                    ),
                                                     const SizedBox(height: 4),
-                                                    Text(formattedDate, style: AppTextStyles.caption),
+                                                    Text(
+                                                      formattedDate,
+                                                      style:
+                                                          AppTextStyles.caption,
+                                                    ),
                                                   ],
                                                 ),
                                               ),
                                               Container(
-                                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 12,
+                                                      vertical: 6,
+                                                    ),
                                                 decoration: BoxDecoration(
-                                                  color: score >= 80 ? AppColors.success.withValues(alpha: 0.15) : AppColors.outline,
-                                                  borderRadius: BorderRadius.circular(20),
+                                                  color: score >= 80
+                                                      ? AppColors.success
+                                                            .withValues(
+                                                              alpha: 0.15,
+                                                            )
+                                                      : AppColors.outline,
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
                                                 ),
                                                 child: Text(
                                                   '$score',
-                                                  style: AppTextStyles.title2.copyWith(
-                                                    fontSize: 14,
-                                                    color: score >= 80 ? AppColors.success : AppColors.text,
-                                                  ),
+                                                  style: AppTextStyles.title2
+                                                      .copyWith(
+                                                        fontSize: 14,
+                                                        color: score >= 80
+                                                            ? AppColors.success
+                                                            : AppColors.text,
+                                                      ),
                                                 ),
                                               ),
                                             ],
@@ -398,16 +468,21 @@ class _DashboardPageState extends State<DashboardPage>
                                       const Spacer(),
                                       Container(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 4),
+                                          horizontal: 10,
+                                          vertical: 4,
+                                        ),
                                         decoration: BoxDecoration(
                                           color: AppColors.primaryLight,
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius: BorderRadius.circular(
+                                            20,
+                                          ),
                                         ),
                                         child: Text(
                                           'Récent',
                                           style: AppTextStyles.caption.copyWith(
-                                              color: AppColors.skyDark,
-                                              fontWeight: FontWeight.bold),
+                                            color: AppColors.skyDark,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -422,15 +497,20 @@ class _DashboardPageState extends State<DashboardPage>
                                           alignment: Alignment.center,
                                           children: [
                                             CircularProgressIndicator(
-                                              value: (_stats.lastSessionScore ?? 0) / 100,
+                                              value:
+                                                  (_stats.lastSessionScore ??
+                                                      0) /
+                                                  100,
                                               strokeWidth: 8,
-                                              backgroundColor: AppColors.outline,
+                                              backgroundColor:
+                                                  AppColors.outline,
                                               color: AppColors.primary,
                                               strokeCap: StrokeCap.round,
                                             ),
                                             Text(
                                               '${_stats.lastSessionScore ?? 0}',
-                                              style: AppTextStyles.screenTitle.copyWith(fontSize: 22),
+                                              style: AppTextStyles.screenTitle
+                                                  .copyWith(fontSize: 22),
                                             ),
                                           ],
                                         ),
@@ -441,7 +521,9 @@ class _DashboardPageState extends State<DashboardPage>
                                           _stats.lastSessionScore != null
                                               ? 'Voici le score global calculé lors de votre dernière session d\'entraînement.'
                                               : 'Aucune session enregistrée. Lancez une nouvelle session pour obtenir votre score.',
-                                          style: AppTextStyles.body.copyWith(fontSize: 13),
+                                          style: AppTextStyles.body.copyWith(
+                                            fontSize: 13,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -461,46 +543,96 @@ class _DashboardPageState extends State<DashboardPage>
                                   child: SkyButton(
                                     label: 'Chat Coach',
                                     icon: Icons.chat_rounded,
-                                    onTap: () => Navigator.pushNamed(
-                                        context, ChatPage.routeName),
+                                    onTap: () => context.push(ChatPage.routeName,
+                                    ),
                                     height: 44,
                                   ),
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: GestureDetector(
-                                    onTap: () => Navigator.pushNamed(
-                                        context, UploadPage.routeName),
+                                    onTap: () => context.push(UploadPage.routeName,
+                                    ),
                                     child: Container(
                                       height: 44,
                                       decoration: BoxDecoration(
                                         color: AppColors.surface,
                                         borderRadius: BorderRadius.circular(12),
                                         border: Border.all(
-                                            color: AppColors.primary,
-                                            width: 1.5),
+                                          color: AppColors.primary,
+                                          width: 1.5,
+                                        ),
                                       ),
                                       child: Center(
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             const Icon(
-                                                Icons.upload_file_rounded,
-                                                color: AppColors.skyDark,
-                                                size: 18),
+                                              Icons.upload_file_rounded,
+                                              color: AppColors.skyDark,
+                                              size: 18,
+                                            ),
                                             const SizedBox(width: 6),
                                             Text(
                                               'Télécharger',
                                               style: AppTextStyles.button
                                                   .copyWith(
-                                                      color: AppColors.skyDark,
-                                                      fontSize: 12),
+                                                    color: AppColors.skyDark,
+                                                    fontSize: 12,
+                                                  ),
                                             ),
                                           ],
                                         ),
                                       ),
                                     ),
                                   ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+
+                          _buildFadeSlide(
+                            6,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Navigation rapide',
+                                  style: AppTextStyles.title.copyWith(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                const SizedBox(height: 14),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: _QuickActionCard(
+                                        icon: Icons.person_outline_rounded,
+                                        label: 'Profil',
+                                        onTap: () => context.push(ProfilePage.routeName,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: _QuickActionCard(
+                                        icon: Icons.history_rounded,
+                                        label: 'Historique',
+                                        onTap: () => context.push(HistoryPage.routeName,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: _QuickActionCard(
+                                        icon: Icons.settings_rounded,
+                                        label: 'Paramètres',
+                                        onTap: () => context.push(SettingsPage.routeName,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -523,78 +655,45 @@ class _DashboardPageState extends State<DashboardPage>
                 ),
               ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
     );
   }
+}
 
-  Widget _buildBottomNav() {
-    final items = [
-      {'icon': Icons.home_rounded, 'label': 'Accueil'},
-      {'icon': Icons.history_rounded, 'label': 'Session'},
-      {'icon': Icons.chat_rounded, 'label': 'Coach'},
-      {'icon': Icons.person_rounded, 'label': 'Progrès'},
-    ];
+class _QuickActionCard extends StatelessWidget {
+  const _QuickActionCard({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
 
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border(
-          top: BorderSide(color: AppColors.outline, width: 1),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 20,
-            offset: const Offset(0, -4),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(items.length, (i) {
-              final isSelected = _currentNavIndex == i;
-              return GestureDetector(
-                onTap: () {
-                  setState(() => _currentNavIndex = i);
-                  if (i == 2) Navigator.pushNamed(context, ChatPage.routeName);
-                },
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? AppColors.primaryLight
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        items[i]['icon'] as IconData,
-                        color:
-                            isSelected ? AppColors.skyDark : AppColors.navIcon,
-                        size: 22,
-                      ),
-                      if (isSelected) ...[
-                        const SizedBox(width: 6),
-                        Text(
-                          items[i]['label'] as String,
-                          style: AppTextStyles.title2.copyWith(
-                            fontSize: 12,
-                            color: AppColors.skyDark,
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-              );
-            }),
-          ),
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: SkyCard(
+        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
+        child: Column(
+          children: [
+            Container(
+              height: 44,
+              width: 44,
+              decoration: BoxDecoration(
+                color: AppColors.primaryLight,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Icon(icon, color: AppColors.skyDark, size: 24),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              label,
+              style: AppTextStyles.body.copyWith(color: AppColors.text),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ),
     );
@@ -636,10 +735,7 @@ class _StatChip extends StatelessWidget {
                 color: AppColors.text,
               ),
             ),
-            Text(
-              subtitle,
-              style: AppTextStyles.caption,
-            ),
+            Text(subtitle, style: AppTextStyles.caption),
           ],
         ),
       ),

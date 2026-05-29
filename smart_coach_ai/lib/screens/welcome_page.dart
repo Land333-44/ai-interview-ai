@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 import '../widgets/sky_button.dart';
@@ -55,7 +56,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 padding: const EdgeInsets.all(16.0),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, LoginPage.routeName);
+                    context.go(LoginPage.routeName);
                   },
                   child: Text(
                     'Passer',
@@ -186,8 +187,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           : 'Suivant',
                       onTap: () {
                         if (_currentPage == _onboardingData.length - 1) {
-                          Navigator.pushReplacementNamed(
-                              context, SignupPage.routeName);
+                          context.go(SignupPage.routeName);
                         } else {
                           _pageController.nextPage(
                             duration: const Duration(milliseconds: 300),

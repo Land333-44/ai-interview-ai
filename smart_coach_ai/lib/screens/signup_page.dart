@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 import '../services/auth_service.dart';
@@ -63,10 +64,7 @@ class _SignupPageState extends State<SignupPage> {
     if (user != null) {
       final otpUserId = await AuthService().sendEmailOtp(email);
       if (!mounted) return;
-      Navigator.pushReplacementNamed(
-        context,
-        EmailVerificationPage.routeName,
-        arguments: {
+      context.go(EmailVerificationPage.routeName, extra: {
           'email': email,
           'userId': otpUserId ?? user.$id,
         },
@@ -85,7 +83,7 @@ class _SignupPageState extends State<SignupPage> {
     if (!mounted) return;
     setState(() => _isLoading = false);
     if (session != null) {
-      Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+      context.go(DashboardPage.routeName);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('La connexion Google a échoué. Veuillez réessayer.')),
@@ -100,7 +98,7 @@ class _SignupPageState extends State<SignupPage> {
     if (!mounted) return;
     setState(() => _isLoading = false);
     if (session != null) {
-      Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+      context.go(DashboardPage.routeName);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('La connexion Apple a échoué. Veuillez réessayer.')),
@@ -351,7 +349,7 @@ class _SignupPageState extends State<SignupPage> {
               const SizedBox(height: 28),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, LoginPage.routeName);
+                  context.go(LoginPage.routeName);
                 },
                 child: Text.rich(
                   TextSpan(

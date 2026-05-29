@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
@@ -108,10 +109,7 @@ class _AnalysisPageState extends State<AnalysisPage>
     await Future.delayed(const Duration(milliseconds: 500));
 
     if (!mounted) return;
-    Navigator.pushReplacementNamed(
-      context,
-      ResultsPage.routeName,
-      arguments: result,
+    context.go(ResultsPage.routeName, extra: result,
     );
   }
 

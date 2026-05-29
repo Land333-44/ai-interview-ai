@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 import '../models/analysis_result.dart';
+import '../widgets/bottom_nav_bar.dart';
 import '../widgets/emotion_bar.dart';
 import '../widgets/sky_button.dart';
 import '../widgets/sky_card.dart';
@@ -85,14 +87,15 @@ class _ResultsPageState extends State<ResultsPage>
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: AppColors.navIcon),
-          onPressed: () => Navigator.pushReplacementNamed(
-              context, DashboardPage.routeName),
+          onPressed: () =>
+              context.go(DashboardPage.routeName),
         ),
         title: Text(
           'Résultats de l\'Analyse',
           style: AppTextStyles.title.copyWith(fontSize: 16),
         ),
       ),
+      bottomNavigationBar: const SmartBottomNavBar(currentIndex: 2),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
@@ -107,7 +110,9 @@ class _ResultsPageState extends State<ResultsPage>
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.success.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(20),
@@ -115,8 +120,11 @@ class _ResultsPageState extends State<ResultsPage>
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.check_circle_rounded,
-                              color: AppColors.success, size: 14),
+                          const Icon(
+                            Icons.check_circle_rounded,
+                            color: AppColors.success,
+                            size: 14,
+                          ),
                           const SizedBox(width: 6),
                           Text(
                             'Analyse Terminée',
@@ -195,17 +203,19 @@ class _ResultsPageState extends State<ResultsPage>
                               score >= 80
                                   ? 'Niveau Élite 🏆'
                                   : score >= 60
-                                      ? 'Bon Niveau 👍'
-                                      : 'En Progression 📈',
-                              style: AppTextStyles.title2.copyWith(fontSize: 14),
+                                  ? 'Bon Niveau 👍'
+                                  : 'En Progression 📈',
+                              style: AppTextStyles.title2.copyWith(
+                                fontSize: 14,
+                              ),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               score >= 80
                                   ? 'Excellente prestation ! Vous êtes dans le top des orateurs.'
                                   : score >= 60
-                                      ? 'Bonne performance avec des axes d\'amélioration identifiés.'
-                                      : 'Continuez à pratiquer pour progresser rapidement.',
+                                  ? 'Bonne performance avec des axes d\'amélioration identifiés.'
+                                  : 'Continuez à pratiquer pour progresser rapidement.',
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.textSoft,
                                 fontSize: 11,
@@ -319,7 +329,9 @@ class _ResultsPageState extends State<ResultsPage>
                         iconColor: AppColors.success,
                         title: '✅ Points Forts',
                         items: _extractList(data.feedback, 'strengths'),
-                        emptyText: data.summary.isNotEmpty ? data.summary : 'Bonne communication générale.',
+                        emptyText: data.summary.isNotEmpty
+                            ? data.summary
+                            : 'Bonne communication générale.',
                         isStrength: true,
                       ),
                       const SizedBox(height: 16),
@@ -359,10 +371,7 @@ class _ResultsPageState extends State<ResultsPage>
                       label: '💬 Discuter avec le Coach',
                       icon: Icons.chat_rounded,
                       onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          ChatPage.routeName,
-                          arguments: {
+                        context.push(ChatPage.routeName, extra: {
                             'context': data.insightText,
                             'score': data.score,
                             'emotions': data.emotions,
@@ -373,7 +382,9 @@ class _ResultsPageState extends State<ResultsPage>
                     const SizedBox(height: 12),
                     GestureDetector(
                       onTap: () => Navigator.pushReplacementNamed(
-                          context, DashboardPage.routeName),
+                        context,
+                        DashboardPage.routeName,
+                      ),
                       child: Container(
                         height: 48,
                         decoration: BoxDecoration(
@@ -428,8 +439,8 @@ class _ResultsPageState extends State<ResultsPage>
     final Color bgColor = isStrength == true
         ? AppColors.success.withValues(alpha: 0.08)
         : isStrength == false
-            ? AppColors.danger.withValues(alpha: 0.08)
-            : const Color(0xFFF59E0B).withValues(alpha: 0.08);
+        ? AppColors.danger.withValues(alpha: 0.08)
+        : const Color(0xFFF59E0B).withValues(alpha: 0.08);
 
     final displayItems = items.isNotEmpty ? items : [emptyText];
 
@@ -462,9 +473,13 @@ class _ResultsPageState extends State<ResultsPage>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('• ',
-                      style: AppTextStyles.body
-                          .copyWith(fontSize: 13, color: iconColor)),
+                  Text(
+                    '• ',
+                    style: AppTextStyles.body.copyWith(
+                      fontSize: 13,
+                      color: iconColor,
+                    ),
+                  ),
                   Expanded(
                     child: Text(
                       item,

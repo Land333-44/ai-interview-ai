@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
@@ -80,9 +81,7 @@ class SmartTopBar extends StatelessWidget {
               onTap: onTrailingTap ??
                   (trailingIcon == Icons.notifications_none_rounded
                       ? () {
-                          Navigator.pushNamed(
-                            context,
-                            NotificationsPage.routeName,
+                          context.push(NotificationsPage.routeName,
                           );
                         }
                       : null),

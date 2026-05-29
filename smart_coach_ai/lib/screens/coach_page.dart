@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
+import '../widgets/bottom_nav_bar.dart';
 import '../widgets/sky_button.dart';
 import '../widgets/sky_card.dart';
 import 'chat_page.dart';
@@ -93,14 +95,15 @@ class _CoachPageState extends State<CoachPage> with TickerProviderStateMixin {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: AppColors.navIcon),
-          onPressed: () => Navigator.pushReplacementNamed(
-              context, DashboardPage.routeName),
+          onPressed: () =>
+              context.go(DashboardPage.routeName),
         ),
         title: Text(
           'Conseils du Coach IA',
           style: AppTextStyles.title.copyWith(fontSize: 16),
         ),
       ),
+      bottomNavigationBar: const SmartBottomNavBar(currentIndex: 3),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
@@ -228,8 +231,9 @@ class _CoachPageState extends State<CoachPage> with TickerProviderStateMixin {
                                   children: [
                                     Text(
                                       item['title'] as String,
-                                      style: AppTextStyles.title2
-                                          .copyWith(fontSize: 13),
+                                      style: AppTextStyles.title2.copyWith(
+                                        fontSize: 13,
+                                      ),
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
@@ -265,7 +269,7 @@ class _CoachPageState extends State<CoachPage> with TickerProviderStateMixin {
                   label: 'Discuter avec le Coach IA',
                   icon: Icons.chat_bubble_outline_rounded,
                   onTap: () {
-                    Navigator.pushNamed(context, ChatPage.routeName);
+                    context.push(ChatPage.routeName);
                   },
                 ),
               ),

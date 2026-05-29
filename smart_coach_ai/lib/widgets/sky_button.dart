@@ -10,6 +10,7 @@ class SkyButton extends StatefulWidget {
     this.icon,
     this.height = 48,
     this.isLoading = false,
+    this.secondary = false,
   });
 
   final String label;
@@ -17,6 +18,7 @@ class SkyButton extends StatefulWidget {
   final IconData? icon;
   final double height;
   final bool isLoading;
+  final bool secondary;
 
   @override
   State<SkyButton> createState() => _SkyButtonState();
@@ -53,9 +55,16 @@ class _SkyButtonState extends State<SkyButton>
         child: Container(
           height: widget.height,
           decoration: BoxDecoration(
-            color: disabled ? AppColors.outline : AppColors.primary,
+            color: disabled
+                ? AppColors.outline
+                : widget.secondary
+                ? Colors.white
+                : AppColors.primary,
             borderRadius: BorderRadius.circular(12),
-            boxShadow: disabled
+            border: widget.secondary
+                ? Border.all(color: AppColors.outline, width: 1)
+                : null,
+            boxShadow: disabled || widget.secondary
                 ? []
                 : [
                     BoxShadow(
@@ -79,12 +88,22 @@ class _SkyButtonState extends State<SkyButton>
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       if (widget.icon != null) ...[
-                        Icon(widget.icon, color: Colors.white, size: 18),
+                        Icon(
+                          widget.icon,
+                          color: widget.secondary
+                              ? AppColors.text
+                              : Colors.white,
+                          size: 18,
+                        ),
                         const SizedBox(width: 8),
                       ],
                       Text(
                         widget.label,
-                        style: AppTextStyles.button,
+                        style: widget.secondary
+                            ? AppTextStyles.button.copyWith(
+                                color: AppColors.text,
+                              )
+                            : AppTextStyles.button,
                       ),
                     ],
                   ),

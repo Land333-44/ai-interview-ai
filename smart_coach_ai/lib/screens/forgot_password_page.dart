@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 import '../services/auth_service.dart';
@@ -103,10 +104,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       }
 
       if (userId != null && secret != null) {
-        Navigator.pushReplacementNamed(
-          context,
-          ResetPasswordPage.routeName,
-          arguments: {
+        context.go(ResetPasswordPage.routeName, extra: {
             'userId': userId,
             'secret': secret,
           },
@@ -239,7 +237,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         const SizedBox(height: 28),
         GestureDetector(
           onTap: () {
-            Navigator.pushReplacementNamed(context, LoginPage.routeName);
+            context.go(LoginPage.routeName);
           },
           child: Text.rich(
             TextSpan(
@@ -388,7 +386,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushReplacementNamed(context, LoginPage.routeName);
+                context.go(LoginPage.routeName);
               },
               child: Text(
                 'Retour à la connexion',
