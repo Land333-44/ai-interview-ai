@@ -15,6 +15,7 @@ import '../widgets/sky_card.dart';
 import '../widgets/sky_insight_card.dart';
 import '../widgets/tab_bar_vat.dart';
 import '../widgets/wave_visualizer.dart';
+import '../widgets/web_camera_recorder.dart';
 import 'analysis_page.dart';
 import 'dashboard_page.dart';
 
@@ -365,9 +366,7 @@ class _UploadPageState extends State<UploadPage>
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    kIsWeb
-                        ? 'Choisissez un fichier vidéo depuis votre ordinateur (mp4, mov, webm...)'
-                        : 'Enregistrez une vidéo ou choisissez depuis vos documents',
+                    'Enregistrez une vidéo avec votre caméra ou choisissez depuis la galerie',
                     style: AppTextStyles.body,
                     textAlign: TextAlign.center,
                   ),
@@ -379,17 +378,31 @@ class _UploadPageState extends State<UploadPage>
             children: [
               Expanded(
                 child: SkyButton(
-                  label: kIsWeb ? 'Choisir vidéo' : 'Enregistrer',
-                  icon: kIsWeb ? Icons.upload_file_rounded : Icons.videocam_rounded,
+                  label: 'Enregistrer',
+                  icon: Icons.videocam_rounded,
                   onTap: () async {
-                    final file = await _media.pickVideoFromCamera();
-                    if (file != null && mounted) {
-                      final bytes = await file.readAsBytes();
-                      setState(() {
-                        _videoPath = file.path;
-                        _videoName = file.name;
-                        _videoBytes = bytes.isEmpty ? null : bytes;
-                      });
+                    if (kIsWeb) {
+                      // Use browser camera recorder dialog on Web
+                      final result = await WebCameraRecorder.show(context);
+                      if (result != null && mounted) {
+                        setState(() {
+                          _videoPath = null;
+                          _videoName = result.name;
+                          _videoBytes =
+                              result.bytes.isEmpty ? null : result.bytes;
+                        });
+                      }
+                    } else {
+                      // Use native camera on mobile
+                      final file = await _media.pickVideoFromCamera();
+                      if (file != null && mounted) {
+                        final bytes = await file.readAsBytes();
+                        setState(() {
+                          _videoPath = file.path;
+                          _videoName = file.name;
+                          _videoBytes = bytes.isEmpty ? null : bytes;
+                        });
+                      }
                     }
                   },
                   height: 48,
