@@ -365,7 +365,9 @@ class _UploadPageState extends State<UploadPage>
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Enregistrez une vidéo ou choisissez depuis vos documents',
+                    kIsWeb
+                        ? 'Choisissez un fichier vidéo depuis votre ordinateur (mp4, mov, webm...)'
+                        : 'Enregistrez une vidéo ou choisissez depuis vos documents',
                     style: AppTextStyles.body,
                     textAlign: TextAlign.center,
                   ),
@@ -377,8 +379,8 @@ class _UploadPageState extends State<UploadPage>
             children: [
               Expanded(
                 child: SkyButton(
-                  label: 'Enregistrer',
-                  icon: Icons.videocam_rounded,
+                  label: kIsWeb ? 'Choisir vidéo' : 'Enregistrer',
+                  icon: kIsWeb ? Icons.upload_file_rounded : Icons.videocam_rounded,
                   onTap: () async {
                     final file = await _media.pickVideoFromCamera();
                     if (file != null && mounted) {
@@ -386,7 +388,7 @@ class _UploadPageState extends State<UploadPage>
                       setState(() {
                         _videoPath = file.path;
                         _videoName = file.name;
-                        _videoBytes = bytes;
+                        _videoBytes = bytes.isEmpty ? null : bytes;
                       });
                     }
                   },
@@ -405,7 +407,7 @@ class _UploadPageState extends State<UploadPage>
                       setState(() {
                         _videoPath = file.path;
                         _videoName = file.name;
-                        _videoBytes = bytes;
+                        _videoBytes = bytes.isEmpty ? null : bytes;
                       });
                     }
                   },

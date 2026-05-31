@@ -86,8 +86,25 @@ class MediaCaptureService {
   Future<XFile?> pickVideoFromGallery() =>
       _picker.pickVideo(source: ImageSource.gallery);
 
-  Future<XFile?> pickVideoFromCamera() =>
-      _picker.pickVideo(source: ImageSource.camera);
+  /// On Web, ImagePicker camera source opens a file picker anyway.
+  /// We use FilePicker directly on Web for a consistent UX with video types.
+  Future<XFile?> pickVideoFromCamera() async {
+    if (kIsWeb) {
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['mp4', 'mov', 'avi', 'mkv', 'webm', '3gp', 'm4v'],
+        withData: true,
+      );
+      if (result == null || result.files.isEmpty) return null;
+      final f = result.files.first;
+      // Return an XFile-like wrapper using path (web uses bytes internally)
+      if (f.bytes != null) {
+        return XFile.fromData(f.bytes!, name: f.name, mimeType: 'video/mp4');
+      }
+      return null;
+    }
+    return _picker.pickVideo(source: ImageSource.camera);
+  }
 
   // ─── DOCUMENTS (.txt for text tab) ───────────────────────────────────────
 
