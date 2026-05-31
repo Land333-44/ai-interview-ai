@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 import '../widgets/sky_button.dart';
-import '../widgets/sky_card.dart';
 import 'login_page.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -72,10 +71,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   Text('Smart Coach AI', style: AppTextStyles.title),
                   const Spacer(),
                   TextButton(
-                    onPressed: () => Navigator.pushReplacementNamed(
-                      context,
-                      LoginPage.routeName,
-                    ),
+                    onPressed: () => context.go(LoginPage.routeName),
                     child: Text(
                       'Passer',
                       style: AppTextStyles.body.copyWith(

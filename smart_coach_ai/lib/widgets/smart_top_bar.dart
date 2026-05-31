@@ -50,7 +50,7 @@ class SmartTopBar extends StatelessWidget {
         children: [
           if (showBack) ...[
             GestureDetector(
-              onTap: onBack ?? () => Navigator.maybePop(context),
+              onTap: onBack ?? () => context.pop(),
               child: const Icon(
                 Icons.arrow_back_rounded,
                 color: AppColors.navIcon,

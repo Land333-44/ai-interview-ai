@@ -381,8 +381,7 @@ class _ResultsPageState extends State<ResultsPage>
                     ),
                     const SizedBox(height: 12),
                     GestureDetector(
-                      onTap: () => Navigator.pushReplacementNamed(
-                        context,
+                      onTap: () => context.go(
                         DashboardPage.routeName,
                       ),
                       child: Container(

@@ -11,12 +11,12 @@ import 'screens/email_verification_page.dart';
 import 'screens/forgot_password_page.dart';
 import 'screens/history_page.dart';
 import 'screens/login_page.dart';
-import 'screens/onboarding_page.dart';
 import 'screens/profile_page.dart';
 import 'screens/reset_password_page.dart';
 import 'screens/results_page.dart';
 import 'screens/settings_page.dart';
 import 'screens/notifications_page.dart';
+import 'screens/training_selector_page.dart';
 import 'screens/signup_page.dart';
 import 'screens/upload_page.dart';
 import 'screens/welcome_page.dart';
@@ -32,6 +32,7 @@ final router = GoRouter(
     _route('/reset-password', const ResetPasswordPage()),
     _route('/email-verification', const EmailVerificationPage()),
     _route('/dashboard', const DashboardPage()),
+    _route('/training', const TrainingSelectorPage()),
     _route('/notifications', const NotificationsPage()),
     _route('/profile', const ProfilePage()),
     _route('/settings', const SettingsPage()),
@@ -76,7 +77,22 @@ final router = GoRouter(
       },
     ),
     _route('/coach', const CoachPage()),
-    _route('/chat', const ChatPage()),
+    GoRoute(
+      path: '/chat',
+      pageBuilder: (context, state) {
+        final extra = state.extra;
+        if (extra is Map<String, dynamic>) {
+          return _transition(
+            state,
+            ChatPage(
+              sessionContext: extra['context']?.toString(),
+              sessionScore: extra['score'] as int?,
+            ),
+          );
+        }
+        return _transition(state, const ChatPage());
+      },
+    ),
   ],
 );
 

@@ -4,21 +4,45 @@ class AppColors {
   const AppColors._();
 
   // Design System Colors
-  static const Color background = Color(0xFFF4FAFD); // kSkyLighter (Fond global)
-  static const Color surface = Color(0xFFFFFFFF);    // kWhite
-  static const Color primary = Color(0xFF87CEEB);    // kSky (Couleur principale bleu ciel)
-  static const Color primaryLight = Color(0xFFE8F6FC); // kSkyLight (Fonds de cartes)
-  static const Color sky = Color(0xFF87CEEB);        // kSky
-  static const Color skyDark = Color(0xFF4A9FC0);    // kSkyDark (Accents & textes actifs)
-  static const Color text = Color(0xFF1A2332);       // kText (Texte principal)
-  static const Color textSoft = Color(0xFF5A6A7A);   // kText2 (Texte secondaire)
-  static const Color muted = Color(0xFFA0AAB8);      // kText3 (Placeholder / hints)
-  static const Color outline = Color(0xFFE2EDF5);    // kBorder (Bordures)
-  
-  static const Color success = Color(0xFF27AE60);    // kGreen (Succès)
-  static const Color danger = Color(0xFFE74C3C);     // kRed (Erreur / stress)
-  static const Color warning = Color(0xFFF0A500);    // kAmber (Avertissement)
+  static const Color background = Color(
+    0xFFF4FAFD,
+  ); // kSkyLighter (Fond global)
+  static const Color surface = Color(0xFFFFFFFF); // kWhite
+  static const Color primary = Color(
+    0xFF87CEEB,
+  ); // kSky (Couleur principale bleu ciel)
+  static const Color primaryLight = Color(
+    0xFFE8F6FC,
+  ); // kSkyLight (Fonds de cartes)
+  static const Color sky = Color(0xFF87CEEB); // kSky
+  static const Color skyDark = Color(
+    0xFF4A9FC0,
+  ); // kSkyDark (Accents & textes actifs)
+  static const Color text = Color(0xFF1A2332); // kText (Texte principal)
+  static const Color textSoft = Color(0xFF5A6A7A); // kText2 (Texte secondaire)
+  static const Color muted = Color(0xFFA0AAB8); // kText3 (Placeholder / hints)
+  static const Color outline = Color(0xFFE2EDF5); // kBorder (Bordures)
+
+  static const Color success = Color(0xFF27AE60); // kGreen (Succès)
+  static const Color danger = Color(0xFFE74C3C); // kRed (Erreur / stress)
+  static const Color warning = Color(0xFFF0A500); // kAmber (Avertissement)
   static const Color navIcon = Color(0xFF5A6A7A);
+
+  // New accent + animation-friendly shades
+  // Accent chosen to pair with the sky blue while remaining visible for CTAs
+  static const Color accent = Color(0xFF6C5CE7); // kAccent (purple)
+  static const Color accentLight = Color(
+    0xFFEDEBFF,
+  ); // lighter tint for surfaces
+  static const Color accentDark = Color(
+    0xFF4B39C8,
+  ); // darker tint for icons/shadows
+  static const Color glass = Color(
+    0x1AFFFFFF,
+  ); // subtle glass overlay (10% white)
+  static const Color shadow = Color(
+    0x1A000000,
+  ); // subtle shadow for animated cards
 
   // Legacy mappings for compatibility
   static const Color softPurple = Color(0xFFE8F6FC);
@@ -31,6 +55,19 @@ class AppColors {
     colors: [primary, skyDark],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
+  );
+
+  static const LinearGradient accentGradient = LinearGradient(
+    colors: [accentLight, accent],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // A subtle animated wash that works well behind switches/cards
+  static const LinearGradient animatedWash = LinearGradient(
+    colors: [Color(0xFFF8FAFF), Color(0xFFEDEBFF), Color(0xFFF4FAFD)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
   );
 
   static const LinearGradient skyGradient = LinearGradient(

@@ -1,5 +1,6 @@
 import 'package:appwrite/models.dart' as models;
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
@@ -46,11 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> _logout() async {
     await AuthService().logout();
     if (!mounted) return;
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      LoginPage.routeName,
-      (route) => false,
-    );
+    context.go(LoginPage.routeName);
   }
 
   @override

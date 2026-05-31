@@ -5,14 +5,16 @@ import '../constants/app_text_styles.dart';
 import '../services/api_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
-import '../widgets/bottom_nav_bar.dart';
 import 'notifications_page.dart';
 import 'upload_page.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+  const ChatPage({super.key, this.sessionContext, this.sessionScore});
 
   static const String routeName = '/chat';
+
+  final String? sessionContext;
+  final int? sessionScore;
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -41,28 +43,23 @@ class _ChatPageState extends State<ChatPage> {
   // Context injected from ResultsPage
   String? _sessionContext;
   int? _sessionScore;
-  // Map<String, double>? _sessionEmotions;
 
   @override
   void initState() {
     super.initState();
+    _sessionContext = widget.sessionContext;
+    _sessionScore = widget.sessionScore;
     _init();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Read context args passed from ResultsPage
+    // Fallback: Read context args passed from legacy/Navigator settings
     final args = ModalRoute.of(context)?.settings.arguments;
     if (args is Map<String, dynamic>) {
-      _sessionContext = args['context']?.toString();
-      _sessionScore = args['score'] as int?;
-      // final rawEmotions = args['emotions'];
-      // if (rawEmotions is Map) {
-      //   _sessionEmotions = Map<String, double>.from(
-      //     rawEmotions.map((k, v) => MapEntry(k.toString(), (v as num).toDouble())),
-      //   );
-      // }
+      _sessionContext ??= args['context']?.toString();
+      _sessionScore ??= args['score'] as int?;
     }
   }
 
@@ -77,17 +74,16 @@ class _ChatPageState extends State<ChatPage> {
     if (_messages.isEmpty) {
       String greeting;
       if (_sessionContext != null && _sessionContext!.isNotEmpty) {
-        final scoreStr = _sessionScore != null
-            ? ' (score : $_sessionScore/100)'
-            : '';
+        final scoreStr =
+            _sessionScore != null ? ' (score : $_sessionScore/100)' : '';
         greeting =
-            'Salam ! Je suis Smart Coach AI. J\'ai analysé votre derni\u00e8re session$scoreStr.\n\n'
+            'Salam ! Je suis Smart Coach AI. J\'ai analysé votre dernière session$scoreStr.\n\n'
             '"${_sessionContext!}"\n\n'
             'Que voulez-vous approfondir ou travailler ?';
       } else {
         greeting =
             'Salam ! Je suis Smart Coach AI. En quoi puis-je vous aider ? '
-            'Voulez-vous pratiquer un entretien, une pr\u00e9sentation ou un discours ?';
+            'Voulez-vous pratiquer un entretien, une présentation ou un discours ?';
       }
       setState(() {
         _messages = [
@@ -223,13 +219,12 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      bottomNavigationBar: const SmartBottomNavBar(currentIndex: 3),
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.surface,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: AppColors.navIcon),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
         title: Row(
           children: [
@@ -241,7 +236,7 @@ class _ChatPageState extends State<ChatPage> {
                 shape: BoxShape.circle,
               ),
               alignment: Alignment.center,
-              child: const Text('\ud83e\udde0', style: TextStyle(fontSize: 16)),
+              child: const Text('🧠', style: TextStyle(fontSize: 16)),
             ),
             const SizedBox(width: 10),
             Column(
@@ -285,8 +280,7 @@ class _ChatPageState extends State<ChatPage> {
               Icons.notifications_none_rounded,
               color: AppColors.navIcon,
             ),
-            onPressed: () =>
-                context.push(NotificationsPage.routeName),
+            onPressed: () => context.push(NotificationsPage.routeName),
           ),
         ],
       ),
@@ -400,7 +394,7 @@ class _ChatPageState extends State<ChatPage> {
             const SizedBox(width: 8),
             _MediaChip(
               icon: Icons.videocam_rounded,
-              label: 'Vid\u00e9o',
+              label: 'Vidéo',
               onTap: () => _openUploadTab(2),
             ),
             const SizedBox(width: 8),
@@ -637,7 +631,7 @@ class _TypingIndicatorState extends State<_TypingIndicator>
           FadeTransition(
             opacity: _anim,
             child: Text(
-              'Coach IA est en train d\'\u00e9crire...',
+              'Coach IA est en train d\'écrire...',
               style: AppTextStyles.caption.copyWith(
                 color: AppColors.skyDark,
                 fontWeight: FontWeight.bold,
