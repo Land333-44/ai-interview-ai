@@ -14,11 +14,12 @@ class TabBarVat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const tabs = ['AUDIO', 'TEXTE', 'VIDÉO'];
+    const tabs = ['AUDIO', 'TEXTE', 'VIDÉO', 'PHOTO'];
     const icons = [
       Icons.mic_rounded,
       Icons.description_rounded,
       Icons.videocam_rounded,
+      Icons.image_rounded,
     ];
 
     return Container(

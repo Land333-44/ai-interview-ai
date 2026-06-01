@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 import '../models/analysis_session_args.dart';
@@ -25,6 +24,8 @@ class UploadPage extends StatefulWidget {
   static const String routeName = '/upload';
 
   final String? scenarioTitle;
+
+  /// 0=audio, 1=text, 2=video, 3=image
   final int initialTab;
 
   @override
@@ -43,18 +44,22 @@ class _UploadPageState extends State<UploadPage>
   final _media = MediaCaptureService();
   String? _audioPath;
   String? _videoPath;
+  String? _imagePath;
   String? _videoName;
+  String? _imageName;
   List<int>? _videoBytes;
+  List<int>? _imageBytes;
   List<int>? _audioBytes;
   String? _audioName;
 
-  late final AnimationController _pulseController;
-  late final Animation<double> _pulseAnim;
+  // Pulse animation for mic circle
+  late AnimationController _pulseController;
+  late Animation<double> _pulseAnim;
 
   @override
   void initState() {
     super.initState();
-    _selectedTab = widget.initialTab.clamp(0, 2);
+    _selectedTab = widget.initialTab.clamp(0, 3);
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 900),
@@ -80,19 +85,15 @@ class _UploadPageState extends State<UploadPage>
       );
       return;
     }
-
     setState(() {
       _isRecording = true;
       _isPaused = false;
       _seconds = 0;
       _audioPath = path;
     });
-
     _pulseController.repeat(reverse: true);
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (!_isPaused) {
-        setState(() => _seconds++);
-      }
+      if (!_isPaused) setState(() => _seconds++);
     });
   }
 
@@ -115,11 +116,8 @@ class _UploadPageState extends State<UploadPage>
       _isRecording = false;
       _isPaused = false;
       _audioPath = path ?? _audioPath;
-      if (newBytes != null) {
-        _audioBytes = newBytes;
-      }
+      if (newBytes != null) _audioBytes = newBytes;
     });
-
     _showStopDialog();
   }
 
@@ -133,36 +131,21 @@ class _UploadPageState extends State<UploadPage>
     String? name,
     List<int>? bytes,
   }) {
-    if (type == SessionType.text) {
-      final trimmed = _textContent.trim();
-      if (trimmed.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Entrez un texte avant d’analyser.')),
-        );
-        return;
-      }
-      _goToAnalysis(AnalysisSessionArgs(
-        type: type,
-        text: trimmed,
-        scenarioTitle: widget.scenarioTitle,
-      ));
-      return;
-    }
-
     if (path == null && bytes == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sélectionnez un fichier ou saisissez du texte.')),
+        const SnackBar(content: Text('Sélectionnez un fichier d\'abord')),
       );
       return;
     }
-
-    _goToAnalysis(AnalysisSessionArgs(
-      type: type,
-      filePath: path,
-      fileName: name,
-      fileBytes: bytes,
-      scenarioTitle: widget.scenarioTitle,
-    ));
+    _goToAnalysis(
+      AnalysisSessionArgs(
+        type: type,
+        filePath: path,
+        fileName: name,
+        fileBytes: bytes,
+        scenarioTitle: widget.scenarioTitle,
+      ),
+    );
   }
 
   void _showStopDialog() {
@@ -172,65 +155,63 @@ class _UploadPageState extends State<UploadPage>
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                height: 4,
-                width: 40,
-                decoration: BoxDecoration(
-                  color: AppColors.outline,
-                  borderRadius: BorderRadius.circular(2),
-                ),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 4,
+              width: 40,
+              decoration: BoxDecoration(
+                color: AppColors.outline,
+                borderRadius: BorderRadius.circular(2),
               ),
-              const SizedBox(height: 24),
-              Text(
-                'Enregistrement Sauvegardé !',
-                style: AppTextStyles.title.copyWith(fontSize: 18),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'Enregistrement Sauvegardé !',
+              style: AppTextStyles.title.copyWith(fontSize: 18),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Durée: ${_formatTime(_seconds)} · Prêt pour l\'analyse.',
+              style: AppTextStyles.body,
+            ),
+            const SizedBox(height: 24),
+            SkyButton(
+              label: 'Continuer vers l\'analyse →',
+              onTap: () {
+                Navigator.pop(context);
+                _launchMediaAnalysis(
+                  type: SessionType.audio,
+                  path: _audioPath,
+                  name: _audioName ?? 'recording.m4a',
+                  bytes: _audioBytes,
+                );
+              },
+            ),
+            const SizedBox(height: 12),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                setState(() => _seconds = 0);
+              },
+              child: Text(
+                'Recommencer',
+                style: AppTextStyles.body.copyWith(color: AppColors.skyDark),
               ),
-              const SizedBox(height: 8),
-              Text(
-                'Durée : ${_formatTime(_seconds)} · Prêt pour l’analyse.',
-                style: AppTextStyles.body,
-              ),
-              const SizedBox(height: 24),
-              SkyButton(
-                label: 'Continuer vers l’analyse →',
-                onTap: () {
-                  context.pop();
-                  _launchMediaAnalysis(
-                    type: SessionType.audio,
-                    path: _audioPath,
-                    name: _audioName ?? 'recording.m4a',
-                    bytes: _audioBytes,
-                  );
-                },
-              ),
-              const SizedBox(height: 12),
-              TextButton(
-                onPressed: () {
-                  context.pop();
-                  setState(() => _seconds = 0);
-                },
-                child: Text(
-                  'Recommencer',
-                  style: AppTextStyles.body.copyWith(color: AppColors.skyDark),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   String _formatTime(int totalSeconds) {
-    final minutes = (totalSeconds ~/ 60).toString().padLeft(2, '0');
-    final seconds = (totalSeconds % 60).toString().padLeft(2, '0');
-    return '$minutes:$seconds';
+    final m = (totalSeconds ~/ 60).toString().padLeft(2, '0');
+    final s = (totalSeconds % 60).toString().padLeft(2, '0');
+    return '$m:$s';
   }
 
   @override
@@ -242,7 +223,7 @@ class _UploadPageState extends State<UploadPage>
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: AppColors.navIcon),
-          onPressed: () => context.pop(),
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           widget.scenarioTitle ?? 'Nouvelle Session',
@@ -250,7 +231,8 @@ class _UploadPageState extends State<UploadPage>
         ),
         actions: [
           TextButton(
-            onPressed: () => context.go(
+            onPressed: () => Navigator.pushReplacementNamed(
+              context,
               DashboardPage.routeName,
             ),
             child: Text(
@@ -266,6 +248,7 @@ class _UploadPageState extends State<UploadPage>
       bottomNavigationBar: const SmartBottomNavBar(currentIndex: 1),
       body: Column(
         children: [
+          // Tab Selector
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: TabBarVat(
@@ -284,6 +267,7 @@ class _UploadPageState extends State<UploadPage>
                 _buildAudioTab(),
                 _buildTextTab(),
                 _buildVideoTab(),
+                _buildImageTab(),
               ],
             ),
           ),
@@ -292,146 +276,69 @@ class _UploadPageState extends State<UploadPage>
     );
   }
 
+  // ---- VIDEO TAB ----
   Widget _buildVideoTab() {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          if (_videoName != null)
-            SkyCard(
-              padding: const EdgeInsets.all(16),
-              child: Row(
+          // Camera preview placeholder
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              height: 280,
+              width: double.infinity,
+              color: const Color(0xFF1A2332),
+              child: Stack(
+                alignment: Alignment.center,
                 children: [
-                  Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryLight,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(
-                      Icons.videocam_rounded,
-                      color: AppColors.primary,
-                      size: 28,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          _videoName ?? 'Vidéo',
-                          style: AppTextStyles.title2,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.videocam_rounded,
+                        color: Colors.white54,
+                        size: 52,
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        'Aperçu Caméra',
+                        style: AppTextStyles.body.copyWith(
+                          color: Colors.white54,
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          'Prêt pour l’analyse',
-                          style: AppTextStyles.caption.copyWith(
-                            color: AppColors.success,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                      ),
+                    ],
+                  ),
+                  if (_isRecording)
+                    Positioned(
+                      top: 16,
+                      left: 16,
+                      child: _RecBadge(seconds: _seconds),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () => setState(() {
-                      _videoPath = null;
-                      _videoName = null;
-                      _videoBytes = null;
-                    }),
-                    icon: const Icon(Icons.close_rounded),
-                    color: AppColors.danger,
-                  ),
-                ],
-              ),
-            )
-          else
-            SkyCard(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.videocam_rounded,
-                    size: 64,
-                    color: AppColors.primary.withOpacity(0.5),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Aucune vidéo sélectionnée',
-                    style: AppTextStyles.title.copyWith(fontSize: 16),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Enregistrez une vidéo avec votre caméra ou choisissez depuis la galerie',
-                    style: AppTextStyles.body,
-                    textAlign: TextAlign.center,
-                  ),
                 ],
               ),
             ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: SkyButton(
-                  label: 'Enregistrer',
-                  icon: Icons.videocam_rounded,
-                  onTap: () async {
-                    if (kIsWeb) {
-                      // Use browser camera recorder dialog on Web
-                      final result = await WebCameraRecorder.show(context);
-                      if (result != null && mounted) {
-                        setState(() {
-                          _videoPath = null;
-                          _videoName = result.name;
-                          _videoBytes =
-                              result.bytes.isEmpty ? null : result.bytes;
-                        });
-                      }
-                    } else {
-                      // Use native camera on mobile
-                      final file = await _media.pickVideoFromCamera();
-                      if (file != null && mounted) {
-                        final bytes = await file.readAsBytes();
-                        setState(() {
-                          _videoPath = file.path;
-                          _videoName = file.name;
-                          _videoBytes = bytes.isEmpty ? null : bytes;
-                        });
-                      }
-                    }
-                  },
-                  height: 48,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: SkyButton(
-                  label: 'Galerie',
-                  icon: Icons.video_library_rounded,
-                  onTap: () async {
-                    final file = await _media.pickVideoFromGallery();
-                    if (file != null && mounted) {
-                      final bytes = await file.readAsBytes();
-                      setState(() {
-                        _videoPath = file.path;
-                        _videoName = file.name;
-                        _videoBytes = bytes.isEmpty ? null : bytes;
-                      });
-                    }
-                  },
-                  height: 48,
-                ),
-              ),
-            ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
           SkyButton(
-            label: 'Analyser la vidéo',
+            label: _videoName ?? 'Choisir depuis la galerie',
+            icon: Icons.video_library_rounded,
+            onTap: () async {
+              final file = await _media.pickVideoFromGallery();
+              if (file != null && mounted) {
+                final bytes = await file.readAsBytes();
+                setState(() {
+                  _videoPath = file.path;
+                  _videoName = file.name;
+                  _videoBytes = bytes;
+                });
+              }
+            },
+            height: 44,
+          ),
+          const SizedBox(height: 16),
+          SkyButton(
+            label: 'Analyser',
             icon: Icons.arrow_forward_rounded,
             onTap: (_videoPath != null || _videoBytes != null)
                 ? () => _launchMediaAnalysis(
@@ -441,20 +348,48 @@ class _UploadPageState extends State<UploadPage>
                     bytes: _videoBytes,
                   )
                 : null,
-            height: 48,
+            height: 44,
+          ),
+          SkyButton(
+            label: 'Enregistrer une vidéo',
+            icon: Icons.videocam_rounded,
+            onTap: () async {
+              if (kIsWeb) {
+                final result = await WebCameraRecorder.show(context);
+                if (result != null && mounted) {
+                  setState(() {
+                    _videoPath = null;
+                    _videoName = result.name;
+                    _videoBytes = result.bytes.isEmpty ? null : result.bytes;
+                  });
+                }
+              } else {
+                final file = await _media.pickVideoFromCamera();
+                if (file != null && mounted) {
+                  final bytes = await file.readAsBytes();
+                  setState(() {
+                    _videoPath = file.path;
+                    _videoName = file.name;
+                    _videoBytes = bytes.isEmpty ? null : bytes;
+                  });
+                }
+              }
+            },
+            height: 44,
           ),
           const SizedBox(height: 20),
           const SkyInsightCard(
             icon: Icons.tips_and_updates_rounded,
             title: 'Astuce Vidéo',
             insight:
-                'Gardez le contact visuel avec la caméra. Un bon éclairage améliore l’analyse IA.',
+                'Gardez le contact visuel avec la caméra. Un bon éclairage améliore l\'analyse IA.',
           ),
         ],
       ),
     );
   }
 
+  // ---- AUDIO TAB ----
   Widget _buildAudioTab() {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
@@ -464,6 +399,7 @@ class _UploadPageState extends State<UploadPage>
             padding: const EdgeInsets.all(32),
             child: Column(
               children: [
+                // Mic circle with pulse animation
                 ScaleTransition(
                   scale: _isRecording
                       ? _pulseAnim
@@ -491,7 +427,9 @@ class _UploadPageState extends State<UploadPage>
                         ),
                         child: Icon(
                           Icons.mic_rounded,
-                          color: _isRecording ? Colors.white : AppColors.skyDark,
+                          color: _isRecording
+                              ? Colors.white
+                              : AppColors.skyDark,
                           size: 42,
                         ),
                       ),
@@ -499,6 +437,7 @@ class _UploadPageState extends State<UploadPage>
                   ),
                 ),
                 const SizedBox(height: 24),
+                // Timer
                 Text(
                   _formatTime(_seconds),
                   style: AppTextStyles.screenTitle.copyWith(
@@ -518,6 +457,7 @@ class _UploadPageState extends State<UploadPage>
                   ),
                 ),
                 const SizedBox(height: 24),
+                // Wave visualizer
                 WaveVisualizer(
                   isAnimating: _isRecording && !_isPaused,
                   color: AppColors.primary,
@@ -549,11 +489,11 @@ class _UploadPageState extends State<UploadPage>
             icon: Icons.arrow_forward_rounded,
             onTap: (_audioPath != null || _audioBytes != null)
                 ? () => _launchMediaAnalysis(
-                      type: SessionType.audio,
-                      path: _audioPath,
-                      name: _audioName ?? 'audio.m4a',
-                      bytes: _audioBytes,
-                    )
+                    type: SessionType.audio,
+                    path: _audioPath,
+                    name: _audioName ?? 'audio.m4a',
+                    bytes: _audioBytes,
+                  )
                 : null,
             height: 44,
           ),
@@ -575,11 +515,12 @@ class _UploadPageState extends State<UploadPage>
       children: [
         if (!_isRecording)
           SkyButton(
-            label: 'Démarrer l’enregistrement',
+            label: 'Démarrer l\'enregistrement',
             icon: Icons.fiber_manual_record_rounded,
             onTap: _startRecording,
           )
         else ...[
+          // Pause
           IconButton(
             onPressed: _pauseRecording,
             icon: Icon(
@@ -593,6 +534,7 @@ class _UploadPageState extends State<UploadPage>
             ),
           ),
           const SizedBox(width: 16),
+          // Stop
           GestureDetector(
             onTap: _stopRecording,
             child: Container(
@@ -613,6 +555,110 @@ class _UploadPageState extends State<UploadPage>
     );
   }
 
+  // ---- IMAGE TAB ----
+  Widget _buildImageTab() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              height: 220,
+              width: double.infinity,
+              color: AppColors.primaryLight,
+              child: _imageBytes != null
+                  ? Image.memory(
+                      Uint8List.fromList(_imageBytes!),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: 220,
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.image_rounded,
+                          color: AppColors.skyDark,
+                          size: 48,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          _imageName ?? 'Aucune photo sélectionnée',
+                          style: AppTextStyles.body,
+                        ),
+                      ],
+                    ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: SkyButton(
+                  label: 'Galerie',
+                  icon: Icons.photo_library_rounded,
+                  onTap: () async {
+                    final file = await _media.pickImageFromGallery();
+                    if (file != null && mounted) {
+                      final bytes = await file.readAsBytes();
+                      setState(() {
+                        _imagePath = file.path;
+                        _imageName = file.name;
+                        _imageBytes = bytes;
+                      });
+                    }
+                  },
+                  height: 44,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: SkyButton(
+                  label: 'Appareil photo',
+                  icon: Icons.camera_alt_rounded,
+                  onTap: () async {
+                    final file = await _media.pickImageFromCamera();
+                    if (file != null && mounted) {
+                      final bytes = await file.readAsBytes();
+                      setState(() {
+                        _imagePath = file.path;
+                        _imageName = file.name;
+                        _imageBytes = bytes;
+                      });
+                    }
+                  },
+                  height: 44,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          SkyButton(
+            label: 'Analyser',
+            icon: Icons.arrow_forward_rounded,
+            onTap: (_imagePath != null || _imageBytes != null)
+                ? () => _launchMediaAnalysis(
+                    type: SessionType.image,
+                    path: _imagePath,
+                    name: _imageName ?? 'image.jpg',
+                    bytes: _imageBytes,
+                  )
+                : null,
+          ),
+          const SizedBox(height: 20),
+          const SkyInsightCard(
+            icon: Icons.face_retouching_natural_rounded,
+            title: 'Astuce Photo',
+            insight:
+                'Utilisez une photo claire et bien éclairée montrant votre posture et expression.',
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ---- TEXT TAB ----
   Widget _buildTextTab() {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
@@ -635,7 +681,8 @@ class _UploadPageState extends State<UploadPage>
                     color: AppColors.text,
                   ),
                   decoration: InputDecoration(
-                    hintText: 'Tapez votre discours, réponse d’entretien, ou collez un texte...',
+                    hintText:
+                        'Tapez votre discours, réponse d\'entretien, ou collez un texte...',
                     hintStyle: AppTextStyles.caption,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -664,6 +711,7 @@ class _UploadPageState extends State<UploadPage>
             ),
           ),
           const SizedBox(height: 16),
+          // Upload from file
           GestureDetector(
             onTap: () async {
               final content = await _media.pickTextFile();
@@ -717,12 +765,83 @@ class _UploadPageState extends State<UploadPage>
             onTap: _textContent.trim().isEmpty
                 ? null
                 : () => _goToAnalysis(
-                      AnalysisSessionArgs(
-                        type: SessionType.text,
-                        text: _textContent.trim(),
-                        scenarioTitle: widget.scenarioTitle,
-                      ),
+                    AnalysisSessionArgs(
+                      type: SessionType.text,
+                      text: _textContent.trim(),
+                      scenarioTitle: widget.scenarioTitle,
                     ),
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RecBadge extends StatefulWidget {
+  const _RecBadge({required this.seconds});
+  final int seconds;
+
+  @override
+  State<_RecBadge> createState() => _RecBadgeState();
+}
+
+class _RecBadgeState extends State<_RecBadge>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _ctrl;
+  late Animation<double> _anim;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    )..repeat(reverse: true);
+    _anim = Tween<double>(begin: 1.0, end: 0.3).animate(_ctrl);
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  String _fmt(int s) {
+    final m = (s ~/ 60).toString().padLeft(2, '0');
+    final sec = (s % 60).toString().padLeft(2, '0');
+    return '$m:$sec';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.black54,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        children: [
+          FadeTransition(
+            opacity: _anim,
+            child: Container(
+              height: 8,
+              width: 8,
+              decoration: const BoxDecoration(
+                color: AppColors.danger,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            'REC  ${_fmt(widget.seconds)}',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),

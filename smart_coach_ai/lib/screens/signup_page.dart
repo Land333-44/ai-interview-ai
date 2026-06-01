@@ -22,8 +22,7 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   bool _isLoading = false;
   bool _obscurePassword = true;
   bool _obscureConfirm = true;
@@ -34,10 +33,7 @@ class _SignupPageState extends State<SignupPage> {
     final password = _passwordController.text.trim();
     final confirmPassword = _confirmPasswordController.text.trim();
 
-    if (name.isEmpty ||
-        email.isEmpty ||
-        password.isEmpty ||
-        confirmPassword.isEmpty) {
+    if (name.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Veuillez remplir tous les champs')),
       );
@@ -46,9 +42,7 @@ class _SignupPageState extends State<SignupPage> {
 
     if (password != confirmPassword) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Les mots de passe ne correspondent pas'),
-        ),
+        const SnackBar(content: Text('Les mots de passe ne correspondent pas')),
       );
       return;
     }
@@ -56,9 +50,7 @@ class _SignupPageState extends State<SignupPage> {
     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
     if (!emailRegex.hasMatch(email)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Veuillez entrer une adresse e-mail valide.'),
-        ),
+        const SnackBar(content: Text('Veuillez entrer une adresse e-mail valide.')),
       );
       return;
     }
@@ -72,18 +64,14 @@ class _SignupPageState extends State<SignupPage> {
     if (user != null) {
       final otpUserId = await AuthService().sendEmailOtp(email);
       if (!mounted) return;
-      context.push(
-        EmailVerificationPage.routeName,
-        extra: {
+      context.go(EmailVerificationPage.routeName, extra: {
           'email': email,
           'userId': otpUserId ?? user.$id,
         },
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('L\'inscription a échoué. Veuillez réessayer.'),
-        ),
+        const SnackBar(content: Text('L\'inscription a échoué. Veuillez réessayer.')),
       );
     }
   }
@@ -98,9 +86,7 @@ class _SignupPageState extends State<SignupPage> {
       context.go(DashboardPage.routeName);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('La connexion Google a échoué. Veuillez réessayer.'),
-        ),
+        const SnackBar(content: Text('La connexion Google a échoué. Veuillez réessayer.')),
       );
     }
   }
@@ -115,9 +101,7 @@ class _SignupPageState extends State<SignupPage> {
       context.go(DashboardPage.routeName);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('La connexion Apple a échoué. Veuillez réessayer.'),
-        ),
+        const SnackBar(content: Text('La connexion Apple a échoué. Veuillez réessayer.')),
       );
     }
   }
@@ -150,10 +134,7 @@ class _SignupPageState extends State<SignupPage> {
           controller: controller,
           obscureText: obscure,
           keyboardType: keyboardType,
-          style: AppTextStyles.body.copyWith(
-            fontSize: 13,
-            color: AppColors.text,
-          ),
+          style: AppTextStyles.body.copyWith(fontSize: 13, color: AppColors.text),
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: AppTextStyles.caption,
@@ -161,9 +142,7 @@ class _SignupPageState extends State<SignupPage> {
             suffixIcon: hasToggle
                 ? IconButton(
                     icon: Icon(
-                      obscure
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
+                      obscure ? Icons.visibility_outlined : Icons.visibility_off_outlined,
                       color: AppColors.muted,
                       size: 18,
                     ),
@@ -249,8 +228,7 @@ class _SignupPageState extends State<SignupPage> {
                       icon: Icons.lock_outline_rounded,
                       obscure: _obscurePassword,
                       hasToggle: true,
-                      onToggle: () =>
-                          setState(() => _obscurePassword = !_obscurePassword),
+                      onToggle: () => setState(() => _obscurePassword = !_obscurePassword),
                     ),
                     const SizedBox(height: 16),
                     _buildField(
@@ -260,8 +238,7 @@ class _SignupPageState extends State<SignupPage> {
                       icon: Icons.verified_user_outlined,
                       obscure: _obscureConfirm,
                       hasToggle: true,
-                      onToggle: () =>
-                          setState(() => _obscureConfirm = !_obscureConfirm),
+                      onToggle: () => setState(() => _obscureConfirm = !_obscureConfirm),
                     ),
                     const SizedBox(height: 16),
                     // Security tip
@@ -273,11 +250,8 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       child: Row(
                         children: [
-                          const Icon(
-                            Icons.shield_outlined,
-                            color: AppColors.skyDark,
-                            size: 18,
-                          ),
+                          const Icon(Icons.shield_outlined,
+                              color: AppColors.skyDark, size: 18),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
@@ -332,21 +306,15 @@ class _SignupPageState extends State<SignupPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
-                              'G',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF4285F4),
-                              ),
-                            ),
+                            const Text('G',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF4285F4),
+                                )),
                             const SizedBox(width: 8),
-                            Text(
-                              'Google',
-                              style: AppTextStyles.title2.copyWith(
-                                fontSize: 12,
-                              ),
-                            ),
+                            Text('Google',
+                                style: AppTextStyles.title2.copyWith(fontSize: 12)),
                           ],
                         ),
                       ),
@@ -366,18 +334,11 @@ class _SignupPageState extends State<SignupPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(
-                              Icons.apple_rounded,
-                              color: AppColors.text,
-                              size: 20,
-                            ),
+                            const Icon(Icons.apple_rounded,
+                                color: AppColors.text, size: 20),
                             const SizedBox(width: 8),
-                            Text(
-                              'Apple',
-                              style: AppTextStyles.title2.copyWith(
-                                fontSize: 12,
-                              ),
-                            ),
+                            Text('Apple',
+                                style: AppTextStyles.title2.copyWith(fontSize: 12)),
                           ],
                         ),
                       ),
@@ -387,7 +348,9 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 28),
               GestureDetector(
-                onTap: () => context.go(LoginPage.routeName),
+                onTap: () {
+                  context.go(LoginPage.routeName);
+                },
                 child: Text.rich(
                   TextSpan(
                     text: 'Vous avez déjà un compte ? ',

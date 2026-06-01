@@ -184,7 +184,7 @@ class _AnalysisPageState extends State<AnalysisPage>
                 if (_error != null) ...[
                   const SizedBox(height: 24),
                   TextButton(
-                    onPressed: () => context.pop(),
+                    onPressed: () => Navigator.pop(context),
                     child: Text(
                       'Retour',
                       style: AppTextStyles.button

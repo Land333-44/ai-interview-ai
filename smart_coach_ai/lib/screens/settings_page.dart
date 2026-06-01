@@ -145,7 +145,7 @@ class _SettingsPageState extends State<SettingsPage> {
             label: 'Retour à l’accueil',
             icon: Icons.arrow_back_rounded,
             secondary: true,
-            onTap: () => context.pop(),
+            onTap: () => Navigator.pop(context),
           ),
         ],
       ),

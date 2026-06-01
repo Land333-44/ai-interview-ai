@@ -183,7 +183,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage>
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: AppColors.navIcon),
-          onPressed: () => context.pop(),
+          onPressed: () => Navigator.maybePop(context),
         ),
       ),
       body: SafeArea(
@@ -248,7 +248,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage>
           label: _isAuthenticated ? 'Aller au Tableau de Bord' : 'Aller à la Connexion',
           icon: _isAuthenticated ? Icons.dashboard_rounded : Icons.login_rounded,
           onTap: () =>
-              context.go(
+              Navigator.pushReplacementNamed(
+                context,
                 _isAuthenticated ? DashboardPage.routeName : LoginPage.routeName,
               ),
         ),

@@ -52,17 +52,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Try to read args from go_router extra
-    Map<String, dynamic>? args;
-    try {
-      final extra = GoRouterState.of(context).extra;
-      if (extra is Map<String, dynamic>) {
-        args = extra;
-      }
-    } catch (_) {}
-    // Fallback to ModalRoute (Navigator-based)
-    args ??= ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-
+    final args = ModalRoute.of(context)?.settings.arguments;
     if (args is Map<String, dynamic>) {
       final argUserId = args['userId'] as String?;
       final argEmail = args['email'] as String?;
@@ -274,16 +264,8 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final goExtra = (() {
-      try {
-        return GoRouterState.of(context).extra;
-      } catch (_) {
-        return null;
-      }
-    })();
-    final args = goExtra is Map<String, dynamic>
-        ? goExtra
-        : ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     final displayEmail = args?['email'] as String? ?? _userEmail;
 
     return Scaffold(
@@ -610,7 +592,10 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
           children: [
             GestureDetector(
               onTap: () {
-                context.go(LoginPage.routeName);
+                Navigator.pushReplacementNamed(
+                  context,
+                  LoginPage.routeName,
+                );
               },
               child: Text(
                 'Changer d\'e-mail',
@@ -634,7 +619,10 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
             ),
             GestureDetector(
               onTap: () {
-                context.go(LoginPage.routeName);
+                Navigator.pushReplacementNamed(
+                  context,
+                  LoginPage.routeName,
+                );
               },
               child: Text(
                 'Retour à la connexion',
@@ -669,7 +657,7 @@ class _VerificationHeader extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => context.pop(),
+            onTap: () => Navigator.maybePop(context),
             child: const Icon(
               Icons.arrow_back_rounded,
               color: AppColors.navIcon,

@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
+    // Email format validation
     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
     if (!emailRegex.hasMatch(email)) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -130,225 +131,109 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Animated Big Logo
-                Hero(
-                  tag: 'app_logo_hero',
-                  child: Container(
-                    height: 80,
-                    width: 80,
-                    decoration: const BoxDecoration(
-                      color: AppColors.primary,
-                      shape: BoxShape.circle,
-                    ),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      '🎙️',
-                      style: TextStyle(fontSize: 36),
-                    ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(22, 26, 22, 22),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  height: 68,
+                  width: 68,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(18),
                   ),
+                  alignment: Alignment.center,
+                  child: const Text('🎙️', style: TextStyle(fontSize: 30)),
                 ),
-                const SizedBox(height: 24),
-                Text(
-                  'Ravi de vous revoir !',
-                  style: AppTextStyles.screenTitle.copyWith(fontSize: 26),
+              ),
+              const SizedBox(height: 22),
+              Center(
+                child: Text(
+                  'Bienvenue !',
                   textAlign: TextAlign.center,
+                  style: AppTextStyles.title.copyWith(fontSize: 26),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  'Votre mentor IA est prêt à continuer.',
-                  style: AppTextStyles.body,
+              ),
+              const SizedBox(height: 8),
+              Center(
+                child: Text(
+                  'Connectez-vous pour continuer votre progression.',
                   textAlign: TextAlign.center,
+                  style: AppTextStyles.body.copyWith(fontSize: 14),
                 ),
-                const SizedBox(height: 36),
-                SkyCard(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      // Email field
-                      Text('ADRESSE E-MAIL', style: AppTextStyles.label),
-                      const SizedBox(height: 8),
-                      TextField(
-                        controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        style: AppTextStyles.body.copyWith(
-                          fontSize: 13,
-                          color: AppColors.text,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'ex: nom@exemple.com',
-                          hintStyle: AppTextStyles.caption,
-                          prefixIcon: const Icon(
-                            Icons.mail_outline_rounded,
-                            color: AppColors.muted,
-                            size: 18,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: AppColors.outline),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: AppColors.skyDark),
-                          ),
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 14),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      // Password field
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('MOT DE PASSE', style: AppTextStyles.label),
-                          GestureDetector(
-                            onTap: () => context.push(
-                              ForgotPasswordPage.routeName,
-                            ),
-                            child: Text(
-                              'Mot de passe oublié ?',
-                              style: AppTextStyles.label.copyWith(
-                                color: AppColors.skyDark,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      TextField(
-                        controller: _passwordController,
-                        obscureText: _obscurePassword,
-                        style: AppTextStyles.body.copyWith(
-                          fontSize: 13,
-                          color: AppColors.text,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: '••••••••',
-                          hintStyle: AppTextStyles.caption,
-                          prefixIcon: const Icon(
-                            Icons.lock_outline_rounded,
-                            color: AppColors.muted,
-                            size: 18,
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _obscurePassword
-                                  ? Icons.visibility_outlined
-                                  : Icons.visibility_off_outlined,
-                              color: AppColors.muted,
-                              size: 18,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _obscurePassword = !_obscurePassword;
-                              });
-                            },
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: AppColors.outline),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: AppColors.skyDark),
-                          ),
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 14),
-                        ),
-                      ),
-                      const SizedBox(height: 28),
-                      SkyButton(
-                        label: 'Se connecter',
-                        icon: Icons.login_rounded,
-                        isLoading: _isLoading,
-                        onTap: _login,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 28),
-                Row(
+              ),
+              const SizedBox(height: 24),
+              SkyCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Expanded(child: Divider(color: AppColors.outline)),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(
-                        'OU CONTINUER AVEC',
-                        style: AppTextStyles.label.copyWith(fontSize: 10),
+                    TextFormField(
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: const InputDecoration(
+                        labelText: 'Email',
+                        prefixIcon: Icon(Icons.mail_outline_rounded),
                       ),
                     ),
-                    const Expanded(child: Divider(color: AppColors.outline)),
+                    const SizedBox(height: 12),
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: _obscurePassword,
+                      decoration: InputDecoration(
+                        labelText: 'Mot de passe',
+                        prefixIcon: const Icon(Icons.lock_outline_rounded),
+                        suffixIcon: IconButton(
+                          onPressed: () => setState(
+                            () => _obscurePassword = !_obscurePassword,
+                          ),
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          context.push(ForgotPasswordPage.routeName,
+                          );
+                        },
+                        child: const Text('Mot de passe oublié ?'),
+                      ),
+                    ),
+                    SkyButton(
+                      label: 'Se connecter',
+                      icon: Icons.login_rounded,
+                      isLoading: _isLoading,
+                      onTap: _login,
+                    ),
+                    const SizedBox(height: 12),
+                    SkyButton(
+                      label: 'Continuer avec Google',
+                      icon: Icons.g_mobiledata_rounded,
+                      secondary: true,
+                      onTap: _isLoading ? null : _loginWithGoogle,
+                    ),
+                    const SizedBox(height: 14),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                          context,
+                          SignupPage.routeName,
+                        );
+                      },
+                      child: const Text('Créer un compte'),
+                    ),
                   ],
                 ),
-                const SizedBox(height: 24),
-                // Google Sign In Button
-                GestureDetector(
-                  onTap: _isLoading ? null : _loginWithGoogle,
-                  child: Container(
-                    height: 52,
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.outline, width: 1.2),
-                    ),
-                    child: Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text(
-                            'G',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF4285F4),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            'Continuer avec Google',
-                            style: AppTextStyles.title2.copyWith(
-                              fontSize: 13,
-                              color: AppColors.text,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 36),
-                GestureDetector(
-                  onTap: () => context.go(SignupPage.routeName),
-                  child: Text.rich(
-                    TextSpan(
-                      text: "Vous n'avez pas de compte ? ",
-                      children: [
-                        TextSpan(
-                          text: "S'inscrire",
-                          style: AppTextStyles.body.copyWith(
-                            color: AppColors.skyDark,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    textAlign: TextAlign.center,
-                    style: AppTextStyles.body.copyWith(fontSize: 13),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
