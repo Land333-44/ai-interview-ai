@@ -121,7 +121,7 @@ export default async ({ req, res, log }) => {
       const fileId = body.fileId;
       if (!fileId) return res.json({ success: false, error: "Missing fileId" });
 
-      const transcript = await transcribeAudio(fileId, GROQ_API_KEY, log);
+      const transcript = await transcribeAudio(fileId, GROQ_API_KEY, log, body.fileName);
       if (!transcript) {
         return res.json({ success: false, error: "Transcription vidéo échouée" });
       }
@@ -278,6 +278,7 @@ Retourne UNIQUEMENT ce JSON (score de 0 à 100) :
   };
 }
 
+<<<<<<< HEAD
 // ─── ANALYZE IMAGE (Groq Vision) ─────────────────────────────────────────────
 
 async function analyzeImage(fileId, groqApiKey, language, scenario, log) {
@@ -563,6 +564,191 @@ function safeParse(raw) {
   }
 }
 
+=======
+// ─── TRANSCRIBE AUDIO (Groq Whisper) ─────────────────────────────────────────
+
+async function transcribeAudio(fileId, groqApiKey, log) {
+  try {
+    if (!storage) { log("Storage not initialized"); return null; }
+
+    log("Downloading file: " + fileId);
+    const bucketId = process.env.BUCKET_ID || process.env.APPWRITE_BUCKET_ID;
+    if (!bucketId) { log("BUCKET_ID missing"); return null; }
+
+    const fileBuffer = await storage.getFileDownload(bucketId, fileId);
+    const blob = new Blob([fileBuffer]);
+
+    const formData = new FormData();
+    formData.append("file", blob, "audio.m4a");
+    formData.append("model", "whisper-large-v3-turbo");
+    formData.append("response_format", "text");
+
+    const response = await fetchWithTimeout(
+      "https://api.groq.com/openai/v1/audio/transcriptions",
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${groqApiKey}` },
+        body: formData,
+      },
+      30000
+    );
+
+    log("WHISPER STATUS: " + response.status);
+    if (!response.ok) return null;
+
+    const transcript = await response.text();
+    log("TRANSCRIPT: " + transcript.substring(0, 200));
+    return transcript.trim() || null;
+
+  } catch (e) {
+    log("TRANSCRIBE ERROR: " + e.message);
+    return null;
+  }
+}
+
+// ─── HUME EMOTIONS ───────────────────────────────────────────────────────────
+
+async function getHumeEmotions(apiKey, text, log) {
+  const startRes = await fetchWithTimeout(
+    "https://api.hume.ai/v0/batch/jobs",
+    {
+      method: "POST",
+      headers: {
+        "X-Hume-Api-Key": apiKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        models: { language: { granularity: "passage" } },
+        texts: [text],
+      }),
+    },
+    8000
+  );
+
+  const jobData  = await startRes.json();
+  const job_id   = jobData?.job_id;
+  if (!job_id) return {};
+
+  log("HUME JOB: " + job_id);
+
+  // Poll max 3 times (3s apart)
+  for (let i = 0; i < 3; i++) {
+    await sleep(3000);
+
+    const pollRes = await fetchWithTimeout(
+      `https://api.hume.ai/v0/batch/jobs/${job_id}/predictions`,
+      {
+        method: "GET",
+        headers: { "X-Hume-Api-Key": apiKey },
+      },
+      8000
+    );
+
+    if (!pollRes.ok) continue;
+
+    const predictions = await pollRes.json();
+    const emotions = extractHumeEmotions(predictions);
+    if (Object.keys(emotions).length > 0) return emotions;
+  }
+
+  return {};
+}
+
+function extractHumeEmotions(predictions) {
+  try {
+    const emotions = {};
+    const results  = predictions?.[0]?.results?.predictions?.[0]?.models?.language?.grouped_predictions;
+    if (!results) return {};
+
+    const entries = results[0]?.predictions?.[0]?.emotions || [];
+    const top = entries
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 6);
+
+    for (const e of top) {
+      emotions[e.name.toLowerCase()] = parseFloat(e.score.toFixed(3));
+    }
+    return emotions;
+  } catch {
+    return {};
+  }
+}
+
+// ─── SAVE HELPERS ────────────────────────────────────────────────────────────
+
+async function saveChatMessage(body, text, sender) {
+  try {
+    const dbId   = process.env.DATABASE_ID;
+    const colId  = process.env.CHAT_COLLECTION_ID;
+    if (!dbId || !colId || !databases) return;
+
+    await databases.createDocument(dbId, colId, ID.unique(), {
+      sessionId:   body.sessionId || "default",
+      userId:      body.userId    || "unknown",
+      sender,
+      messageText: text,
+      timestamp:   new Date().toISOString(),
+      isRead:      false,
+      messageType: "text",
+    });
+  } catch (e) {
+    console.log("saveChat error: " + e.message);
+  }
+}
+
+async function saveAnalysis(body, result) {
+  try {
+    const dbId  = process.env.DATABASE_ID;
+    const colId = process.env.ANALYSES_COLLECTION_ID;
+    if (!dbId || !colId || !databases) return;
+
+    await databases.createDocument(dbId, colId, ID.unique(), {
+      userId:       body.userId  || "unknown",
+      title:        body.title   || "Session Analysis",
+      status:       "completed",
+      analysisType: body.type    || "text",
+      runDate:      new Date().toISOString(),
+      note:         JSON.stringify(result.feedback || {}),
+    });
+  } catch (e) {
+    console.log("saveAnalysis error: " + e.message);
+  }
+}
+
+// ─── UTILITIES ───────────────────────────────────────────────────────────────
+
+function buildSystemPrompt(language, scenario) {
+  const lang = language === "fr" ? "français" : "English";
+  return `Tu es Smart Coach AI, un coach expert en ${scenario}. Réponds toujours en ${lang}. Sois encourageant, précis et constructif.`;
+}
+
+function buildErrorResult(text, errorMsg) {
+  return {
+    score:    0,
+    summary:  errorMsg,
+    modality: "text",
+    feedback: { strengths: [], weaknesses: [], improvements: [] },
+    emotions: {},
+  };
+}
+
+function fetchWithTimeout(url, options, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  return fetch(url, { ...options, signal: controller.signal })
+    .finally(() => clearTimeout(timer));
+}
+
+function safeParse(raw) {
+  try {
+    const match = raw.match(/\{[\s\S]*\}/);
+    return match ? JSON.parse(match[0]) : {};
+  } catch {
+    return {};
+  }
+}
+
+>>>>>>> 2eae047 (fix: rewrite main.js - correct response structure for Flutter frontend)
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
