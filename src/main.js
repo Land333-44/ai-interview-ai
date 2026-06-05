@@ -408,6 +408,7 @@ async function saveAnalysis(body, result) {
       analysisType: body.type    || "text",
       runDate:      new Date().toISOString(),
       note:         JSON.stringify(result.feedback || {}),
+      fileId:       body.fileId  || "",
     });
   } catch (e) {
     console.log("saveAnalysis error: " + e.message);
