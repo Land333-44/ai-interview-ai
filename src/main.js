@@ -308,46 +308,58 @@ async function transcribeAudio(fileId, groqApiKey, log) {
 // ─── HUME EMOTIONS ───────────────────────────────────────────────────────────
 
 async function getHumeEmotions(apiKey, text, log) {
-  const startRes = await fetchWithTimeout(
-    "https://api.hume.ai/v0/batch/jobs",
-    {
-      method: "POST",
-      headers: {
-        "X-Hume-Api-Key": apiKey,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        models: { language: { granularity: "passage" } },
-        texts: [text],
-      }),
-    },
-    8000
-  );
-
-  const jobData  = await startRes.json();
-  const job_id   = jobData?.job_id;
-  if (!job_id) return {};
-
-  log("HUME JOB: " + job_id);
-
-  // Poll max 3 times (3s apart)
-  for (let i = 0; i < 3; i++) {
-    await sleep(3000);
-
-    const pollRes = await fetchWithTimeout(
-      `https://api.hume.ai/v0/batch/jobs/${job_id}/predictions`,
+  try {
+    const startRes = await fetchWithTimeout(
+      "https://api.hume.ai/v0/batch/jobs",
       {
-        method: "GET",
-        headers: { "X-Hume-Api-Key": apiKey },
+        method: "POST",
+        headers: {
+          "X-Hume-Api-Key": apiKey,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          models: { language: { granularity: "passage" } },
+          texts: [text],
+        }),
       },
       8000
     );
 
-    if (!pollRes.ok) continue;
+    const rawStart = await startRes.text();
+    log("HUME START RAW: " + rawStart.substring(0, 200));
 
-    const predictions = await pollRes.json();
-    const emotions = extractHumeEmotions(predictions);
-    if (Object.keys(emotions).length > 0) return emotions;
+    let jobData = {};
+    try { jobData = JSON.parse(rawStart); } catch { return {}; }
+
+    const job_id = jobData?.job_id;
+    if (!job_id) { log("HUME: no job_id"); return {}; }
+
+    log("HUME JOB: " + job_id);
+
+    // Poll max 3 times (3s apart)
+    for (let i = 0; i < 3; i++) {
+      await sleep(3000);
+
+      const pollRes = await fetchWithTimeout(
+        `https://api.hume.ai/v0/batch/jobs/${job_id}/predictions`,
+        {
+          method: "GET",
+          headers: { "X-Hume-Api-Key": apiKey },
+        },
+        8000
+      );
+
+      const rawPoll = await pollRes.text();
+      log("HUME POLL " + i + ": " + rawPoll.substring(0, 200));
+
+      let predictions = [];
+      try { predictions = JSON.parse(rawPoll); } catch { continue; }
+
+      const emotions = extractHumeEmotions(predictions);
+      if (Object.keys(emotions).length > 0) return emotions;
+    }
+  } catch (e) {
+    log("HUME EXCEPTION: " + e.message);
   }
 
   return {};
@@ -404,7 +416,7 @@ async function saveAnalysis(body, result) {
     await databases.createDocument(dbId, colId, ID.unique(), {
       userId:       body.userId  || "unknown",
       title:        body.title   || "Session Analysis",
-      status:       "completed",
+      status:       "complete",
       analysisType: body.type    || "text",
       runDate:      new Date().toISOString(),
       note:         JSON.stringify(result.feedback || {}),
