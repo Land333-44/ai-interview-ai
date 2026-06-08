@@ -319,7 +319,7 @@ async function getHumeEmotions(apiKey, text, log) {
         },
         body: JSON.stringify({
           models: { language: {} },
-          text: [{ content: text, content_type: "text" }],
+          text: [text],
         }),
       },
       8000
