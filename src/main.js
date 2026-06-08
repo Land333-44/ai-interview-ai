@@ -347,6 +347,7 @@ async function getHumeEmotions(apiKey, text, log) {
         8000
       );
       const rawStatus = await statusRes.text();
+      log("HUME STATUS RAW " + i + ": " + rawStatus.substring(0, 300));
       let statusData = {};
       try { statusData = JSON.parse(rawStatus); } catch {}
       const jobStatus = statusData?.state?.status;
