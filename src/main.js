@@ -336,27 +336,39 @@ async function getHumeEmotions(apiKey, text, log) {
 
     log("HUME JOB: " + job_id);
 
-    // Poll max 3 times (3s apart)
-    for (let i = 0; i < 3; i++) {
-      await sleep(3000);
+    // Poll up to 5 times (4s apart) — check status before fetching predictions
+    for (let i = 0; i < 5; i++) {
+      await sleep(4000);
 
-      const pollRes = await fetchWithTimeout(
-        `https://api.hume.ai/v0/batch/jobs/${job_id}/predictions`,
-        {
-          method: "GET",
-          headers: { "X-Hume-Api-Key": apiKey },
-        },
+      // 1. Check job status
+      const statusRes = await fetchWithTimeout(
+        `https://api.hume.ai/v0/batch/jobs/${job_id}`,
+        { method: "GET", headers: { "X-Hume-Api-Key": apiKey } },
         8000
       );
+      const rawStatus = await statusRes.text();
+      let statusData = {};
+      try { statusData = JSON.parse(rawStatus); } catch {}
+      const jobStatus = statusData?.state?.status;
+      log("HUME STATUS " + i + ": " + jobStatus);
 
+      if (jobStatus !== "completed") continue;
+
+      // 2. Fetch predictions only when completed
+      const pollRes = await fetchWithTimeout(
+        `https://api.hume.ai/v0/batch/jobs/${job_id}/predictions`,
+        { method: "GET", headers: { "X-Hume-Api-Key": apiKey } },
+        8000
+      );
       const rawPoll = await pollRes.text();
-      log("HUME POLL " + i + ": " + rawPoll.substring(0, 200));
+      log("HUME PREDICTIONS: " + rawPoll.substring(0, 300));
 
       let predictions = [];
-      try { predictions = JSON.parse(rawPoll); } catch { continue; }
+      try { predictions = JSON.parse(rawPoll); } catch { break; }
 
       const emotions = extractHumeEmotions(predictions);
       if (Object.keys(emotions).length > 0) return emotions;
+      break;
     }
   } catch (e) {
     log("HUME EXCEPTION: " + e.message);
@@ -419,7 +431,7 @@ async function saveAnalysis(body, result) {
       status:       "complete",
       analysisType: "quick",
       runDate:      new Date().toISOString(),
-      note:         JSON.stringify(result.feedback || {}),
+      note:         JSON.stringify(result.feedback || {}).substring(0, 490),
       fileId:       body.fileId  || "",
     });
   } catch (e) {
