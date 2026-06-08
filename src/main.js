@@ -318,7 +318,7 @@ async function getHumeEmotions(apiKey, text, log) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          models: { language: { granularity: "passage" } },
+          models: { language: { granularity: "sentence" } },
           texts: [text],
         }),
       },
@@ -417,7 +417,7 @@ async function saveAnalysis(body, result) {
       userId:       body.userId  || "unknown",
       title:        body.title   || "Session Analysis",
       status:       "complete",
-      analysisType: body.type    || "text",
+      analysisType: "quick",
       runDate:      new Date().toISOString(),
       note:         JSON.stringify(result.feedback || {}),
       fileId:       body.fileId  || "",
