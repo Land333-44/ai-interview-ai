@@ -352,7 +352,7 @@ async function getHumeEmotions(apiKey, text, log) {
       const jobStatus = statusData?.state?.status;
       log("HUME STATUS " + i + ": " + jobStatus);
 
-      if (jobStatus !== "completed") continue;
+      if (jobStatus?.toUpperCase() !== "COMPLETED") continue;
 
       // 2. Fetch predictions only when completed
       const pollRes = await fetchWithTimeout(
