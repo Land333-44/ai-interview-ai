@@ -108,17 +108,31 @@ export default async ({ req, res, log }) => {
 
     // ── IMAGE ─────────────────────────────────────────────────────────────────
     if (type === "image") {
-      return res.json({
-        success: false,
-        error: "L'analyse d'image n'est pas encore disponible.",
-      });
+      const fileId = body.fileId;
+      if (!fileId) return res.json({ success: false, error: "Missing fileId" });
+
+      const result = await analyzeImage(fileId, GROQ_API_KEY, language, scenario, log);
+      await saveAnalysis(body, result);
+      return res.json({ success: true, ...result });
     }
 
     // ── VIDEO ─────────────────────────────────────────────────────────────────
     if (type === "video") {
+      const fileId = body.fileId;
+      if (!fileId) return res.json({ success: false, error: "Missing fileId" });
+
+      const transcript = await transcribeAudio(fileId, GROQ_API_KEY, log);
+      if (!transcript) {
+        return res.json({ success: false, error: "Transcription vidéo échouée" });
+      }
+
+      const result = await analyzeText(GROQ_API_KEY, HUME_API_KEY, transcript, language, scenario, log);
+      await saveAnalysis(body, result);
       return res.json({
-        success: false,
-        error: "L'analyse vidéo n'est pas encore disponible.",
+        success: true,
+        ...result,
+        feedback: { ...result.feedback, transcript },
+        modality: "video",
       });
     }
 
@@ -262,6 +276,82 @@ Retourne UNIQUEMENT ce JSON (score de 0 à 100) :
     },
     emotions,
   };
+}
+
+// ─── ANALYZE IMAGE (Groq Vision) ─────────────────────────────────────────────
+
+async function analyzeImage(fileId, groqApiKey, language, scenario, log) {
+  try {
+    if (!storage) return buildErrorResult("", "Storage non configuré");
+    const bucketId = process.env.BUCKET_ID || process.env.APPWRITE_BUCKET_ID;
+    if (!bucketId) return buildErrorResult("", "BUCKET_ID manquant");
+
+    log("IMAGE: downloading " + fileId);
+    const imageBuffer = await storage.getFileDownload(bucketId, fileId);
+    const base64Image = Buffer.from(imageBuffer).toString("base64");
+
+    const langLabel = language === "fr" ? "français" : "English";
+
+    const response = await fetchWithTimeout(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${groqApiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "meta-llama/llama-4-scout-17b-16e-instruct",
+          messages: [
+            {
+              role: "user",
+              content: [
+                {
+                  type: "text",
+                  text: `Tu es un coach expert en ${scenario}. Analyse cette image et donne du feedback sur la posture, le langage corporel, l'expression et la mise en scène. Réponds en ${langLabel}. Retourne UNIQUEMENT ce JSON:\n{"summary":"résumé","score":0,"strengths":["..."],"weaknesses":["..."],"improvements":["..."],"better_answer":"conseil","next_question":"question suivante"}`,
+                },
+                {
+                  type: "image_url",
+                  image_url: { url: `data:image/jpeg;base64,${base64Image}` },
+                },
+              ],
+            },
+          ],
+          temperature: 0.2,
+          max_tokens: 800,
+        }),
+      },
+      20000
+    );
+
+    log("IMAGE ANALYZE STATUS: " + response.status);
+    const raw = await response.text();
+    log("IMAGE RAW: " + raw.substring(0, 200));
+
+    let json = {};
+    try { json = JSON.parse(raw); } catch { return buildErrorResult("", "Vision non-JSON"); }
+    if (!response.ok) return buildErrorResult("", json?.error?.message || "Vision error");
+
+    const content = json?.choices?.[0]?.message?.content || "{}";
+    const parsed = safeParse(content);
+
+    return {
+      score: Math.min(100, Math.max(0, parsed.score || 0)),
+      summary: parsed.summary || "",
+      modality: "image",
+      feedback: {
+        strengths: parsed.strengths || [],
+        weaknesses: parsed.weaknesses || [],
+        improvements: parsed.improvements || [],
+        better_answer: parsed.better_answer || "",
+        next_question: parsed.next_question || "",
+      },
+      emotions: {},
+    };
+  } catch (e) {
+    log("IMAGE ERROR: " + e.message);
+    return buildErrorResult("", e.message);
+  }
 }
 
 // ─── TRANSCRIBE AUDIO (Groq Whisper) ─────────────────────────────────────────
