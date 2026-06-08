@@ -318,8 +318,8 @@ async function getHumeEmotions(apiKey, text, log) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          models: { language: { granularity: "sentence" } },
-          texts: [text],
+          models: { language: {} },
+          text: [{ content: text, content_type: "text" }],
         }),
       },
       8000
@@ -362,7 +362,7 @@ async function getHumeEmotions(apiKey, text, log) {
         8000
       );
       const rawPoll = await pollRes.text();
-      log("HUME PREDICTIONS: " + rawPoll.substring(0, 300));
+      log("HUME PREDICTIONS FULL: " + rawPoll.substring(0, 600));
 
       let predictions = [];
       try { predictions = JSON.parse(rawPoll); } catch { break; }
