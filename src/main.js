@@ -84,18 +84,21 @@ export default async ({ req, res, log }) => {
       return res.json({ success: true, ...result });
     }
 
-    // ── AUDIO ─────────────────────────────────────────────────────────────────
+    // ── AUDIO ────────────────────────────────────────────────────────────────
     if (type === "audio") {
-      const fileId = body.fileId;
-      if (!fileId) return res.json({ success: false, error: "Missing fileId" });
+      const base64Data = body.data;
+      const fileName   = body.fileName || "recording.m4a";
+      if (!base64Data) return res.json({ success: false, error: "Missing data" });
 
-      const transcript = await transcribeAudio(fileId, GROQ_API_KEY, log);
+      log("AUDIO: decoding base64, fileName=" + fileName);
+      const fileBuffer = Buffer.from(base64Data, "base64");
+
+      const transcript = await transcribeBuffer(fileBuffer, fileName, GROQ_API_KEY, log);
       if (!transcript) {
         return res.json({ success: false, error: "Transcription échouée" });
       }
 
       const result = await analyzeText(GROQ_API_KEY, HUME_API_KEY, transcript, language, scenario, log);
-
       await saveAnalysis(body, result);
 
       return res.json({
@@ -108,20 +111,28 @@ export default async ({ req, res, log }) => {
 
     // ── IMAGE ─────────────────────────────────────────────────────────────────
     if (type === "image") {
-      const fileId = body.fileId;
-      if (!fileId) return res.json({ success: false, error: "Missing fileId" });
+      const base64Data = body.data;
+      const fileName   = body.fileName || "image.jpg";
+      if (!base64Data) return res.json({ success: false, error: "Missing data" });
 
-      const result = await analyzeImage(fileId, GROQ_API_KEY, language, scenario, log);
+      log("IMAGE: decoding base64, fileName=" + fileName);
+
+      const result = await analyzeImageBase64(base64Data, fileName, GROQ_API_KEY, language, scenario, log);
       await saveAnalysis(body, result);
       return res.json({ success: true, ...result });
     }
 
     // ── VIDEO ─────────────────────────────────────────────────────────────────
     if (type === "video") {
-      const fileId = body.fileId;
-      if (!fileId) return res.json({ success: false, error: "Missing fileId" });
+      const base64Data = body.data;
+      const fileName   = body.fileName || "recording.mp4";
+      if (!base64Data) return res.json({ success: false, error: "Missing data" });
 
-      const transcript = await transcribeAudio(fileId, GROQ_API_KEY, log, body.fileName);
+      log("VIDEO: decoding base64, fileName=" + fileName + ", size=" + base64Data.length);
+      const fileBuffer = Buffer.from(base64Data, "base64");
+      log("VIDEO: buffer size=" + fileBuffer.length + " bytes");
+
+      const transcript = await transcribeBuffer(fileBuffer, fileName, GROQ_API_KEY, log);
       if (!transcript) {
         return res.json({ success: false, error: "Transcription vidéo échouée" });
       }
@@ -251,9 +262,7 @@ Retourne UNIQUEMENT ce JSON (score de 0 à 100) :
   const groqContent = groqJson?.choices?.[0]?.message?.content || "{}";
   const parsed = safeParse(groqContent);
 
-  // ── HUME emotions ────────────────────────────────────────────────────────
   let emotions = {};
-
   if (HUME_API_KEY) {
     try {
       emotions = await getHumeEmotions(HUME_API_KEY, text, log);
@@ -262,14 +271,13 @@ Retourne UNIQUEMENT ce JSON (score de 0 à 100) :
     }
   }
 
-  // ── Format final attendu par le frontend ─────────────────────────────────
   return {
     score:    Math.min(100, Math.max(0, parsed.score || 0)),
     summary:  parsed.summary  || "",
     modality: "text",
     feedback: {
-      strengths:   parsed.strengths   || [],
-      weaknesses:  parsed.weaknesses  || [],
+      strengths:    parsed.strengths    || [],
+      weaknesses:   parsed.weaknesses   || [],
       improvements: parsed.improvements || [],
       better_answer: parsed.better_answer || "",
       next_question: parsed.next_question || "",
@@ -278,18 +286,14 @@ Retourne UNIQUEMENT ce JSON (score de 0 à 100) :
   };
 }
 
-<<<<<<< HEAD
 // ─── ANALYZE IMAGE (Groq Vision) ─────────────────────────────────────────────
 
-async function analyzeImage(fileId, groqApiKey, language, scenario, log) {
+async function analyzeImageBase64(base64Data, fileName, groqApiKey, language, scenario, log) {
   try {
-    if (!storage) return buildErrorResult("", "Storage non configuré");
-    const bucketId = process.env.BUCKET_ID || process.env.APPWRITE_BUCKET_ID;
-    if (!bucketId) return buildErrorResult("", "BUCKET_ID manquant");
-
-    log("IMAGE: downloading " + fileId);
-    const imageBuffer = await storage.getFileDownload(bucketId, fileId);
-    const base64Image = Buffer.from(imageBuffer).toString("base64");
+    const ext = fileName.split(".").pop().toLowerCase();
+    const mimeType = ext === "png" ? "image/png"
+      : ext === "webp" ? "image/webp"
+      : "image/jpeg";
 
     const langLabel = language === "fr" ? "français" : "English";
 
@@ -313,7 +317,7 @@ async function analyzeImage(fileId, groqApiKey, language, scenario, log) {
                 },
                 {
                   type: "image_url",
-                  image_url: { url: `data:image/jpeg;base64,${base64Image}` },
+                  image_url: { url: `data:${mimeType};base64,${base64Data}` },
                 },
               ],
             },
@@ -341,8 +345,8 @@ async function analyzeImage(fileId, groqApiKey, language, scenario, log) {
       summary: parsed.summary || "",
       modality: "image",
       feedback: {
-        strengths: parsed.strengths || [],
-        weaknesses: parsed.weaknesses || [],
+        strengths:    parsed.strengths    || [],
+        weaknesses:   parsed.weaknesses   || [],
         improvements: parsed.improvements || [],
         better_answer: parsed.better_answer || "",
         next_question: parsed.next_question || "",
@@ -355,21 +359,22 @@ async function analyzeImage(fileId, groqApiKey, language, scenario, log) {
   }
 }
 
-// ─── TRANSCRIBE AUDIO (Groq Whisper) ─────────────────────────────────────────
+// ─── TRANSCRIBE BUFFER (Groq Whisper) ────────────────────────────────────────
 
-async function transcribeAudio(fileId, groqApiKey, log) {
+async function transcribeBuffer(fileBuffer, fileName, groqApiKey, log) {
   try {
-    if (!storage) { log("Storage not initialized"); return null; }
+    const ext = fileName ? fileName.split(".").pop().toLowerCase() : "mp4";
+    const mimeType = ext === "m4a"  ? "audio/m4a"
+      : ext === "mp3"  ? "audio/mpeg"
+      : ext === "wav"  ? "audio/wav"
+      : ext === "webm" ? "audio/webm"
+      : "video/mp4";
 
-    log("Downloading file: " + fileId);
-    const bucketId = process.env.BUCKET_ID || process.env.APPWRITE_BUCKET_ID;
-    if (!bucketId) { log("BUCKET_ID missing"); return null; }
+    log("WHISPER: fileName=" + fileName + " mimeType=" + mimeType + " size=" + fileBuffer.length);
 
-    const fileBuffer = await storage.getFileDownload(bucketId, fileId);
-    const blob = new Blob([fileBuffer]);
-
+    const blob = new Blob([fileBuffer], { type: mimeType });
     const formData = new FormData();
-    formData.append("file", blob, "audio.m4a");
+    formData.append("file", blob, fileName || `recording.${ext}`);
     formData.append("model", "whisper-large-v3-turbo");
     formData.append("response_format", "text");
 
@@ -384,7 +389,11 @@ async function transcribeAudio(fileId, groqApiKey, log) {
     );
 
     log("WHISPER STATUS: " + response.status);
-    if (!response.ok) return null;
+    if (!response.ok) {
+      const errText = await response.text();
+      log("WHISPER ERROR: " + errText.substring(0, 300));
+      return null;
+    }
 
     const transcript = await response.text();
     log("TRANSCRIPT: " + transcript.substring(0, 200));
@@ -427,18 +436,15 @@ async function getHumeEmotions(apiKey, text, log) {
 
     log("HUME JOB: " + job_id);
 
-    // Poll up to 5 times (4s apart) — check status before fetching predictions
     for (let i = 0; i < 5; i++) {
       await sleep(4000);
 
-      // 1. Check job status
       const statusRes = await fetchWithTimeout(
         `https://api.hume.ai/v0/batch/jobs/${job_id}`,
         { method: "GET", headers: { "X-Hume-Api-Key": apiKey } },
         8000
       );
       const rawStatus = await statusRes.text();
-      log("HUME STATUS RAW " + i + ": " + rawStatus.substring(0, 300));
       let statusData = {};
       try { statusData = JSON.parse(rawStatus); } catch {}
       const jobStatus = statusData?.state?.status;
@@ -446,14 +452,13 @@ async function getHumeEmotions(apiKey, text, log) {
 
       if (jobStatus?.toUpperCase() !== "COMPLETED") continue;
 
-      // 2. Fetch predictions only when completed
       const pollRes = await fetchWithTimeout(
         `https://api.hume.ai/v0/batch/jobs/${job_id}/predictions`,
         { method: "GET", headers: { "X-Hume-Api-Key": apiKey } },
         8000
       );
       const rawPoll = await pollRes.text();
-      log("HUME PREDICTIONS FULL: " + rawPoll.substring(0, 600));
+      log("HUME PREDICTIONS: " + rawPoll.substring(0, 300));
 
       let predictions = [];
       try { predictions = JSON.parse(rawPoll); } catch { break; }
@@ -564,191 +569,6 @@ function safeParse(raw) {
   }
 }
 
-=======
-// ─── TRANSCRIBE AUDIO (Groq Whisper) ─────────────────────────────────────────
-
-async function transcribeAudio(fileId, groqApiKey, log) {
-  try {
-    if (!storage) { log("Storage not initialized"); return null; }
-
-    log("Downloading file: " + fileId);
-    const bucketId = process.env.BUCKET_ID || process.env.APPWRITE_BUCKET_ID;
-    if (!bucketId) { log("BUCKET_ID missing"); return null; }
-
-    const fileBuffer = await storage.getFileDownload(bucketId, fileId);
-    const blob = new Blob([fileBuffer]);
-
-    const formData = new FormData();
-    formData.append("file", blob, "audio.m4a");
-    formData.append("model", "whisper-large-v3-turbo");
-    formData.append("response_format", "text");
-
-    const response = await fetchWithTimeout(
-      "https://api.groq.com/openai/v1/audio/transcriptions",
-      {
-        method: "POST",
-        headers: { Authorization: `Bearer ${groqApiKey}` },
-        body: formData,
-      },
-      30000
-    );
-
-    log("WHISPER STATUS: " + response.status);
-    if (!response.ok) return null;
-
-    const transcript = await response.text();
-    log("TRANSCRIPT: " + transcript.substring(0, 200));
-    return transcript.trim() || null;
-
-  } catch (e) {
-    log("TRANSCRIBE ERROR: " + e.message);
-    return null;
-  }
-}
-
-// ─── HUME EMOTIONS ───────────────────────────────────────────────────────────
-
-async function getHumeEmotions(apiKey, text, log) {
-  const startRes = await fetchWithTimeout(
-    "https://api.hume.ai/v0/batch/jobs",
-    {
-      method: "POST",
-      headers: {
-        "X-Hume-Api-Key": apiKey,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        models: { language: { granularity: "passage" } },
-        texts: [text],
-      }),
-    },
-    8000
-  );
-
-  const jobData  = await startRes.json();
-  const job_id   = jobData?.job_id;
-  if (!job_id) return {};
-
-  log("HUME JOB: " + job_id);
-
-  // Poll max 3 times (3s apart)
-  for (let i = 0; i < 3; i++) {
-    await sleep(3000);
-
-    const pollRes = await fetchWithTimeout(
-      `https://api.hume.ai/v0/batch/jobs/${job_id}/predictions`,
-      {
-        method: "GET",
-        headers: { "X-Hume-Api-Key": apiKey },
-      },
-      8000
-    );
-
-    if (!pollRes.ok) continue;
-
-    const predictions = await pollRes.json();
-    const emotions = extractHumeEmotions(predictions);
-    if (Object.keys(emotions).length > 0) return emotions;
-  }
-
-  return {};
-}
-
-function extractHumeEmotions(predictions) {
-  try {
-    const emotions = {};
-    const results  = predictions?.[0]?.results?.predictions?.[0]?.models?.language?.grouped_predictions;
-    if (!results) return {};
-
-    const entries = results[0]?.predictions?.[0]?.emotions || [];
-    const top = entries
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 6);
-
-    for (const e of top) {
-      emotions[e.name.toLowerCase()] = parseFloat(e.score.toFixed(3));
-    }
-    return emotions;
-  } catch {
-    return {};
-  }
-}
-
-// ─── SAVE HELPERS ────────────────────────────────────────────────────────────
-
-async function saveChatMessage(body, text, sender) {
-  try {
-    const dbId   = process.env.DATABASE_ID;
-    const colId  = process.env.CHAT_COLLECTION_ID;
-    if (!dbId || !colId || !databases) return;
-
-    await databases.createDocument(dbId, colId, ID.unique(), {
-      sessionId:   body.sessionId || "default",
-      userId:      body.userId    || "unknown",
-      sender,
-      messageText: text,
-      timestamp:   new Date().toISOString(),
-      isRead:      false,
-      messageType: "text",
-    });
-  } catch (e) {
-    console.log("saveChat error: " + e.message);
-  }
-}
-
-async function saveAnalysis(body, result) {
-  try {
-    const dbId  = process.env.DATABASE_ID;
-    const colId = process.env.ANALYSES_COLLECTION_ID;
-    if (!dbId || !colId || !databases) return;
-
-    await databases.createDocument(dbId, colId, ID.unique(), {
-      userId:       body.userId  || "unknown",
-      title:        body.title   || "Session Analysis",
-      status:       "completed",
-      analysisType: body.type    || "text",
-      runDate:      new Date().toISOString(),
-      note:         JSON.stringify(result.feedback || {}),
-    });
-  } catch (e) {
-    console.log("saveAnalysis error: " + e.message);
-  }
-}
-
-// ─── UTILITIES ───────────────────────────────────────────────────────────────
-
-function buildSystemPrompt(language, scenario) {
-  const lang = language === "fr" ? "français" : "English";
-  return `Tu es Smart Coach AI, un coach expert en ${scenario}. Réponds toujours en ${lang}. Sois encourageant, précis et constructif.`;
-}
-
-function buildErrorResult(text, errorMsg) {
-  return {
-    score:    0,
-    summary:  errorMsg,
-    modality: "text",
-    feedback: { strengths: [], weaknesses: [], improvements: [] },
-    emotions: {},
-  };
-}
-
-function fetchWithTimeout(url, options, timeoutMs) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  return fetch(url, { ...options, signal: controller.signal })
-    .finally(() => clearTimeout(timer));
-}
-
-function safeParse(raw) {
-  try {
-    const match = raw.match(/\{[\s\S]*\}/);
-    return match ? JSON.parse(match[0]) : {};
-  } catch {
-    return {};
-  }
-}
-
->>>>>>> 2eae047 (fix: rewrite main.js - correct response structure for Flutter frontend)
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
