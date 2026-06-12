@@ -98,7 +98,7 @@ export default async ({ req, res, log }) => {
         return res.json({ success: false, error: "Transcription échouée" });
       }
 
-      const result = await analyzeText(GROQ_API_KEY, HUME_API_KEY, transcript, language, scenario, log);
+      const result = await analyzeText(GROQ_API_KEY, null, transcript, language, scenario, log, "llama-3.1-8b-instant");
       await saveAnalysis(body, result);
 
       return res.json({
@@ -137,7 +137,7 @@ export default async ({ req, res, log }) => {
         return res.json({ success: false, error: "Transcription vidéo échouée" });
       }
 
-      const result = await analyzeText(GROQ_API_KEY, HUME_API_KEY, transcript, language, scenario, log);
+      const result = await analyzeText(GROQ_API_KEY, null, transcript, language, scenario, log, "llama-3.1-8b-instant");
       await saveAnalysis(body, result);
       return res.json({
         success: true,
@@ -203,7 +203,7 @@ async function groqChat(apiKey, message, history, language, scenario, log) {
 
 // ─── ANALYZE TEXT ─────────────────────────────────────────────────────────────
 
-async function analyzeText(GROQ_API_KEY, HUME_API_KEY, text, language, scenario, log) {
+async function analyzeText(GROQ_API_KEY, HUME_API_KEY, text, language, scenario, log, model = "llama-3.3-70b-versatile") {
   const langLabel = language === "fr" ? "français" : "English";
 
   const groqRes = await fetchWithTimeout(
@@ -215,7 +215,7 @@ async function analyzeText(GROQ_API_KEY, HUME_API_KEY, text, language, scenario,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
+        model,
         messages: [
           {
             role: "system",
